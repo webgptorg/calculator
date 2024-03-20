@@ -30,53 +30,25 @@
 
             <label>
                 Počet stránek:
-                <input
-                    type="range"
-                    name="pages-count"
-                    min="1"
-                    max="10000"
-                    value="50"
-                    oninput="this.nextElementSibling.value = this.value"
-                />
+                <input type="range" name="pages-count" data-show-output="scalar" min="1" max="10000" value="50" />
                 <output></output>
             </label>
 
             <label>
                 Počet produktů:
-                <input
-                    type="range"
-                    name="products-count"
-                    min="1"
-                    max="100000"
-                    value="50"
-                    oninput="this.nextElementSibling.value = this.value"
-                />
+                <input type="range" name="products-count" data-show-output="scalar" min="1" max="100000" value="50" />
                 <output></output>
             </label>
 
             <label>
                 Rozpočet na tvorbu webu:
-                <input
-                    type="range"
-                    name="upfront-budget"
-                    min="0"
-                    max="1000000"
-                    value="10000"
-                    oninput="this.nextElementSibling.value = this.value"
-                />
+                <input type="range" name="upfront-budget" data-show-output="CZK" min="0" max="1000000" value="10000" />
                 <output></output>
             </label>
 
             <label>
                 Rozpočet na měsíc:
-                <input
-                    type="range"
-                    name="upfront-budget"
-                    min="0"
-                    max="100000"
-                    value="1000"
-                    oninput="this.nextElementSibling.value = this.value"
-                />
+                <input type="range" name="upfront-budget" data-show-output="CZK" min="0" max="100000" value="1000" />
                 <output></output>
             </label>
         </form>
