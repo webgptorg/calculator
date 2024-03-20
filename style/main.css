@@ -1,8 +1,86 @@
 html,
 body {
     font-family: 'Roboto', sans-serif;
+
+    display: flex;
+    flex-direction: column;
+
+    margin: 0;
+    padding: 0;
 }
 
-label {
+h1 {
+    text-align: center;
+    margin: 0;
+    padding: 20px;
+    background-color: #f0f0f0;
+    border-bottom: 1px solid #ccc;
+}
+
+/*=================================================*/
+
+form.input {
+    /*/
+    outline: 1px solid rgb(102, 255, 0);
+    /**/
+
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 10px;
+    padding: 10px;
+    margin: 10px;
+}
+
+@media only screen and (max-width: 600px) {
+    /* 📱 Big smartphones */
+
+    form.input {
+        grid-template-columns: 1fr;
+    }
+}
+
+form.input fieldset {
+    border: 1px solid #ccc;
+}
+
+form.input fieldset .field:not(:last-child) {
+    padding-bottom: 15px;
+    border-bottom: 1px solid #ccc;
+    margin-bottom: 15px;
+}
+
+form.input fieldset .field label {
     display: block;
+}
+
+form.input fieldset .field label h3 {
+    margin: 0;
+    margin-bottom: 7px;
+
+    font-size: 1em;
+    font-weight: bold;
+}
+
+form.input fieldset .field label p {
+    margin: 0;
+}
+
+form.input fieldset .field input[type='range'] {
+    margin-top: 20px;
+    display: block;
+    width: 100%;
+}
+
+form.input fieldset .field output {
+    display: block;
+    font-style: italic;
+
+    display: block;
+    width: 100%;
+    text-align: center;
+}
+
+/*=================================================*/
+
+.output {
 }

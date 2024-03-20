@@ -5,7 +5,7 @@ export function main() {
 
     // TODO: Extract this to separate function
     for (const inputElement of Array.from(document.querySelectorAll(`input[type="range"][data-show-output]`))) {
-        inputElement.addEventListener('input', (event) => {
+        const updateOutput = () => {
             const value = parseFloat(inputElement.value);
             const showOutput = inputElement.dataset.showOutput;
 
@@ -75,11 +75,37 @@ export function main() {
                 } else {
                     valueFormatted = `Do ${Math.round((value / 365) * 10) / 10} let`;
                 }
+            } else if (showOutput === 'level-of-control') {
+                if (value < 5) {
+                    valueFormatted = 'Chci být vidět na internetu, jedno jak';
+                } else if (value < 10) {
+                    valueFormatted = 'Chci web, který bude fungovat';
+                } else if (value < 20) {
+                    valueFormatted = 'Chci web, který bude fungovat a trochu vypadat';
+                } else if (value < 50) {
+                    valueFormatted = 'Chci web, který bude fungovat a vypadat';
+                } else if (value < 60) {
+                    valueFormatted = 'Chci web, který bude vypadat dobře';
+                } else if (value < 70) {
+                    valueFormatted = 'Chci web, který bude vypadat skvěle';
+                } else if (value < 80) {
+                    valueFormatted = 'Chci web, který bude vypadat přesně tak, jak chci';
+                } else {
+                    valueFormatted = 'Chci web, který bude do PUNTÍKU přesně tak, jak chci';
+                }
             } else {
                 console.error(`Unknown data-show-output="${showOutput}"`);
             }
 
-            event.target.nextElementSibling.value = valueFormatted;
+            inputElement.nextElementSibling.value = valueFormatted;
+        };
+
+        inputElement.addEventListener('input', () => {
+            updateOutput();
+        });
+
+        requestAnimationFrame(() => {
+            updateOutput();
         });
     }
 }

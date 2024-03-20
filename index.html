@@ -16,7 +16,9 @@
                 <legend>Váš web</legend>
 
                 <div class="field">
-                    <label for="web-type">Typ webu:</label>
+                    <label for="web-type">
+                        <h3>Typ webu:</h3>
+                    </label>
                     <select id="web-type">
                         <option value="presentation" selected>Prezentační web</option>
                         <option value="eshop">E-shop</option>
@@ -35,7 +37,10 @@
                 </div>
 
                 <div class="field">
-                    <label for="pages-count">Počet stránek:</label>
+                    <label for="pages-count">
+                        <h3>Počet stránek:</h3>
+                        <p>Počet unikátních stránek typu "O nás", "Kontakt",...</p>
+                    </label>
                     <input
                         id="pages-count"
                         type="range"
@@ -49,7 +54,9 @@
                 </div>
 
                 <div class="field">
-                    <label for="products-count">Počet produktů:</label>
+                    <label for="products-count">
+                        <h3>Počet produktů:</h3>
+                    </label>
                     <input
                         id="products-count"
                         type="range"
@@ -64,9 +71,9 @@
 
                 <div class="field">
                     <label for="updates-days-period">
-                        <h3>Jak často chcete na web psát:</h3>
-                        <p>!!!</p></label
-                    >
+                        <h3>Aktualizace</h3>
+                        <p>Jak často chcete na web psát novinky, aktualizace, přidávat příspěvky,...</p>
+                    </label>
                     <!-- TODO: Make logarithmic sliders -->
                     <input
                         id="updates-days-period"
@@ -81,24 +88,36 @@
                 </div>
 
                 <div class="field">
-                    <label for="custom-functions-count">Počet vlastních funkcí:</label>
+                    <label for="custom-functions-count">
+                        <h3>Počet vlastních funkcí:</h3>
+                        <p>
+                            Například kontaktní formulář, kolo štěstí, hypoteční kalkulačka,... Oproti stránkám je
+                            potřeba funkce naprogramovat.
+                        </p>
+                    </label>
                     <input
                         id="custom-functions-count"
                         type="range"
                         data-show-output="scalar"
                         min="0"
-                        max="10"
+                        max="100"
                         step="1"
-                        value="50"
+                        value="0"
                     />
                     <output></output>
                 </div>
             </fieldset>
             <fieldset>
-                <legend>Váše zdroje</legend>
+                <legend>Zdroje</legend>
 
                 <div class="field">
-                    <label for="budget-upfront">Rozpočet na tvorbu webu:</label>
+                    <label for="budget-upfront">
+                        <h3>Rozpočet na tvorbu webu:</h3>
+                        <p>
+                            Kolik prostředků dokážete dát do webu před jeho spuštěním. Pokud některou z věcí děláte
+                            sami, přepočítejte váš čas <a href="#!!!">hodinovou sazbou</a>.
+                        </p>
+                    </label>
                     <input
                         id="budget-upfront"
                         type="range"
@@ -112,13 +131,19 @@
                 </div>
 
                 <div class="field">
-                    <label for="budget-per-month">Rozpočet na měsíc:</label>
+                    <label for="budget-per-month">
+                        <h3>Rozpočet na měsíc:</h3>
+                        <p>
+                            Kolik prostředků dokážete dát do webu měsícně. Počítá se veškerý náklad vč. hostingu,
+                            domény, vašeho času,...
+                        </p>
+                    </label>
                     <input
                         id="budget-per-month"
                         type="range"
                         data-show-output="CZK"
                         min="0"
-                        max="100000"
+                        max="50000"
                         step="1"
                         value="1000"
                     />
@@ -127,16 +152,36 @@
             </fieldset>
 
             <fieldset>
-                <legend>Čas</legend>
+                <legend>Kontrola</legend>
 
                 <div class="field">
-                    <label for="days-to-deadline">Deadline:</label>
+                    <label for="days-to-deadline">
+                        <h3>Deadline:</h3>
+                        <p></p>
+                    </label>
                     <input
                         id="days-to-deadline"
                         type="range"
                         data-show-output="days-to-deadline"
                         min="-1"
                         max="365"
+                        step="1"
+                        value="30"
+                    />
+                    <output></output>
+                </div>
+
+                <div class="field">
+                    <label for="level-of-control">
+                        <h3>Míra kontroly:</h3>
+                        <p></p>
+                    </label>
+                    <input
+                        id="level-of-control"
+                        type="range"
+                        data-show-output="level-of-control"
+                        min="0"
+                        max="100"
                         step="1"
                         value="30"
                     />
