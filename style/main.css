@@ -19,7 +19,7 @@ h1 {
 
 /*=================================================*/
 
-form.input {
+#input {
     /*/
     outline: 1px solid rgb(102, 255, 0);
     /**/
@@ -34,26 +34,26 @@ form.input {
 @media only screen and (max-width: 600px) {
     /* 📱 Big smartphones */
 
-    form.input {
+    #input {
         grid-template-columns: 1fr;
     }
 }
 
-form.input fieldset {
+#input fieldset {
     border: 1px solid #ccc;
 }
 
-form.input fieldset .field:not(:last-child) {
+#input fieldset .field:not(:last-child) {
     padding-bottom: 15px;
     border-bottom: 1px solid #ccc;
     margin-bottom: 15px;
 }
 
-form.input fieldset .field label {
+#input fieldset .field label {
     display: block;
 }
 
-form.input fieldset .field label h3 {
+#input fieldset .field label h3 {
     margin: 0;
     margin-bottom: 7px;
 
@@ -61,17 +61,17 @@ form.input fieldset .field label h3 {
     font-weight: bold;
 }
 
-form.input fieldset .field label p {
+#input fieldset .field label p {
     margin: 0;
 }
 
-form.input fieldset .field input[type='range'] {
+#input fieldset .field input[type='range'] {
     margin-top: 20px;
     display: block;
     width: 100%;
 }
 
-form.input fieldset .field output {
+#input fieldset .field output {
     display: block;
     font-style: italic;
 
@@ -82,5 +82,29 @@ form.input fieldset .field output {
 
 /*=================================================*/
 
-.output {
+#output li .proscons {
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    justify-content: flex-start;
+}
+
+#output li .proscons ul.pros {
+    color: rgb(54, 172, 54);
+    list-style: none;
+}
+
+#output li .proscons ul.pros li::before {
+    font-weight: bold;
+    content: '+ ';
+}
+
+#output li .proscons ul.cons {
+    color: #f66;
+    list-style: none;
+}
+
+#output li .proscons ul.cons li::before {
+    font-weight: bold;
+    content: '- ';
 }

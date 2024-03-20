@@ -1,7 +1,81 @@
-import { solutions } from '../data/solutions.mjs';
+import { normalizeTo_camelCase } from 'https://cdn.jsdelivr.net/npm/n12@1.8.28/+esm';
+import { spaceTrim } from 'https://cdn.jsdelivr.net/npm/spacetrim@0.11.4/+esm';
+import solutions from '../data/index.mjs';
 
 export function main() {
     console.log(solutions);
+
+    // ======================
+
+    const recalculateResult = () => {
+        const inputParameters = {};
+        for (const id of [
+            'web-type',
+            'pages-count',
+            'products-count',
+            'updates-days-period',
+            'custom-functions-count',
+            'budget-upfront',
+            'budget-per-month',
+            'days-to-deadline',
+            'level-of-control',
+        ]) {
+            const inputElement = document.getElementById(id);
+            if (!inputElement) {
+                console.error(`Element with id="${id}" not found`);
+                continue;
+            }
+
+            let value;
+
+            if (id === 'web-type') {
+                value = inputElement.value;
+            } else {
+                value = parseFloat(inputElement.value);
+            }
+
+            inputParameters[normalizeTo_camelCase(id)] = value;
+        }
+
+        // console.info({ inputParameters });
+
+        const solutionsForMe = solutions.map((solution) => solution(inputParameters));
+
+        // TODO: !!! Filter
+        // TODO: !!! Sort
+
+        // console.info({ solutionsForMe });
+
+        const outputElement = document.getElementById('output');
+
+        outputElement.innerHTML = '';
+        for (const { fit, title, description, pros, cons } of solutionsForMe) {
+            // TODO: !!! Use fit, pros and cons
+            outputElement.innerHTML = spaceTrim(`
+                <li>
+                    <b>${title}</b> ${description}
+
+                    <div class="proscons">
+                        <ul class="pros">
+                            <li>Aaaaa</li>
+                            <li>Bbbb</li>
+                        </ul>
+                        <ul class="cons">
+                            <li>Aaaaa</li>
+                            <li>Bbbb</li>
+                        </ul>
+                    </div>
+
+                </li>
+            `);
+        }
+    };
+
+    requestAnimationFrame(() => {
+        recalculateResult();
+    });
+
+    // ======================
 
     // TODO: Extract this to separate function
     for (const inputElement of Array.from(document.querySelectorAll(`input[type="range"][data-show-output]`))) {
@@ -102,6 +176,7 @@ export function main() {
 
         inputElement.addEventListener('input', () => {
             updateOutput();
+            recalculateResult();
         });
 
         requestAnimationFrame(() => {
