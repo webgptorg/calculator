@@ -51,7 +51,8 @@ export function main() {
         outputElement.innerHTML = '';
         for (const { fit, title, description, pros, cons } of solutionsForMe) {
             // TODO: !!! Use fit, pros and cons
-            outputElement.innerHTML += spaceTrim(`
+            outputElement.innerHTML += spaceTrim(
+                (block) => `
                 <li>
                     
                     <b>${title}</b> ${description}
@@ -60,17 +61,16 @@ export function main() {
 
                     <div class="proscons">
                         <ul class="pros">
-                            <li>Aaaaa</li>
-                            <li>Bbbb</li>
+                            ${block(pros.map((text) => `<li>${text /* <- TODO: !!! Escape */}</li>`).join('\n'))}
                         </ul>
                         <ul class="cons">
-                            <li>Aaaaa</li>
-                            <li>Bbbb</li>
+                            ${block(cons.map((text) => `<li>${text /* <- TODO: !!! Escape */}</li>`).join('\n'))}
                         </ul>
                     </div>
 
                 </li>
-            `);
+            `,
+            );
         }
     };
 
@@ -153,19 +153,19 @@ export function main() {
                     valueFormatted = `Do ${Math.round((value / 365) * 10) / 10} let`;
                 }
             } else if (showOutput === 'level-of-control') {
-                if (value < 5/100) {
+                if (value < 5 / 100) {
                     valueFormatted = 'Chci být vidět na internetu, jedno jak';
-                } else if (value < 10/100) {
+                } else if (value < 10 / 100) {
                     valueFormatted = 'Chci web, který bude fungovat';
-                } else if (value < 20/100) {
+                } else if (value < 20 / 100) {
                     valueFormatted = 'Chci web, který bude fungovat a trochu vypadat';
-                } else if (value < 50/100) {
+                } else if (value < 50 / 100) {
                     valueFormatted = 'Chci web, který bude fungovat a vypadat';
-                } else if (value < 60/100) {
+                } else if (value < 60 / 100) {
                     valueFormatted = 'Chci web, který bude vypadat dobře';
-                } else if (value < 70/100) {
+                } else if (value < 70 / 100) {
                     valueFormatted = 'Chci web, který bude vypadat skvěle';
-                } else if (value < 80/100) {
+                } else if (value < 80 / 100) {
                     valueFormatted = 'Chci web, který bude vypadat přesně tak, jak chci';
                 } else {
                     valueFormatted = 'Chci web, který bude do PUNTÍKU přesně tak, jak chci';

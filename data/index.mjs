@@ -1,4 +1,4 @@
-import { customSolution } from './customSolution.mjs';
-import { wordpressSolution } from './wordpressSolution.mjs';
+import { rankCustomSolution } from './rankCustomSolution.mjs';
+import { rankWordpressSolution } from './rankWordpressSolution.mjs';
 
-export default [wordpressSolution, customSolution];
+export default [rankCustomSolution, rankWordpressSolution];
