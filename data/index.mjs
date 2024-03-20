@@ -1,3 +1,4 @@
-import { wordpress } from './wordpress.mjs';
+import { customSolution } from './customSolution.mjs';
+import { wordpressSolution } from './wordpressSolution.mjs';
 
-export default [wordpress];
+export default [wordpressSolution, customSolution];
