@@ -12,45 +12,137 @@
         <h1>🧮 Webová kalkulačka</h1>
 
         <form class="input">
-            <label>
-                Typ webu:
-                <select name="web-type">
-                    <option>Prezentační web</option>
-                    <option>E-shop</option>
-                    <option>Blog</option>
-                    <option></option>
-                    <option></option>
-                    <option></option>
-                    <option></option>
-                    <option></option>
-                    <option></option>
-                    <option>Aplikace s vlastními funkcemi</option>
-                </select>
-            </label>
+            <fieldset>
+                <legend>Váš web</legend>
 
-            <label>
-                Počet stránek:
-                <input type="range" name="pages-count" data-show-output="scalar" min="1" max="10000" value="50" />
-                <output></output>
-            </label>
+                <div class="field">
+                    <label for="web-type">Typ webu:</label>
+                    <select id="web-type">
+                        <option value="presentation" selected>Prezentační web</option>
+                        <option value="eshop">E-shop</option>
+                        <option value="blog">Blog</option>
+                        <!--
+                        TODO: Make more options
+                        <option></option>
+                        <option></option>
+                        <option></option>
+                        <option></option>
+                        <option></option>
+                        <option></option>
+                        -->
+                        <option value="application">Aplikace s vlastními funkcemi</option>
+                    </select>
+                </div>
 
-            <label>
-                Počet produktů:
-                <input type="range" name="products-count" data-show-output="scalar" min="1" max="100000" value="50" />
-                <output></output>
-            </label>
+                <div class="field">
+                    <label for="pages-count">Počet stránek:</label>
+                    <input
+                        id="pages-count"
+                        type="range"
+                        data-show-output="scalar+pretty"
+                        min="1"
+                        max="10000"
+                        step="1"
+                        value="50"
+                    />
+                    <output></output>
+                </div>
 
-            <label>
-                Rozpočet na tvorbu webu:
-                <input type="range" name="upfront-budget" data-show-output="CZK" min="0" max="1000000" value="10000" />
-                <output></output>
-            </label>
+                <div class="field">
+                    <label for="products-count">Počet produktů:</label>
+                    <input
+                        id="products-count"
+                        type="range"
+                        data-show-output="scalar+pretty"
+                        min="0"
+                        max="100000"
+                        step="1"
+                        value="50"
+                    />
+                    <output></output>
+                </div>
 
-            <label>
-                Rozpočet na měsíc:
-                <input type="range" name="upfront-budget" data-show-output="CZK" min="0" max="100000" value="1000" />
-                <output></output>
-            </label>
+                <div class="field">
+                    <label for="updates-days-period">
+                        <h3>Jak často chcete na web psát:</h3>
+                        <p>!!!</p></label
+                    >
+                    <!-- TODO: Make logarithmic sliders -->
+                    <input
+                        id="updates-days-period"
+                        type="range"
+                        data-show-output="days-period"
+                        min="1"
+                        max="400"
+                        step="1"
+                        value="30"
+                    />
+                    <output></output>
+                </div>
+
+                <div class="field">
+                    <label for="custom-functions-count">Počet vlastních funkcí:</label>
+                    <input
+                        id="custom-functions-count"
+                        type="range"
+                        data-show-output="scalar"
+                        min="0"
+                        max="10"
+                        step="1"
+                        value="50"
+                    />
+                    <output></output>
+                </div>
+            </fieldset>
+            <fieldset>
+                <legend>Váše zdroje</legend>
+
+                <div class="field">
+                    <label for="budget-upfront">Rozpočet na tvorbu webu:</label>
+                    <input
+                        id="budget-upfront"
+                        type="range"
+                        data-show-output="CZK"
+                        min="0"
+                        max="1000000"
+                        step="1"
+                        value="10000"
+                    />
+                    <output></output>
+                </div>
+
+                <div class="field">
+                    <label for="budget-per-month">Rozpočet na měsíc:</label>
+                    <input
+                        id="budget-per-month"
+                        type="range"
+                        data-show-output="CZK"
+                        min="0"
+                        max="100000"
+                        step="1"
+                        value="1000"
+                    />
+                    <output></output>
+                </div>
+            </fieldset>
+
+            <fieldset>
+                <legend>Čas</legend>
+
+                <div class="field">
+                    <label for="days-to-deadline">Deadline:</label>
+                    <input
+                        id="days-to-deadline"
+                        type="range"
+                        data-show-output="days-to-deadline"
+                        min="-1"
+                        max="365"
+                        step="1"
+                        value="30"
+                    />
+                    <output></output>
+                </div>
+            </fieldset>
         </form>
 
         <ol class="output">
