@@ -1,4 +1,6 @@
 export const solutions = [
+    /*
+    Note: !!!
     {
         name: 'Vývoj na míru po vlastní ose',
         description:
@@ -7,20 +9,34 @@ export const solutions = [
         fits: 'ALL',
         requirements: [],
         features: {},
-    },
+    }
+    */
+
     {
-        name: 'ChatGPT',
-        description: 'ChatGPT můžete využít pro vytvoření jednoduchého webu nebo pro psaní textů.',
-        fits: [''],
-        requirements: [],
-        features: {},
-        limitations: ['Pomocí ChatGPT bez dalších znalostí vytvoříte pouze limitovaný web'],
-    },
-    {
-        name: 'Wordpress' /* po vlastní ose */,
+        name: 'Self-hosted Wordpress' /* po vlastní ose */,
         description: 'Využijte nejrozšířenější open-source CMS na světě pro vytvoření svých webových stránek.',
         features: {},
         requirements: {},
+
+        basalSetup: {
+            initial: 1,
+            design: 0,
+            programming: 0,
+            copywriting: 0,
+        },
+        addPage: {
+            programming: 0.1,
+            seo: 2,
+            copywriting: 2,
+            design: 0.1,
+        },
+        addPost: {
+            seo: 1,
+            copywriting: 1,
+        },
+        addCustomFunctionality: {
+            programming: 20,
+        },
     },
     {
         name: 'Webgpt',
@@ -29,6 +45,7 @@ export const solutions = [
         requirements: {},
         limitations: ['Pouze limitovaná sada prvků', 'Pouze limitovaná sada designů'],
     },
+    /*
     {
         name: 'Poptat webovou agenturu',
         description: '',
@@ -43,6 +60,7 @@ export const solutions = [
         requirements: [],
         features: {},
     },
+    */
     {
         name: 'WebFlow',
         description: '',
@@ -97,6 +115,15 @@ export const solutions = [
         description: '',
         features: {},
         requirements: {},
+    },
+
+    {
+        name: 'ChatGPT',
+        description: 'ChatGPT můžete využít pro vytvoření jednoduchého webu nebo pro psaní textů.',
+        fits: [''],
+        requirements: [],
+        features: {},
+        limitations: ['Pomocí ChatGPT bez dalších znalostí vytvoříte pouze limitovaný web'],
     },
 
     // ------------------------------------------ Boilerplate
