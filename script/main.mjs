@@ -51,6 +51,8 @@ export function main() {
         outputElement.innerHTML = '';
         for (const { fit, title, description, pros, cons } of solutionsForMe) {
             // TODO: !!! Use fit, pros and cons
+            // TODO: !!! Do not show percentage, its just orientational
+            // TODO: !!! Filter less than 50%
             outputElement.innerHTML += spaceTrim(
                 (block) => `
                 <li>
