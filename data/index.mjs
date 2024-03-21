@@ -12,7 +12,7 @@ import {
     rankWebgptSolution,
     rankWixSolution,
     rankWordpressSolution,
-} from './_.mjs';
+} from './r.mjs';
 
 export default [
     rankCustomSolution,
