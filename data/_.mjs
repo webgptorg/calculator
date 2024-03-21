@@ -13,12 +13,32 @@ export function rankCustomSolution({
 }) {
     const solutionRank = new SolutionRank('Vlastní řešení', 'Naprogramujte si vlastní řešení.');
 
+    let complexity = pagesCount * 0.1 + productsCount * 0.2 + customFunctionsCount * 0.3;
+    let budgetRating = (budgetUpfront + budgetPerMonth * 12) / complexity;
+    let timeConstraintRating = daysToDeadline / complexity;
+
     if (levelOfControl < 0.5) {
         solutionRank.pushBenefit(-1, 'Mnoho věcí budete muset řešit sami místo abyste se mohli věnovat svému byznysu');
     }
 
     if (daysToDeadline < 30) {
         solutionRank.pushBenefit(-2, 'Za tak krátkou dobu nestihnete vytvořit vlastní řešení');
+    }
+
+    if (updatesDaysPeriod > 30) {
+        solutionRank.pushBenefit(-1, 'Delší doby mezi aktualizacemi zvýšují riziko bezpečnostních hrozeb');
+    }
+
+    if (budgetRating < 1) {
+        solutionRank.pushBenefit(-2, 'Použitý rozpočet není dostatečný pro požadovanou složitost');
+    } else {
+        solutionRank.pushBenefit(1, 'Dostatečný rozpočet pro realizaci vlastního řešení');
+    }
+
+    if (timeConstraintRating < 1) {
+        solutionRank.pushBenefit(-2, 'Nedostatečný čas na vývoj vzhledem k požadované složitosti');
+    } else {
+        solutionRank.pushBenefit(1, 'Dostatečný čas na vývoj');
     }
 
     return solutionRank;
@@ -36,7 +56,7 @@ export function rankWordpressSolution({
     levelOfControl,
 }) {
     const solutionRank = new SolutionRank(
-        'Self-hosted Wordpress',
+        'Self-hosted WordPress',
         'Využijte nejrozšířenější open-source CMS na světě pro vytvoření svých webových stránek.',
     );
 
@@ -58,12 +78,15 @@ export function rankWordpressSolution({
         solutionRank.pushBenefit(-0.5, 'Za týden nestihnete vytvořit web na WordPressu');
     }
 
-    return solutionRank;
+    if (budgetPerMonth / (pagesCount + productsCount + customFunctionsCount) < 5) {
+        solutionRank.pushBenefit(-1, 'Rozpočet na měsíční údržbu není dostatečný pro očekávaný počet stránek a funkcí');
+    }
 
-    /*
-        !!! pros: ['Nejrozšířenější open-source CMS na světě', 'Mnoho šablon a pluginů'],
-        !!! cons: ['Potřeba spravovat hosting', 'Potřeba spravovat aktualizace'],
-        */
+    if (updatesDaysPeriod > 60) {
+        solutionRank.pushBenefit(-1, 'WordPress vyžaduje časté aktualizace pro udržení bezpečnosti');
+    }
+
+    return solutionRank;
 }
 
 export function rankWebgptSolution({
@@ -79,6 +102,22 @@ export function rankWebgptSolution({
 }) {
     const solutionRank = new SolutionRank('WebGPT', 'Vygenerujte si web pomocí WebGPT za 3 minuty.');
 
+    if (webType !== 'static') {
+        solutionRank.pushBenefit(-2, 'WebGPT je ideální pro statické stránky');
+    }
+
+    if (customFunctionsCount > 3) {
+        solutionRank.pushBenefit(-2, 'WebGPT může mít omezené možnosti pro složité funkce');
+    }
+
+    if (daysToDeadline >= 3 && daysToDeadline <= 14) {
+        solutionRank.pushBenefit(2, 'Ideální pro rychlé projektové nasazení s kratší deadline');
+    }
+
+    if (budgetUpfront < 500) {
+        solutionRank.pushBenefit(1, 'Nízké náklady na zahájení jsou vhodné pro menší rozpočty');
+    }
+
     return solutionRank;
 }
 
@@ -93,7 +132,27 @@ export function rankWebflowSolution({
     daysToDeadline,
     levelOfControl,
 }) {
-    const solutionRank = new SolutionRank('', '');
+    const solutionRank = new SolutionRank('Webflow', 'Vytvořte si profesionalní web bez nutnosti programovat.');
+
+    if (webType === 'eCommerce' && productsCount <= 1000) {
+        solutionRank.pushBenefit(2, 'Webflow nabízí silné nástroje pro e-commerce do 1000 produktů');
+    } else if (productsCount > 1000) {
+        solutionRank.pushBenefit(-2, 'Pro více než 1000 produktů již Webflow nemusí být dostatečně efektivní');
+    }
+
+    if (customFunctionsCount > 5) {
+        solutionRank.pushBenefit(-1, 'Přidání složitějších funkcí může být v Webflow výzvou');
+    }
+
+    if (daysToDeadline < 14) {
+        solutionRank.pushBenefit(-1, 'Pro kvalitní web na Webflow je potřeba více než dva týdny');
+    }
+
+    if (budgetUpfront >= 1000 && budgetPerMonth >= 50) {
+        solutionRank.pushBenefit(2, 'Rozpočet je dostatečný pro vytvoření kvalitního webu na Webflow');
+    } else {
+        solutionRank.pushBenefit(-2, 'Nedostatečný rozpočet pro požadavky vytvoření webu na Webflow');
+    }
 
     return solutionRank;
 }
@@ -110,6 +169,24 @@ export function rankWixSolution({
     levelOfControl,
 }) {
     const solutionRank = new SolutionRank('Wix', 'Jednoduchý webový builder pro vytvoření webu bez programování.');
+
+    if (pagesCount <= 20 && productsCount <= 50) {
+        solutionRank.pushBenefit(1, 'Ideální pro menší weby a projekty');
+    } else {
+        solutionRank.pushBenefit(-2, 'Pro větší projekty Wix nemusí být nejefektivnější');
+    }
+
+    if (customFunctionsCount > 3) {
+        solutionRank.pushBenefit(-2, 'Komplexnější funkční požadavky mohou být problematické realizovat s Wix');
+    }
+
+    if (budgetPerMonth < 25) {
+        solutionRank.pushBenefit(-1, 'Rozpočet na měsíční údržbu je pod optimalní úrovní pro Wix');
+    }
+
+    if (daysToDeadline >= 7 && daysToDeadline <= 30) {
+        solutionRank.pushBenefit(1, 'Realistické časové období pro vytvoření webu na platformě Wix');
+    }
 
     return solutionRank;
 }
