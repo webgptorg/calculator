@@ -316,7 +316,7 @@ export function rankFacebookSolution({
     }
 
     if (levelOfControl > 0.2) {
-        solutionRank.bigCon('Velmi omezená vlastní kontrola');
+        solutionRank.bigCon('Předdefinované možnosti');
     }
 
     return solutionRank;
@@ -340,7 +340,7 @@ export function rankLinkedinSolution({
     }
 
     if (levelOfControl > 0.2) {
-        solutionRank.bigCon('Velmi omezená vlastní kontrola');
+        solutionRank.bigCon('Předdefinované možnosti');
     }
 
     return solutionRank;
@@ -364,7 +364,7 @@ export function rankInstagramSolution({
     }
 
     if (levelOfControl > 0.2) {
-        solutionRank.bigCon('Velmi omezená vlastní kontrola');
+        solutionRank.bigCon('Předdefinované možnosti');
     }
 
     return solutionRank;
