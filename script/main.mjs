@@ -2,9 +2,13 @@ import { normalizeTo_camelCase } from 'https://cdn.jsdelivr.net/npm/n12@1.8.28/+
 import { spaceTrim } from 'https://cdn.jsdelivr.net/npm/spacetrim@0.11.4/+esm';
 import solutions from '../data/index.mjs';
 
-export function main() {
-    console.log(solutions);
+const valueExponentBase = 2; // <- Which is better 2 OR Math.E;
+const valueExponentStep = 0.00001;
+const valueExponentMin = 0;
+const valueExponentMax = 10;
 
+export function main() {
+    // console.info(solutions);
     // ======================
 
     const recalculateResult = () => {
@@ -30,6 +34,8 @@ export function main() {
 
             if (id === 'web-type') {
                 value = inputElement.value;
+            } else if (inputElement.dataset.value) {
+                value = parseFloat(inputElement.dataset.value);
             } else {
                 value = parseFloat(inputElement.value);
             }
@@ -76,16 +82,77 @@ export function main() {
         }
     };
 
-    requestAnimationFrame(() => {
-        recalculateResult();
-    });
-
     // ======================
 
     // TODO: Extract this to separate function
     for (const inputElement of Array.from(document.querySelectorAll(`input[type="range"][data-show-output]`))) {
+        if (inputElement.dataset.isActivated) {
+            console.error({ inputElement });
+            throw new Error('This input is already activated');
+        }
+
+        inputElement.dataset.isActivated = true;
+
+        const scaleType = inputElement.dataset.scaleType;
+
+        const minValue = parseFloat(inputElement.getAttribute('min'));
+        const maxValue = parseFloat(inputElement.getAttribute('max'));
+        const stepValue = parseFloat(inputElement.getAttribute('step'));
+
+        const initialValue = parseFloat(inputElement.value);
+
+        if (scaleType === 'linear') {
+            console.log(inputElement, initialValue);
+            inputElement.dataset.value = initialValue;
+            // No need to re-set:> inputElement.value = initialValue;
+        } else if (scaleType === 'logarithmic') {
+            const initialValueExponentValue =
+                Math.log(
+                    ((initialValue - minValue) / (maxValue - minValue)) *
+                        Math.pow(valueExponentBase, valueExponentMax) +
+                        1,
+                ) / Math.log(valueExponentBase);
+
+            // Note: Just for backup back into DOM
+            inputElement.dataset.valueMin = minValue;
+            inputElement.dataset.valueMax = maxValue;
+            inputElement.dataset.stepValue = stepValue;
+
+            inputElement.setAttribute('min', valueExponentMin);
+            inputElement.setAttribute('max', valueExponentMax);
+            inputElement.setAttribute('step', valueExponentStep);
+
+            inputElement.dataset.value = initialValueExponentValue;
+            inputElement.value = initialValueExponentValue;
+        } else {
+            throw new Error(`Unknown scale type "${scaleType}"`);
+        }
+
         const updateOutput = () => {
-            const value = parseFloat(inputElement.value);
+            let value;
+
+            if (scaleType === 'linear') {
+                value = parseFloat(inputElement.value);
+
+                // Note: Just for backup back into DOM
+                inputElement.dataset.value = value;
+                inputElement.value = value;
+            } else if (scaleType === 'logarithmic') {
+                const valueExponentValue = parseFloat(inputElement.value);
+
+                const valueUnrounded =
+                    ((Math.pow(valueExponentBase, valueExponentValue) - 1) /
+                        Math.pow(valueExponentBase, valueExponentMax)) *
+                        (maxValue - minValue) +
+                    minValue;
+
+                value = Math.round(valueUnrounded / stepValue) * stepValue;
+
+                // Note: Just for backup back into DOM
+                inputElement.dataset.value = value;
+                inputElement.value = valueExponentValue;
+            }
+
             const showOutput = inputElement.dataset.showOutput;
 
             let valueFormatted = value.toLocaleString('cs-CZ');
@@ -188,4 +255,31 @@ export function main() {
             updateOutput();
         });
     }
+
+    requestAnimationFrame(() => {
+        recalculateResult();
+    });
+
+    // ======================
+    const webTypeElement = window.document.getElementById('web-type');
+    const productsCountElement = window.document.getElementById('products-count');
+
+    function updateWebType() {
+        if (!['eshop', 'application'].includes(webTypeElement.value)) {
+            // TODO: [⛑] productsCountElement.dataset.valueBackup = productsCountElement.value;
+
+            productsCountElement.disabled = true;
+            productsCountElement.value = 0;
+            productsCountElement.dataset.value = 0;
+            productsCountElement.nextElementSibling.innerHTML = '&nbsp;';
+        } else {
+            productsCountElement.disabled = false;
+            // TODO: [⛑] productsCountElement.value = productsCountElement.dataset.valueBackup;
+            // TODO: [⛑] productsCountElement.dataset.value = productsCountElement.dataset.valueBackup;
+        }
+    }
+    window.document.getElementById('web-type').addEventListener('input', updateWebType);
+    requestAnimationFrame(updateWebType);
+
+    // ======================
 }

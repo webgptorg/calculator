@@ -220,6 +220,10 @@ export function rankShopifySolution({
 }) {
     const solutionRank = new SolutionRank('Shopify', 'Vytvořte si svůj e-shop pomocí Shopify.');
 
+    if (webType !== 'eshop') {
+        solutionRank.pushBenefit(-5, 'Vhodné pouze pro e-shopy');
+    }
+
     return solutionRank;
 }
 
@@ -236,6 +240,10 @@ export function rankShoptetSolution({
 }) {
     const solutionRank = new SolutionRank('ShopTet', 'Český systém pro vytvoření e-shopu.');
 
+    if (webType !== 'eshop') {
+        solutionRank.pushBenefit(-5, 'Vhodné pouze pro e-shopy');
+    }
+
     return solutionRank;
 }
 
@@ -251,6 +259,10 @@ export function rankLinktreeSolution({
     levelOfControl,
 }) {
     const solutionRank = new SolutionRank('Linktr.ee', 'Pro vytvoření jednoduchého webu/rozcestníku s odkazy.');
+
+    if (webType === 'eshop') {
+        solutionRank.pushBenefit(-5, 'Nevhodné pro e-shopy');
+    }
 
     if (pagesCount > 1) {
         solutionRank.pushBenefit(-3, 'Vhodné pouze pro jednostránkové rozcestníky s odkazy');
