@@ -108,11 +108,24 @@ header h1 {
     padding-left: 0;
 }
 
+#solutions > li {
+    padding-bottom: 20px;
+}
+
 #solutions li .proscons {
     display: flex;
     flex-direction: row;
     flex-wrap: wrap;
     justify-content: flex-start;
+}
+
+#solutions li .proscons ul {
+    /*/
+    outline: 1px solid rgb(102, 255, 0);
+    /**/
+
+    width: calc(50% - 10px);
+    padding-left: 10px;
 }
 
 #solutions li .proscons ul.pros {
@@ -133,4 +146,10 @@ header h1 {
 #solutions li .proscons ul.cons li::before {
     font-weight: bold;
     content: '- ';
+}
+
+/*=================================================*/
+
+.debug {
+    display: none;
 }

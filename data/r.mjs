@@ -1,4 +1,5 @@
 import { SolutionRank } from '../script/SolutionRank.mjs';
+import { webTypeToMessage } from './other/webTypeToMessage.mjs';
 
 export function rankCustomSolution({
     webType,
@@ -12,6 +13,10 @@ export function rankCustomSolution({
     levelOfControl,
 }) {
     const solutionRank = new SolutionRank('Vlastní řešení', 'Naprogramujte si vlastní řešení.');
+
+    if (['presentation', 'eshop', 'blog'].includes(webType)) {
+        solutionRank.pushBenefit(-0.5, `Pro ${webTypeToMessage(webType, 2)} je vhodnější použít hotové řešení`);
+    }
 
     let complexity = pagesCount * 0.1 + productsCount * 0.2 + customFunctionsCount * 0.3;
     let budgetRating = (budgetUpfront + budgetPerMonth * 12) / complexity;
@@ -38,7 +43,7 @@ export function rankCustomSolution({
     if (timeConstraintRating < 1) {
         solutionRank.pushBenefit(-2, 'Nedostatečný čas na vývoj vzhledem k požadované složitosti');
     } else {
-        solutionRank.pushBenefit(1, 'Dostatečný čas na vývoj');
+        solutionRank.pushBenefit(0.5, 'Dostatečný čas na vývoj');
     }
 
     return solutionRank;
@@ -59,6 +64,10 @@ export function rankWordpressSolution({
         'Self-hosted WordPress',
         'Využijte nejrozšířenější open-source CMS na světě pro vytvoření svých webových stránek.',
     );
+
+    if (['application', 'eshop'].includes(webType)) {
+        solutionRank.pushBenefit(-0.5, `Není nejlepší volbou pro ${webTypeToMessage(webType, 2)}`);
+    }
 
     if (customFunctionsCount < 5) {
         solutionRank.pushBenefit(1, 'Pro základní úkoly má WordPress velké množství pluginů');
@@ -102,20 +111,28 @@ export function rankWebgptSolution({
 }) {
     const solutionRank = new SolutionRank('WebGPT', 'Vygenerujte si web pomocí WebGPT za 3 minuty.');
 
-    if (webType !== 'static') {
-        solutionRank.pushBenefit(-2, 'WebGPT je ideální pro statické stránky');
+    if (['application', 'blog'].includes(webType)) {
+        solutionRank.pushBenefit(-0.5, `Není nejlepší volbou pro ${webTypeToMessage(webType, 2)}`);
     }
 
-    if (customFunctionsCount > 3) {
-        solutionRank.pushBenefit(-2, 'WebGPT může mít omezené možnosti pro složité funkce');
+    if (pagesCount > 10) {
+        solutionRank.pushBenefit(-2, 'Není ideální pro více stránek');
     }
 
-    if (daysToDeadline >= 3 && daysToDeadline <= 14) {
-        solutionRank.pushBenefit(2, 'Ideální pro rychlé projektové nasazení s kratší deadline');
+    if (customFunctionsCount > 2) {
+        solutionRank.pushBenefit(-2, 'Omezené možnosti pro vlastní funkce');
+    }
+
+    if (daysToDeadline < 15) {
+        solutionRank.pushBenefit(2, 'Ideální pro rychlé nasazení');
     }
 
     if (budgetUpfront < 500) {
-        solutionRank.pushBenefit(1, 'Nízké náklady na zahájení jsou vhodné pro menší rozpočty');
+        solutionRank.pushBenefit(1, 'Levné');
+    }
+
+    if (budgetPerMonth < 300) {
+        solutionRank.pushBenefit(1, 'Levné');
     }
 
     return solutionRank;
@@ -134,24 +151,20 @@ export function rankWebflowSolution({
 }) {
     const solutionRank = new SolutionRank('Webflow', 'Vytvořte si profesionalní web bez nutnosti programovat.');
 
-    if (webType === 'eCommerce' && productsCount <= 1000) {
-        solutionRank.pushBenefit(2, 'Webflow nabízí silné nástroje pro e-commerce do 1000 produktů');
-    } else if (productsCount > 1000) {
-        solutionRank.pushBenefit(-2, 'Pro více než 1000 produktů již Webflow nemusí být dostatečně efektivní');
+    if (['application'].includes(webType)) {
+        solutionRank.pushBenefit(-0.5, `Není nejlepší volbou pro ${webTypeToMessage(webType, 2)}`);
+    }
+
+    if (productsCount + pagesCount + customFunctionsCount > 1000) {
+        solutionRank.pushBenefit(-1, 'Nevhodné pro velké weby');
     }
 
     if (customFunctionsCount > 5) {
-        solutionRank.pushBenefit(-1, 'Přidání složitějších funkcí může být v Webflow výzvou');
+        solutionRank.pushBenefit(-1, 'Přidání složitějších funkcí může být výzvou');
     }
 
-    if (daysToDeadline < 14) {
-        solutionRank.pushBenefit(-1, 'Pro kvalitní web na Webflow je potřeba více než dva týdny');
-    }
-
-    if (budgetUpfront >= 1000 && budgetPerMonth >= 50) {
-        solutionRank.pushBenefit(2, 'Rozpočet je dostatečný pro vytvoření kvalitního webu na Webflow');
-    } else {
-        solutionRank.pushBenefit(-2, 'Nedostatečný rozpočet pro požadavky vytvoření webu na Webflow');
+    if (daysToDeadline < 7) {
+        solutionRank.pushBenefit(-1, 'Nedostatečný čas pro vytvoření webu');
     }
 
     return solutionRank;
@@ -170,10 +183,16 @@ export function rankWixSolution({
 }) {
     const solutionRank = new SolutionRank('Wix', 'Jednoduchý webový builder pro vytvoření webu bez programování.');
 
-    if (pagesCount <= 20 && productsCount <= 50) {
-        solutionRank.pushBenefit(1, 'Ideální pro menší weby a projekty');
-    } else {
-        solutionRank.pushBenefit(-2, 'Pro větší projekty Wix nemusí být nejefektivnější');
+    if (['application'].includes(webType)) {
+        solutionRank.pushBenefit(-0.5, `Není nejlepší volbou pro ${webTypeToMessage(webType, 2)}`);
+    }
+
+    if (productsCount > 100) {
+        solutionRank.pushBenefit(-1, 'Nevhodné pro větší e-shopy');
+    }
+
+    if (pagesCount > 100) {
+        solutionRank.pushBenefit(-1, 'Nevhodné pro větší weby');
     }
 
     if (customFunctionsCount > 3) {
@@ -202,7 +221,11 @@ export function rankSolidpixelsSolution({
     daysToDeadline,
     levelOfControl,
 }) {
-    const solutionRank = new SolutionRank('', '');
+    const solutionRank = new SolutionRank('Solid Pixels', '');
+
+    if (['eshop', 'application'].includes(webType)) {
+        solutionRank.pushBenefit(-0.5, `Není nejlepší volbou pro ${webTypeToMessage(webType, 2)}`);
+    }
 
     return solutionRank;
 }
@@ -260,8 +283,8 @@ export function rankLinktreeSolution({
 }) {
     const solutionRank = new SolutionRank('Linktr.ee', 'Pro vytvoření jednoduchého webu/rozcestníku s odkazy.');
 
-    if (webType === 'eshop') {
-        solutionRank.pushBenefit(-5, 'Nevhodné pro e-shopy');
+    if (!['presentation'].includes(webType)) {
+        solutionRank.pushBenefit(-5, `Nevhodné pro ${webTypeToMessage(webType, 2)}`);
     }
 
     if (pagesCount > 1) {
@@ -288,6 +311,10 @@ export function rankFacebookSolution({
 }) {
     const solutionRank = new SolutionRank('Facebook profil', 'Nemějte web, ale jen Facebook profil.');
 
+    if (!['presentation', 'eshop'].includes(webType)) {
+        solutionRank.pushBenefit(-5, `Nelze použít jako ${webTypeToMessage(webType, 2)}`);
+    }
+
     if (levelOfControl > 0.2) {
         solutionRank.pushBenefit(-3, 'Velmi omezená vlastní kontrola');
     }
@@ -307,6 +334,10 @@ export function rankLinkedinSolution({
     levelOfControl,
 }) {
     const solutionRank = new SolutionRank('LinkedIn profil', 'Nemějte web, ale jen LinkedIn profil.');
+
+    if (!['presentation', 'blog'].includes(webType)) {
+        solutionRank.pushBenefit(-5, `Nelze použít jako ${webTypeToMessage(webType, 2)}`);
+    }
 
     if (levelOfControl > 0.2) {
         solutionRank.pushBenefit(-3, 'Velmi omezená vlastní kontrola');
@@ -328,6 +359,10 @@ export function rankInstagramSolution({
 }) {
     const solutionRank = new SolutionRank('Instagram profil', 'Nemějte web, ale jen Instagram profil.');
 
+    if (!['presentation', 'blog'].includes(webType)) {
+        solutionRank.pushBenefit(-5, `Nelze použít jako ${webTypeToMessage(webType, 2)}`);
+    }
+
     if (levelOfControl > 0.2) {
         solutionRank.pushBenefit(-3, 'Velmi omezená vlastní kontrola');
     }
@@ -346,7 +381,21 @@ export function rankChatgptSolution({
     daysToDeadline,
     levelOfControl,
 }) {
-    const solutionRank = new SolutionRank('ChatGPT', 'Vygenerujte si web pomocí ChatGPT.');
+    // Note: Making web via ChatGPT is pretty much the same as custom solution but with some modifications
+    const solutionRank = rankCustomSolution({
+        webType,
+        pagesCount,
+        productsCount,
+        updatesDaysPeriod,
+        customFunctionsCount,
+        budgetUpfront: budgetUpfront / 2,
+        budgetPerMonth: budgetPerMonth / 2,
+        daysToDeadline: daysToDeadline * 2,
+        levelOfControl,
+    });
+
+    solutionRank.title = 'ChatGPT';
+    solutionRank.description = 'Vygenerujte si web pomocí ChatGPT.';
 
     solutionRank.pushBenefit(-0.5, 'Pomocí ChatGPT bez dalších znalostí vytvoříte pouze limitovaný web');
 

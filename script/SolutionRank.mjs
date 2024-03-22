@@ -25,13 +25,15 @@ export class SolutionRank {
         // TODO: !!! Sort by fitExponent
         return this.benefits
             .filter((benefit) => benefit.fitExponent > 0)
-            .map((benefit) => benefit.reason + benefit.fitExponent);
+            .sort((a, b) => b.fitExponent - a.fitExponent)
+            .map((benefit) => benefit.reason + `<i class="debug">(${benefit.fitExponent})</i>`);
     }
 
     get cons() {
         // TODO: !!! Sort by fitExponent
         return this.benefits
             .filter((benefit) => benefit.fitExponent < 0)
-            .map((benefit) => benefit.reason + benefit.fitExponent);
+            .sort((a, b) => a.fitExponent - b.fitExponent)
+            .map((benefit) => benefit.reason + `<i class="debug">(${benefit.fitExponent})</i>`);
     }
 }

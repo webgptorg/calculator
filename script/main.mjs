@@ -60,8 +60,7 @@ export function main() {
                 <li>
                     
                     <b>${title}</b> ${description}
-                    <br/>
-                    <i>(${Math.round(fit * 100)}%)</i>
+                    <i class="debug">(${Math.round(fit * 100)}%)</i>
 
                     <div class="proscons">
                         <ul class="pros">
@@ -214,8 +213,10 @@ export function main() {
                     valueFormatted = 'Do půl roku';
                 } else if (value <= 365 * k) {
                     valueFormatted = 'Do roku';
-                } else {
+                } else if (value <= 365 * 2.5) {
                     valueFormatted = `Do ${Math.round((value / 365) * 10) / 10} let`;
+                } else {
+                    valueFormatted = `Až to bude, tak to bude`;
                 }
             } else if (showOutput === 'level-of-control') {
                 if (value < 5 / 100) {
@@ -249,6 +250,12 @@ export function main() {
 
         requestAnimationFrame(() => {
             updateOutput();
+        });
+    }
+
+    for (const inputElement of Array.from(document.querySelectorAll(`select`))) {
+        inputElement.addEventListener('input', () => {
+            recalculateResult();
         });
     }
 
