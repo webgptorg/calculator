@@ -11,8 +11,34 @@ export class SolutionRank {
             throw new Error('fitExponent must be non-zero');
         }
         this.benefits.push({ fitExponent, reason });
+    }
 
-        return this;
+    pro(reason) {
+        return this.pushBenefit(1, reason);
+    }
+
+    con(reason) {
+        return this.pushBenefit(-1, reason);
+    }
+
+    bigPro(reason) {
+        return this.pushBenefit(3, reason);
+    }
+
+    bigCon(reason) {
+        return this.pushBenefit(-3, reason);
+    }
+
+    smallPro(reason) {
+        return this.pushBenefit(1 / 3, reason);
+    }
+
+    smallCon(reason) {
+        return this.pushBenefit(-1 / 3, reason);
+    }
+
+    restrictiveCon(reason) {
+        return this.pushBenefit(-9, reason);
     }
 
     get fit() {
