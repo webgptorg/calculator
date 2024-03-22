@@ -52,9 +52,6 @@ export function main() {
 
         solutionsElement.innerHTML = '';
         for (const { fit, title, description, pros, cons } of solutionsForMe) {
-            // TODO: !!! Use fit, pros and cons
-            // TODO: !!! Do not show percentage, its just orientational
-            // TODO: !!! Filter less than 50%
             solutionsElement.innerHTML += spaceTrim(
                 (block) => `
                 <li>
@@ -64,10 +61,10 @@ export function main() {
 
                     <div class="proscons">
                         <ul class="pros">
-                            ${block(pros.map((text) => `<li>${text /* <- TODO: !!! Escape */}</li>`).join('\n'))}
+                            ${block(pros.map((text) => `<li>${text /* <- TODO: Escape */}</li>`).join('\n'))}
                         </ul>
                         <ul class="cons">
-                            ${block(cons.map((text) => `<li>${text /* <- TODO: !!! Escape */}</li>`).join('\n'))}
+                            ${block(cons.map((text) => `<li>${text /* <- TODO: Escape */}</li>`).join('\n'))}
                         </ul>
                     </div>
 

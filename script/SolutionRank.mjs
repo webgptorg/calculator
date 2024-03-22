@@ -22,7 +22,6 @@ export class SolutionRank {
     }
 
     get pros() {
-        // TODO: !!! Sort by fitExponent
         return this.benefits
             .filter((benefit) => benefit.fitExponent > 0)
             .sort((a, b) => b.fitExponent - a.fitExponent)
@@ -30,7 +29,6 @@ export class SolutionRank {
     }
 
     get cons() {
-        // TODO: !!! Sort by fitExponent
         return this.benefits
             .filter((benefit) => benefit.fitExponent < 0)
             .sort((a, b) => a.fitExponent - b.fitExponent)
