@@ -23,11 +23,15 @@ export class SolutionRank {
 
     get pros() {
         // TODO: !!! Sort by fitExponent
-        return this.benefits.filter((benefit) => benefit.fitExponent > 0).map((benefit) => benefit.reason);
+        return this.benefits
+            .filter((benefit) => benefit.fitExponent > 0)
+            .map((benefit) => benefit.reason + benefit.fitExponent);
     }
 
     get cons() {
         // TODO: !!! Sort by fitExponent
-        return this.benefits.filter((benefit) => benefit.fitExponent < 0).map((benefit) => benefit.reason);
+        return this.benefits
+            .filter((benefit) => benefit.fitExponent < 0)
+            .map((benefit) => benefit.reason + benefit.fitExponent);
     }
 }

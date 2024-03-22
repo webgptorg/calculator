@@ -43,23 +43,19 @@ export function main() {
             inputParameters[normalizeTo_camelCase(id)] = value;
         }
 
-        // console.info({ inputParameters });
+        const solutionsForMe = solutions
+            .map((solution) => solution(inputParameters))
+            // !!! .filter((solution) => solution.fit > 0.2)
+            .sort((a, b) => b.fit - a.fit);
 
-        const solutionsForMe = solutions.map((solution) => solution(inputParameters));
+        const solutionsElement = document.getElementById('solutions');
 
-        // TODO: !!! Filter
-        // TODO: !!! Sort
-
-        // console.info({ solutionsForMe });
-
-        const outputElement = document.getElementById('output');
-
-        outputElement.innerHTML = '';
+        solutionsElement.innerHTML = '';
         for (const { fit, title, description, pros, cons } of solutionsForMe) {
             // TODO: !!! Use fit, pros and cons
             // TODO: !!! Do not show percentage, its just orientational
             // TODO: !!! Filter less than 50%
-            outputElement.innerHTML += spaceTrim(
+            solutionsElement.innerHTML += spaceTrim(
                 (block) => `
                 <li>
                     

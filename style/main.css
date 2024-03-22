@@ -9,12 +9,17 @@ body {
     padding: 0;
 }
 
-h1 {
+header {
     text-align: center;
     margin: 0;
-    padding: 20px;
+    padding: 0;
     background-color: #f0f0f0;
     border-bottom: 1px solid #ccc;
+}
+
+header h1 {
+    text-align: center;
+    margin: 25px;
 }
 
 /*=================================================*/
@@ -82,29 +87,50 @@ h1 {
 
 /*=================================================*/
 
-#output li .proscons {
+#output {
+    margin: 0;
+    padding: 35px;
+    background-color: #f8f8f8;
+    border-top: 1px solid #ccc;
+
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+
+#output > * {
+    max-width: 800px;
+}
+
+#output ol,
+#output ul {
+    padding-left: 0;
+}
+
+#solutions li .proscons {
     display: flex;
     flex-direction: row;
     flex-wrap: wrap;
     justify-content: flex-start;
 }
 
-#output li .proscons ul.pros {
+#solutions li .proscons ul.pros {
     color: rgb(54, 172, 54);
     list-style: none;
 }
 
-#output li .proscons ul.pros li::before {
+#solutions li .proscons ul.pros li::before {
     font-weight: bold;
     content: '+ ';
 }
 
-#output li .proscons ul.cons {
+#solutions li .proscons ul.cons {
     color: #f66;
     list-style: none;
 }
 
-#output li .proscons ul.cons li::before {
+#solutions li .proscons ul.cons li::before {
     font-weight: bold;
     content: '- ';
 }
