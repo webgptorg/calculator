@@ -1,0 +1,11 @@
+{
+    "autokill": true,
+    "terminals": [
+        {
+            "name": "🏭🖼️ Generate solutions",
+            "command": "ts-node ./generator/create-solution/create-solution.ts",
+            "onlySingle": true,
+            "focus": true
+        }
+    ]
+}

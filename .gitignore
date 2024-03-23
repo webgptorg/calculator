@@ -1,2 +1,6 @@
 .tmp
 
+.env
+
+
+node_modules
