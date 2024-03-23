@@ -20,7 +20,7 @@ export function main() {
             'web-type',
             'pages-count',
             'products-count',
-            'updates-days-period',
+            // [🆙] 'updates-days-period',
             'custom-functions-count',
             'budget-upfront',
             'budget-per-month',

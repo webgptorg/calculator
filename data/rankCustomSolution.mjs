@@ -16,17 +16,5 @@ export function rankCustomSolution({
     solutionRank.pro('Máte plnou kontrolu nad vším.');
     solutionRank.con('Mnoho věcí musíte udělat sami.');
 
-    solutionRank.goodFor({ webType }, ['']);
-    solutionRank.goodFor({ webType }, ['']);
-
-    solutionRank.rankPrefecence(
-        { pagesCount },
-        {
-            ideal: 'Pro malé projekty',
-            '5-10': 'Pro střední projekty',
-            '10+': 'Pro velké projekty',
-        },
-    );
-
     return solutionRank;
 }
