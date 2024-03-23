@@ -139,27 +139,27 @@ export class SolutionRank {
             }
         } else if (key === 'budgetUpfront') {
             if (value >= ideal) {
-                return this.pro(`Dostatečný rozpočet na začátek`);
+                return this.pro(`Ideální rozpočet na začátek`);
             } else if (value < possible) {
                 return this.con(`Neadekvátní rozpočet na začátek`);
             }
         } else if (key === 'budgetPerMonth') {
             if (value >= ideal) {
-                return this.pro(`Dostatečný rozpočet na měsíc`);
+                return this.pro(`Ideální rozpočet na měsíc`);
             } else if (value < possible) {
                 return this.con(`Neadekvátní rozpočet na měsíc`);
             }
         } else if (key === 'daysToDeadline') {
             if (value >= ideal) {
-                return this.pro(`Dostačující čas na dokončení`);
+                return this.pro(`Ideální čas na dokončení`);
             } else if (value < possible) {
-                return this.con(`Za tak krátkou dobu nemáte šanci vytvořit rozumné řešení`);
+                return this.con(`Moc krátký čas na dokončení`);
             }
         } else if (key === 'levelOfControl') {
             if (value <= ideal) {
-                return this.pro(`Dostatečná míra přizpůsobení`);
+                return this.pro(`Ideální míra přizpůsobení`);
             } else if (value > possible) {
-                return this.con(`Mnoho věcí nemůžete ovlivnit`);
+                return this.con(`Mnoho věcí nebudete mít pod kontrolou`);
             }
         } else {
             throw new Error(`Unknown preference: ${key}`);
