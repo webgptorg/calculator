@@ -12,8 +12,6 @@
         "@promptbook/utils": "^0.40.0-10",
         "chalk": "^5.3.0",
         "configchecker": "^1.5.16",
-        "dotenv": "^16.4.5",
-        "ts-node": "^10.9.2",
-        "typescript": "^5.4.3"
+        "dotenv": "^16.4.5"
     }
 }

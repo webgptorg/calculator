@@ -7,12 +7,11 @@ dotenv.config({ path: '.env' });
 import { CallbackInterfaceTools, createPromptbookExecutor, promptbookStringToJson } from '@promptbook/core';
 import { JavascriptEvalExecutionTools } from '@promptbook/execute-javascript';
 import { OpenAiExecutionTools } from '@promptbook/openai';
-import type { PromptbookString } from '@promptbook/types';
 import { assertsExecutionSuccessful } from '@promptbook/utils';
 import chalk from 'chalk';
 import { readFile, writeFile } from 'fs/promises';
 import { join } from 'path';
-import { OPENAI_API_KEY } from '../config';
+import { OPENAI_API_KEY } from './config.js';
 
 if (process.cwd() !== join(__dirname, '../..')) {
     console.error(chalk.red(`CWD must be root of the project`));
@@ -29,11 +28,11 @@ createSolution('Solid Pixels')
         process.exit(0);
     });
 
-async function createSolution(solutionName: string) {
+async function createSolution(solutionName) {
     console.info(`🏭 Creating solution`);
 
     const promptbook = promptbookStringToJson(
-        (await readFile(join(__dirname, '../promptbook/create-solution.ptbk.md'), 'utf-8')) as PromptbookString,
+        await readFile(join(__dirname, '../promptbook/create-solution.ptbk.md'), 'utf-8'),
     );
 
     const executor = createPromptbookExecutor({
@@ -41,7 +40,7 @@ async function createSolution(solutionName: string) {
         tools: {
             natural: new OpenAiExecutionTools({
                 isVerbose: false,
-                openAiApiKey: OPENAI_API_KEY!,
+                openAiApiKey: OPENAI_API_KEY,
                 user: 'calculator/create-solution',
             }),
             script: [
