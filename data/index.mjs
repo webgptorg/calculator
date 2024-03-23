@@ -1,3 +1,4 @@
+/*
 import {
     rankChatgptSolution,
     rankCustomSolution,
@@ -11,12 +12,15 @@ import {
     rankWebflowSolution,
     rankWebgptSolution,
     rankWixSolution,
-    rankWordpressSolution,
-} from './r.mjs';
+} from './r2.mjs';
+*/
+import { rankWordpressSolution } from './rankWordpressSolution.mjs';
 
 export default [
-    rankCustomSolution,
     rankWordpressSolution,
+
+    /*
+    rankCustomSolution,
     rankWebgptSolution,
     rankWebflowSolution,
     rankWixSolution,
@@ -28,4 +32,5 @@ export default [
     rankLinkedinSolution,
     rankInstagramSolution,
     rankChatgptSolution,
+    */
 ];

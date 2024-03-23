@@ -171,6 +171,9 @@ export function main() {
                 } else if (value < 20000000) {
                     valueFormatted = `řádově miliony (${valueFormatted})`;
                 }
+
+                /*
+            // [🆙]
             } else if (showOutput === 'days-period') {
                 const k = 1.2;
 
@@ -191,6 +194,8 @@ export function main() {
                 } else {
                     valueFormatted = `Jednou za ${Math.round((value / 365) * 10) / 10} roky`;
                 }
+
+            */
             } else if (showOutput === 'days-to-deadline') {
                 const k = 1.2;
 
