@@ -103,6 +103,13 @@ header h1 {
     max-width: 800px;
 }
 
+#output li p {
+    /* Note: This is because of showdown Markdown */
+    display: inline-block;
+    margin: 0;
+    margin-top: 5px;
+}
+
 #output ol,
 #output ul {
     padding-left: 0;

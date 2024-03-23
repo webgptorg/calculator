@@ -1,4 +1,5 @@
 import { normalizeTo_camelCase } from 'https://cdn.jsdelivr.net/npm/n12@1.8.28/+esm';
+import showdown from 'https://cdn.jsdelivr.net/npm/showdown@2.1.0/+esm';
 import { spaceTrim } from 'https://cdn.jsdelivr.net/npm/spacetrim@0.11.4/+esm';
 import solutions from '../data/index.mjs';
 
@@ -6,6 +7,8 @@ const valueExponentBase = 2; // <- Which is better 2 OR Math.E;
 const valueExponentStep = 0.00001;
 const valueExponentMin = 0;
 const valueExponentMax = 10;
+
+const converter = new showdown.Converter();
 
 export function main() {
     // console.info(solutions);
@@ -56,15 +59,15 @@ export function main() {
                 (block) => `
                 <li>
                     
-                    <b>${title}</b> ${description}
+                    <b>${title}</b> ${converter.makeHtml(description)}
                     <i class="debug">(${Math.round(fit * 100)}%)</i>
 
                     <div class="proscons">
                         <ul class="pros">
-                            ${block(pros.map((text) => `<li>${text /* <- TODO: Escape */}</li>`).join('\n'))}
+                            ${block(pros.map((text) => `<li>${converter.makeHtml(text)}</li>`).join('\n'))}
                         </ul>
                         <ul class="cons">
-                            ${block(cons.map((text) => `<li>${text /* <- TODO: Escape */}</li>`).join('\n'))}
+                            ${block(cons.map((text) => `<li>${converter.makeHtml(text)}</li>`).join('\n'))}
                         </ul>
                     </div>
 
