@@ -18,7 +18,7 @@
 
 -   MODEL VARIANT Chat
 -   MODEL NAME `gpt-4-0125-preview`
-<!-- !!!  -   POSTPROCESSING `extractOneBlockFromMarkdown` -->
+-   POSTPROCESSING `extractOneBlockFromMarkdown`
 
 ```
 
