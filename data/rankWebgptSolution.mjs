@@ -1,42 +1,98 @@
 import { SolutionRank } from '../script/SolutionRank.mjs';
-import { webTypeToMessage } from './other/webTypeToMessage.mjs';
 
-export function rankWebgptSolution({
-    webType,
-    pagesCount,
-    productsCount,
-    updatesDaysPeriod,
-    customFunctionsCount,
-    budgetUpfront,
-    budgetPerMonth,
-    daysToDeadline,
-    levelOfControl,
-}) {
-    const solutionRank = new SolutionRank('WebGPT', 'Vygenerujte si web pomocí WebGPT za 3 minuty.');
+/**
+ * Rank the suitability of the WebGPT solution for Czech clients.
+ */
+export function rankWebgptSolution(prefecences) {
+    const {
+        webType, // <- 'presentation', 'eshop', 'blog', 'application'
+        pagesCount,
+        productsCount,
+        customFunctionsCount,
+        budgetUpfront, // <- In CZK
+        budgetPerMonth, // <- In CZK
+        daysToDeadline,
+        levelOfControl,
+        languageSupport, // Additional preference for language support
+    } = prefecences;
 
-    if (['application', 'blog'].includes(webType)) {
-        solutionRank.smallCon(`Není nejlepší volbou pro ${webTypeToMessage(webType, 2)}`);
+    const solutionRank = new SolutionRank(
+        'WebGPT',
+        'Moderní přístup k vytváření webových stránek s využitím pokročilého AI.',
+    );
+
+    solutionRank.pro('Používá pokročilé AI pro generování obsahu.');
+
+    solutionRank.goodFor({ webType }, ['presentation', 'blog']);
+    solutionRank.badFor({ webType }, ['application', 'eshop']);
+
+    solutionRank.rankPrefecence(
+        { pagesCount },
+        {
+            ideal: 20,
+            possible: 100,
+        },
+    );
+
+    solutionRank.rankPrefecence(
+        { productsCount },
+        {
+            ideal: 0,
+            possible: 50,
+        },
+    );
+
+    solutionRank.rankPrefecence(
+        { customFunctionsCount },
+        {
+            ideal: 5,
+            possible: 20,
+        },
+    );
+
+    solutionRank.rankPrefecence(
+        { budgetUpfront },
+        {
+            ideal: 40000 /* CZK */,
+            possible: 10000 /* CZK */,
+        },
+    );
+
+    solutionRank.rankPrefecence(
+        { budgetPerMonth },
+        {
+            ideal: 2000 /* CZK */,
+            possible: 500 /* CZK */,
+        },
+    );
+
+    solutionRank.rankPrefecence(
+        { daysToDeadline },
+        {
+            ideal: 30 /* days */,
+            possible: 5 /* days */,
+        },
+    );
+
+    solutionRank.rankPrefecence(
+        { levelOfControl },
+        {
+            ideal: 20 /* % */ / 100,
+            possible: 50 /* % */ / 100,
+        },
+    );
+
+    solutionRank.rankPrefecence(
+        { languageSupport },
+        {
+            ideal: true, // Ideal if language support is critical
+            possible: false, // Possible even if not initially supported
+        },
+    );
+
+    if (languageSupport) {
+        solutionRank.note('WebGPT poskytuje podporu pro Český jazyk, což umožňuje efektivní tvorbu a správu obsahu.');
     }
 
-    if (pagesCount > 10) {
-        solutionRank.bigCon('Není ideální pro více stránek');
-    }
-
-    if (customFunctionsCount > 2) {
-        solutionRank.bigCon('Omezené možnosti pro vlastní funkce');
-    }
-
-    if (daysToDeadline < 15) {
-        solutionRank.bigPro('Ideální pro rychlé nasazení');
-    }
-
-    if (budgetUpfront < 500) {
-        solutionRank.pro('Levné');
-    }
-
-    if (budgetPerMonth < 300) {
-        solutionRank.pro('Levné');
-    }
-
-    return solutionRank;
+    return solutionRank.calculate();
 }

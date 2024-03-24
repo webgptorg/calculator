@@ -1,3 +1,4 @@
+import { SolutionRank } from '../script/SolutionRank.mjs';
 /**
  * Rank the suitability of the Solid Pixels solution based on user preferences.
  */
@@ -14,21 +15,22 @@ export function rankSolidpixelsSolution(prefecences) {
     } = prefecences;
 
     const solutionRank = new SolutionRank(
-        'Solid Pixels',
-        'Solid Pixels nabízí uživatelům snadnou cestu k sestavení elegantních a funkčních webových stránek.',
+        'Solid Pixels', 
+        'Použijte moderní a intuitivní platformu Solid Pixels pro snadnou tvorbu a správu webů.',
     );
 
-    solutionRank.pro('Velmi snadné použití bez nutnosti programovacích dovedností.');
-    solutionRank.pro('Český produkt s podporou v českém jazyce.');
+    solutionRank.pro('Snadná tvorba webových stránek bez potřeby technických dovedností.');
+    solutionRank.pro('Vstupní cena zahrnuje webhosting a zabezpečení.');
+    solutionRank.pro('Intuitivní drag & drop editor.');
 
     solutionRank.goodFor({ webType }, ['presentation', 'blog']);
-    solutionRank.badFor({ webType }, ['application']);
+    solutionRank.badFor({ webType }, ['eshop', 'application']);
 
     solutionRank.rankPrefecence(
         { pagesCount },
         {
-            ideal: 50,
-            possible: 500,
+            ideal: 12,
+            possible: 50,
         },
     );
 
@@ -36,15 +38,21 @@ export function rankSolidpixelsSolution(prefecences) {
         { productsCount },
         {
             ideal: 0,
-            possible: 200, // Solid Pixels can support simple e-shops
+            possible: 50, // <- With basic e-commerce solutions
         },
     );
+
+    if (productsCount > 0) {
+        solutionRank.note(
+            'Pro jednodušší e-shop funkce nabízí Solid Pixels zabudované řešení, ale nemůže konkurovat specializovaným e-shop platformám.',
+        );
+    }
 
     solutionRank.rankPrefecence(
         { customFunctionsCount },
         {
             ideal: 0,
-            possible: 10, // Limited by the platform's capabilities
+            possible: 10,
         },
     );
 
@@ -59,26 +67,30 @@ export function rankSolidpixelsSolution(prefecences) {
     solutionRank.rankPrefecence(
         { budgetPerMonth },
         {
-            ideal: 300 /* CZK */,
-            possible: 100 /* CZK */,
+            ideal: 500 /* CZK */,
+            possible: 150 /* CZK */,
         },
     );
 
     solutionRank.rankPrefecence(
         { daysToDeadline },
         {
-            ideal: 30 /* days */,
-            possible: 1 /* day */, // Quick to set up for simple sites
+            ideal: 14 /* days */,
+            possible: 1 /* day */,
         },
     );
 
     solutionRank.rankPrefecence(
         { levelOfControl },
         {
-            ideal: 20 /* % */ / 100,
-            possible: 50 /* % */ / 100,
+            ideal: 30 /* % */ / 100,
+            possible: 70 /* % */ / 100,
         },
     );
+
+    solutionRank.con('Omezené možnosti pro náročnější weby a aplikace.');
+    solutionRank.con('Pro pokročilé funkce může být potřeba integrace externích služeb.');
+    solutionRank.con('E-shop řešení není vhodné pro velká a komplexní obchodní řešení.');
 
     return solutionRank.calculate();
 }

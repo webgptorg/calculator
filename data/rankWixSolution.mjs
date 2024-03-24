@@ -1,5 +1,4 @@
 import { SolutionRank } from '../script/SolutionRank.mjs';
-
 /**
  * Rank the suitability of the Wix solution based on user preferences.
  */
@@ -7,41 +6,37 @@ export function rankWixSolution(prefecences) {
     const {
         webType, // <- 'presentation', 'eshop', 'blog', 'application'
         pagesCount,
-        productsCount, // Relevant for e-shops
-        customFunctionsCount, // Implementing through Wix Velo for custom functionality
+        productsCount,
+        customFunctionsCount,
         budgetUpfront, // <- In CZK
-        budgetPerMonth, // <- In CZK, should include Wix subscription costs
-        daysToDeadline, // How quickly the website must be up
-        levelOfControl, // Freedom in customization, from drag-and-drop to code
+        budgetPerMonth, // <- In CZK
+        daysToDeadline,
+        levelOfControl,
     } = prefecences;
 
     const solutionRank = new SolutionRank(
-        'Wix Platform',
-        'Umožňuje snadnou a rychlou tvorbu webových stránek pro vaše podnikání.',
+        'Wix',
+        'Vytvořte si krásné webové stránky snadno s Wixem, cloudovou platformou pro webdesign.',
     );
 
-    solutionRank.pro('Intuitivní drag-and-drop editor.');
-    solutionRank.pro('Vhodné pro začátečníky bez programovacích dovedností.');
-
-    solutionRank.con('Méně kontrolní a přizpůsobitelné než samostatné systémy.');
-    solutionRank.con('Vyšší měsíční náklady.');
+    solutionRank.pro('Jednoduché drag-and-drop rozhraní.');
 
     solutionRank.goodFor({ webType }, ['presentation', 'blog', 'eshop']);
-    solutionRank.badFor({ webType }, ['application']);
+    solutionRank.badFor({ webType }, ['application']); // Omezené možnosti pro pokročilé webové aplikace
 
     solutionRank.rankPrefecence(
         { pagesCount },
         {
-            ideal: 1,
-            possible: 50,
+            ideal: 500,
+            possible: 1000,
         },
     );
 
     solutionRank.rankPrefecence(
         { productsCount },
         {
-            ideal: 1,
-            possible: 5000, // With suitable Wix plans
+            ideal: 200,
+            possible: 500,
         },
     );
 
@@ -49,15 +44,15 @@ export function rankWixSolution(prefecences) {
         { customFunctionsCount },
         {
             ideal: 0,
-            possible: 20, // Implementable through Wix Velo with limitations
+            possible: 20, // Přes Wix App Market a malý prostor pro vlastní vývoj
         },
     );
 
     solutionRank.rankPrefecence(
         { budgetUpfront },
         {
-            ideal: 5000 /* CZK */,
-            possible: 0 /* CZK */, // No upfront cost, only monthly subscription fees
+            ideal: 10000 /* CZK */,
+            possible: 0 /* CZK */, // Může začít zdarma s možností upgradovat
         },
     );
 
@@ -65,15 +60,15 @@ export function rankWixSolution(prefecences) {
         { budgetPerMonth },
         {
             ideal: 300 /* CZK */,
-            possible: 2000 /* CZK */, // Depends on the Wix plan selected
+            possible: 150 /* CZK */, // Závisí na požadavcích a vybraném balíčku
         },
     );
 
     solutionRank.rankPrefecence(
         { daysToDeadline },
         {
-            ideal: 7 /* days */, // Very quick to deploy
-            possible: 1 /* days */, // Basic sites can be set up in a day
+            ideal: 30 /* days */,
+            possible: 1 /* day */, // Rychlá implementace díky šablonám a editoru
         },
     );
 
@@ -81,7 +76,7 @@ export function rankWixSolution(prefecences) {
         { levelOfControl },
         {
             ideal: 20 /* % */ / 100,
-            possible: 50 /* % */ / 100, // Higher with Wix Velo but limited compared to full coding
+            possible: 40 /* % */ / 100, // Nižší stupeň kontroly kvůli uzavřené platformě
         },
     );
 

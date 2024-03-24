@@ -20,7 +20,7 @@ if (process.cwd() !== join(__dirname, '../..')) {
 }
 */
 
-createSolution('Shopify')
+createSolutions()
     .catch((error) => {
         console.error(/*chalk.bgRed(*/ error.name || 'NamelessError');
         console.error(error);
@@ -29,6 +29,26 @@ createSolution('Shopify')
     .then(() => {
         process.exit(0);
     });
+
+async function createSolutions() {
+    for (const solutionName of [
+        // 'Wordpress',
+        'Custom',
+        'WebGPT',
+        'Webflow',
+        'Wix',
+        'Solid Pixels',
+        'Shopify',
+        'Shoptet',
+        'Linktr.ee',
+        'Facebook',
+        'LinkedIN',
+        'Instagram',
+        'ChatGPT',
+    ]) {
+        await createSolution(solutionName);
+    }
+}
 
 async function createSolution(solutionName) {
     console.info(`🏭 Creating solution`);
