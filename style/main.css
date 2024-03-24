@@ -158,5 +158,6 @@ header h1 {
 /*=================================================*/
 
 .debug {
-    display: none;
+    outline: 1px dotted rgb(102, 255, 0);
+    display: inline-block;
 }
