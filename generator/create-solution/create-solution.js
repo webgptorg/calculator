@@ -8,19 +8,21 @@ import { CallbackInterfaceTools, createPromptbookExecutor, promptbookStringToJso
 import { JavascriptEvalExecutionTools } from '@promptbook/execute-javascript';
 import { OpenAiExecutionTools } from '@promptbook/openai';
 import { assertsExecutionSuccessful } from '@promptbook/utils';
-import chalk from 'chalk';
+// import chalk from 'chalk';
 import { readFile, writeFile } from 'fs/promises';
-import { join } from 'path';
 import { OPENAI_API_KEY } from './config.js';
 
+/*
+TODO: !!!
 if (process.cwd() !== join(__dirname, '../..')) {
-    console.error(chalk.red(`CWD must be root of the project`));
+    console.error(/*chalk.red(* / `CWD must be root of the project`);
     process.exit(1);
 }
+*/
 
-createSolution('Solid Pixels')
+createSolution('Shopify')
     .catch((error) => {
-        console.error(chalk.bgRed(error.name || 'NamelessError'));
+        console.error(/*chalk.bgRed(*/ error.name || 'NamelessError');
         console.error(error);
         process.exit(1);
     })
@@ -32,7 +34,7 @@ async function createSolution(solutionName) {
     console.info(`🏭 Creating solution`);
 
     const promptbook = promptbookStringToJson(
-        await readFile(join(__dirname, '../promptbook/create-solution.ptbk.md'), 'utf-8'),
+        await readFile('./generator/promptbook/create-solution.ptbk.md', 'utf-8'),
     );
 
     const executor = createPromptbookExecutor({

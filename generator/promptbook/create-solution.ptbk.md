@@ -6,10 +6,10 @@
 
 ## Function name
 
--   EXACUTE SCRIPT
+-   EXECUTE SCRIPT
 
 ```javascript
-const functionName = `rank${capitalize(solutionName.split(/\W/g).join('').toLowerCase())}Solution`;
+`rank${capitalize(solutionName.split(/\W/g).join('').toLowerCase())}Solution`;
 ```
 
 `-> {functionName}`
@@ -17,7 +17,8 @@ const functionName = `rank${capitalize(solutionName.split(/\W/g).join('').toLowe
 ## Write ranking function for {solutionName}
 
 -   MODEL VARIANT Chat
--   MODEL NAME `chatgpt-4-turbo`
+-   MODEL NAME `gpt-4-0125-preview`
+<!-- !!!  -   POSTPROCESSING `extractOneBlockFromMarkdown` -->
 
 ```
 
