@@ -1,4 +1,3 @@
-
 import { SolutionRank } from '../script/SolutionRank.mjs';
 
 /**
@@ -7,8 +6,8 @@ import { SolutionRank } from '../script/SolutionRank.mjs';
 export function rankFacebookSolution(preferences) {
     const {
         webType, // 'presentation', 'eshop', 'blog', 'application'
-        followersCount,
-        engagementRate,
+        // !!! followersCount,
+        // !!! engagementRate,
         budgetUpfront, // In CZK
         budgetPerMonth, // For ads and maintenance, in CZK
         daysToDeadline,
@@ -23,27 +22,11 @@ export function rankFacebookSolution(preferences) {
     solutionRank.pro('Snadné sdílení obsahu a interakce s klienty.');
     solutionRank.pro('Žádné náklady na start - vytvoření stránky je zdarma.');
 
-    solutionRank.goodFor({webType}, ['presentation', 'eshop', 'blog']);
-    solutionRank.badFor({webType}, ['application']);
+    solutionRank.goodFor({ webType }, ['presentation', 'eshop', 'blog']);
+    solutionRank.badFor({ webType }, ['application']);
 
     solutionRank.rankPrefecence(
-        {followersCount},
-        {
-            ideal: 10000,
-            possible: 100,
-        },
-    );
-
-    solutionRank.rankPrefecence(
-        {engagementRate},
-        {
-            ideal: 10 /* % */, // Ideal engagement rate in percent
-            possible: 1 /* % */, // Minimal acceptable engagement rate in percent
-        },
-    );
-
-    solutionRank.rankPrefecence(
-        {budgetUpfront},
+        { budgetUpfront },
         {
             ideal: 10000 /* CZK */, // Ideal for ads to kickstart
             possible: 0 /* CZK */, // It's possible to start without any budget
@@ -51,7 +34,7 @@ export function rankFacebookSolution(preferences) {
     );
 
     solutionRank.rankPrefecence(
-        {budgetPerMonth},
+        { budgetPerMonth },
         {
             ideal: 5000 /* CZK */, // Ideal for ongoing ads and content creation
             possible: 1000 /* CZK */, // Minimal budget for some visibility
@@ -59,7 +42,7 @@ export function rankFacebookSolution(preferences) {
     );
 
     solutionRank.rankPrefecence(
-        {daysToDeadline},
+        { daysToDeadline },
         {
             ideal: 7 /* days */,
             possible: 1 /* day */,
@@ -67,7 +50,7 @@ export function rankFacebookSolution(preferences) {
     );
 
     solutionRank.rankPrefecence(
-        {levelOfControl},
+        { levelOfControl },
         {
             ideal: 20 /* % */ / 100,
             possible: 80 /* % */ / 100,

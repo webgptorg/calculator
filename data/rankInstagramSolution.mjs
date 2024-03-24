@@ -1,4 +1,3 @@
-
 import { SolutionRank } from '../script/SolutionRank.mjs';
 
 /**
@@ -24,9 +23,11 @@ export function rankInstagramSolution(preferences) {
     solutionRank.con('Potřebuje kvalitní vizuální obsah a pravidelnou údržbu.');
     solutionRank.con('Konkurenční prostředí může být náročné.');
 
-    solutionRank.goodFor({ typeOfContent }, ['image', 'video', 'story']);
-    solutionRank.badFor({ typeOfContent }, []);
+    // !!! solutionRank.goodFor({ typeOfContent }, ['image', 'video', 'story']);
+    // !!! solutionRank.badFor({ typeOfContent }, []);
 
+    /*
+    !!!
     solutionRank.rankPrefecence(
         { contentFrequency },
         {
@@ -42,22 +43,29 @@ export function rankInstagramSolution(preferences) {
             possible: 500,
         },
     );
+    */
 
+    /*
+    !!!
     solutionRank.rankPrefecence(
         { engagementRateTarget },
         {
-            ideal: 5 /* % */,
-            possible: 1 /* % */,
+            ideal: 5 
+            possible: 1
         },
     );
+    */
 
+    /*
+    !!!
     solutionRank.rankPrefecence(
         { budgetForAds },
         {
-            ideal: 10000 /* CZK */,
-            possible: 1000 /* CZK */,
+            ideal: 10000 /* CZK * /,
+            possible: 1000 /* CZK * /,
         },
     );
+    */
 
     solutionRank.rankPrefecence(
         { productsCount },

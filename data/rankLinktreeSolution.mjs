@@ -6,7 +6,7 @@ import { SolutionRank } from '../script/SolutionRank.mjs';
 export function rankLinktreeSolution(preferences) {
     const {
         webType, // <- 'presentation', 'eshop', 'blog', 'application'
-        linksCount,
+
         budgetUpfront, // <- In CZK
         budgetPerMonth, // <- In CZK
         daysToDeadline,
@@ -22,14 +22,6 @@ export function rankLinktreeSolution(preferences) {
 
     solutionRank.goodFor({ webType }, ['presentation', 'blog']);
     solutionRank.badFor({ webType }, ['eshop', 'application']);
-
-    solutionRank.rankPrefecence(
-        { linksCount },
-        {
-            ideal: 5,
-            possible: 20,
-        },
-    );
 
     solutionRank.rankPrefecence(
         { budgetUpfront },
@@ -61,3 +53,7 @@ export function rankLinktreeSolution(preferences) {
 
     return solutionRank.calculate();
 }
+
+/**
+ * TODO: !!! Remake
+ */

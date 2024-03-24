@@ -13,7 +13,6 @@ export function rankWebgptSolution(prefecences) {
         budgetPerMonth, // <- In CZK
         daysToDeadline,
         levelOfControl,
-        languageSupport, // Additional preference for language support
     } = prefecences;
 
     const solutionRank = new SolutionRank(
@@ -82,17 +81,9 @@ export function rankWebgptSolution(prefecences) {
         },
     );
 
-    solutionRank.rankPrefecence(
-        { languageSupport },
-        {
-            ideal: true, // Ideal if language support is critical
-            possible: false, // Possible even if not initially supported
-        },
-    );
 
-    if (languageSupport) {
-        solutionRank.note('WebGPT poskytuje podporu pro Český jazyk, což umožňuje efektivní tvorbu a správu obsahu.');
-    }
+
+
 
     return solutionRank.calculate();
 }

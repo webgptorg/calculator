@@ -1,6 +1,5 @@
 import { SolutionRank } from '../script/SolutionRank.mjs';
 
-
 /**
  * Ranks the suitability of the ChatGPT solution for website implementation based on user preferences.
  */
@@ -8,7 +7,7 @@ export function rankChatgptSolution(preferences) {
     const {
         webType,
         pagesCount,
-        interactionsCount, // This replaces productsCount for more generality
+        // !!! interactionsCount, // This replaces productsCount for more generality
         customFunctionsCount,
         budgetUpfront,
         budgetPerMonth,
@@ -35,6 +34,8 @@ export function rankChatgptSolution(preferences) {
         },
     );
 
+    /*
+    !!!
     solutionRank.rankPrefecence(
         { interactionsCount },
         {
@@ -42,6 +43,7 @@ export function rankChatgptSolution(preferences) {
             possible: 100000,
         },
     );
+    */
 
     solutionRank.rankPrefecence(
         { customFunctionsCount },
@@ -75,13 +77,16 @@ export function rankChatgptSolution(preferences) {
         },
     );
 
+    /*
+    !!!
     solutionRank.rankPrefecence(
         { levelOfLocalization },
         {
-            ideal: 100 /* % */,
-            possible: 50 /* % */,
+            ideal: 100 /* % * /,
+            possible: 50 /* % * /,
         },
     );
+    */
 
     solutionRank.con('Vyžaduje integraci se serverovými funkcemi pro plnou funkčnost.');
     solutionRank.con('Může vyžadovat pokročilé programovací znalosti k efektivní implementaci.');
