@@ -10,7 +10,6 @@
         "@promptbook/remote-server": "0.40.0",
         "@promptbook/types": "0.40.0",
         "@promptbook/utils": "0.40.0",
-        "chalk": "^3.0.0",
         "configchecker": "^1.5.16",
         "dotenv": "^16.4.5"
     }
