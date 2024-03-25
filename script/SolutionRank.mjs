@@ -109,6 +109,8 @@ export class SolutionRank {
         const [key, value] = this._extractPartialPrefecencesKeyValuePair(partialPrefecences);
         const { ideal, possible } = prefecences;
 
+        // TODO: !!! Use also big and small cons and pros in some range
+
         if (false) {
         } else if (key === 'pagesCount') {
             if (value <= ideal) {

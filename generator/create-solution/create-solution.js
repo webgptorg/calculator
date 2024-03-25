@@ -45,6 +45,8 @@ async function createSolutions() {
         'LinkedIN',
         'Instagram',
         'ChatGPT',
+
+        // <- TODO: To some configuration
     ]) {
         await createSolution(solutionName);
     }
@@ -103,3 +105,8 @@ async function createSolution(solutionName) {
 
     console.info(`[ Done 🏭  Creating solution ]`);
 }
+
+/**
+ * TODO: !!! Add generated disclaimer to generated files (and maybe make this as postprocessing function + [🧠] maybe prettifyWhatever (+ it should wor))
+ * TODO: !!! Generated ranks must be ballanced
+ */
