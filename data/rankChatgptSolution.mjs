@@ -1,7 +1,7 @@
 import { SolutionRank } from '../script/SolutionRank.mjs';
 
 /**
- * Ranks the suitability of the ChatGPT solution for providing system solutions to build a client's web.
+ * Rank the suitability of the ChatGPT solution based on user preferences.
  */
 export function rankChatgptSolution(prefecences) {
     const {
@@ -16,76 +16,75 @@ export function rankChatgptSolution(prefecences) {
     } = prefecences;
 
     const solutionRank = new SolutionRank(
-        'ChatGPT powered web solution',
-        'Využijte pokročilé AI pro automatizaci, podporu a řízení obsahu na Vašich webových stránkách.',
+        'ChatGPT Web Interface',
+        'Použijte umělou inteligenci ChatGPT k dynamické interakci s uživateli na vaší web stránce.',
     );
 
-    solutionRank.pro('Schopnost automatizace a generování obsahu.');
-    solutionRank.pro('Pokročilé AI funkce pro zvýšení interaktivnosti webu.');
-    solutionRank.pro('Úspora času a zdrojů na správu obsahu.');
+    solutionRank.pro('Pokročilé AI schopnosti pro interakci s uživateli.');
 
-    solutionRank.goodFor({ webType }, ['presentation', 'blog', 'application']);
-    solutionRank.badFor({ webType }, ['eshop']);
+    solutionRank.goodFor({ webType }, ['application', 'blog']);
+    solutionRank.badFor({ webType }, ['presentation', 'eshop']);
 
     solutionRank.rankPrefecence(
         { pagesCount },
         {
-            ideal: 500,
-            possible: 5000,
+            ideal: 1, // AI-driven content is dynamic, requiring fewer static pages
+            possible: 10,
         },
     );
 
     solutionRank.rankPrefecence(
         { productsCount },
         {
-            ideal: 0,
-            possible: 500, // ChatGPT could be used to generate product descriptions or support interactions but is not ideal for handling transactions.
+            ideal: 0, // ChatGPT is not primarily for e-commerce
+            possible: 50, // Could assist in product inquiries
         },
     );
 
     solutionRank.rankPrefecence(
         { customFunctionsCount },
         {
-            ideal: 10,
-            possible: 50,
+            ideal: 1, // Leveraging ChatGPT for specific tasks reduces the need for many custom functions
+            possible: 10,
         },
     );
 
     solutionRank.rankPrefecence(
         { budgetUpfront },
         {
-            ideal: 20000 /* CZK */,
-            possible: 10000 /* CZK */,
+            ideal: 15000, // Requires investment in integration and possibly server costs
+            possible: 5000,
         },
     );
 
     solutionRank.rankPrefecence(
         { budgetPerMonth },
         {
-            ideal: 2000 /* CZK */,
-            possible: 500 /* CZK */,
+            ideal: 2000, // Continued API usage costs
+            possible: 500,
         },
     );
 
     solutionRank.rankPrefecence(
         { daysToDeadline },
         {
-            ideal: 60 /* days */,
-            possible: 30 /* days */,
+            ideal: 30, // Time for integration and testing
+            possible: 7,
         },
     );
 
     solutionRank.rankPrefecence(
         { levelOfControl },
         {
-            ideal: 50 /* % */ / 100,
-            possible: 70 /* % */ / 100,
+            ideal: 60 / 100, // Flexible but may not allow for 100% control
+            possible: 80 / 100,
         },
     );
 
-    solutionRank.con('Omezení v oblasti zpracování komplexních e-commerce řešení.');
-    solutionRank.con('Vyžaduje pravidelné aktualizace a úpravy pro udržení kvality AI modelu.');
-    solutionRank.con('Může vyžadovat dodatečné náklady na API volání pro dynamický obsah.');
+    // Noting specific advantages and disadvantages
+    solutionRank.bigPro('Přizpůsobení obsahu na základě uživatelské interakce.');
+    solutionRank.smallCon('Vyžaduje průběžné náklady na API.');
+    solutionRank.note('Potřebuje konstantní připojení k internetu pro interakci s API ChatGPT.');
 
     return solutionRank.calculate();
 }

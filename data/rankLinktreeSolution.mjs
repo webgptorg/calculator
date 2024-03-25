@@ -3,7 +3,7 @@ import { SolutionRank } from '../script/SolutionRank.mjs';
 /**
  * Rank the suitability of the Linktree solution based on user preferences.
  */
-export function rankLinktreeSolution(preferences) {
+export function rankLinktreeSolution(prefecences) {
     const {
         webType, // <- 'presentation', 'eshop', 'blog', 'application'
         pagesCount,
@@ -13,25 +13,23 @@ export function rankLinktreeSolution(preferences) {
         budgetPerMonth, // <- In CZK
         daysToDeadline,
         levelOfControl,
-    } = preferences;
+    } = prefecences;
 
     const solutionRank = new SolutionRank(
         'Linktree',
-        'Jednoduchá a efektivní platforma pro správu více odkazů na jediné webové stránce, populární mezi influencery a značkami.',
+        'Vytvořte si jednoduše elegantní propojovací stránku pro všechny vaše odkazy.',
     );
 
-    solutionRank.pro('Okamžité spuštění bez potřeby technických znalostí.');
-    solutionRank.pro('Ideální pro řízení více online profilů a odkazů z jednoho místa.');
-    solutionRank.pro('Měsíční platby za pokročilé funkce jsou poměrně nízké.');
+    solutionRank.pro('Snadný a rychlý způsob, jak sdílet více odkazů přes jednu URL.');
 
-    solutionRank.goodFor({ webType }, ['presentation']);
-    solutionRank.badFor({ webType }, ['eshop', 'blog', 'application']);
+    solutionRank.goodFor({ webType }, ['presentation', 'blog']);
+    solutionRank.badFor({ webType }, ['application', 'eshop']);
 
     solutionRank.rankPrefecence(
         { pagesCount },
         {
             ideal: 1,
-            possible: 1, // Linktree is designed to manage multiple links from a single page
+            possible: 3,
         },
     );
 
@@ -39,39 +37,45 @@ export function rankLinktreeSolution(preferences) {
         { productsCount },
         {
             ideal: 0,
-            possible: 10, // Limited e-commerce capabilities via external links
+            possible: 5, // <- By linking to external product pages
         },
     );
+
+    if (productsCount > 0) { 
+        solutionRank.note(
+            'Linktree umožňuje pouze odkazovat na externí produktové stránky, nikoli přímo prodávat produkty.',
+        );
+    }
 
     solutionRank.rankPrefecence(
         { customFunctionsCount },
         {
             ideal: 0,
-            possible: 5, // Limited by the platform's inherent capabilities
+            possible: 2, // <- Limited to basic functionalities
         },
     );
 
     solutionRank.rankPrefecence(
         { budgetUpfront },
         {
-            ideal: 0 /* CZK */, // No upfront costs for basic usage
-            possible: 1000 /* CZK */, // Considering potential costs for premium features
+            ideal: 0 /* CZK */,
+            possible: 500 /* CZK */, // <- Very low initial cost
         },
     );
 
     solutionRank.rankPrefecence(
         { budgetPerMonth },
         {
-            ideal: 0 /* CZK */, // Free for basic usage
-            possible: 300 /* CZK */, // For access to advanced features
+            ideal: 0 /* CZK */,
+            possible: 150 /* CZK */, // <- Affordable subscription plans
         },
     );
 
     solutionRank.rankPrefecence(
         { daysToDeadline },
         {
-            ideal: 1 /* days */,
-            possible: 0 /* days */, // Can be set up in minutes
+            ideal: 1 /* day */,
+            possible: 7 /* days */,
         },
     );
 
@@ -79,14 +83,9 @@ export function rankLinktreeSolution(preferences) {
         { levelOfControl },
         {
             ideal: 10 /* % */ / 100,
-            possible: 20 /* % */ / 100, // Limited control due to platform constraints
+            possible: 30 /* % */ / 100,
         },
     );
-
-    // Disadvantages
-    solutionRank.con('Omezené možnosti přizpůsobení a funkcionality.');
-    solutionRank.con('Není vhodné pro složitější webové projekty nebo eshopy.');
-    solutionRank.con('Nízký stupeň kontroly nad designem a strukturou webové stránky.');
 
     return solutionRank.calculate();
 }

@@ -16,22 +16,20 @@ export function rankLinkedinSolution(prefecences) {
     } = prefecences;
 
     const solutionRank = new SolutionRank(
-        'LinkedIn pro firmy',
-        'Využijte sílu LinkedInu pro prezentaci Vaší firmy, nábor nových zaměstnanců nebo pro B2B marketing.',
+        'LinkedIn Profinder',
+        'Využijte platformu LinkedIn k nalezení profesionálů ve vaší oblasti pro vývoj webu.',
     );
 
-    solutionRank.pro('Cílení na profesionály a podniky.');
-    solutionRank.pro('Silný nástroj pro B2B marketing.');
-    solutionRank.pro('Možnost přímé komunikace s potenciálními zaměstnanci nebo klienty.');
-
-    solutionRank.goodFor({ webType }, ['presentation']);
-    solutionRank.badFor({ webType }, ['eshop', 'blog', 'application']);
+    solutionRank.note('LinkedIn Profinder pomáhá klientům najít správné odborníky k realizaci jejich projektů webu.');
+    
+    solutionRank.badFor({webType}, ['eshop', 'application']);
+    solutionRank.goodFor({webType}, ['presentation', 'blog']);
 
     solutionRank.rankPrefecence(
         { pagesCount },
         {
-            ideal: 1, // LinkedIn profil count as one page
-            possible: 1, // Limited to the structure of the LinkedIn page
+            ideal: 1,
+            possible: 10,
         },
     );
 
@@ -39,7 +37,7 @@ export function rankLinkedinSolution(prefecences) {
         { productsCount },
         {
             ideal: 0,
-            possible: 0, // LinkedIn is not suited for selling products directly
+            possible: 50,
         },
     );
 
@@ -47,41 +45,46 @@ export function rankLinkedinSolution(prefecences) {
         { customFunctionsCount },
         {
             ideal: 0,
-            possible: 0, // Limited customization, mainly for networking and content sharing
+            possible: 5,
         },
     );
 
     solutionRank.rankPrefecence(
         { budgetUpfront },
         {
-            ideal: 0 /* CZK */, // It's free to create a company page
-            possible: 15000 /* CZK */, // For premium accounts and initial setup assistance
+            ideal: 50000 /* CZK */,
+            possible: 10000 /* CZK */,
         },
     );
 
     solutionRank.rankPrefecence(
         { budgetPerMonth },
         {
-            ideal: 0 /* CZK */, // No monthly fees for basic usage
-            possible: 5000 /* CZK */, // For premium accounts and running ads
+            ideal: 0 /* CZK */,
+            possible: 1000 /* CZK */,
         },
     );
 
     solutionRank.rankPrefecence(
         { daysToDeadline },
         {
-            ideal: 1 /* day */,
-            possible: 7 /* days */, // Considering content creation and profile optimization
+            ideal: 30 /* days */,
+            possible: 7 /* days */,
         },
     );
 
     solutionRank.rankPrefecence(
         { levelOfControl },
         {
-            ideal: 10 /* % */ / 100, // Low level of customization
-            possible: 30 /* % */ / 100, // Some degree of control over content and networking features
+            ideal: 70 /* % */ / 100,
+            possible: 90 /* % */ / 100,
         },
     );
 
+    solutionRank.smallPro('Snadné nalezení kvalifikovaných odborníků.');
+    solutionRank.smallCon('Není ideální pro složité webové aplikace nebo eshopy.');
+    solutionRank.bigPro('Přímá komunikace a spolupráce s freelancery a agenturami.');
+    solutionRank.bigCon('Vyšší upfrontové náklady v porovnání s DIY řešeními.');
+    
     return solutionRank.calculate();
 }

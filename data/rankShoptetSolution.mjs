@@ -3,29 +3,25 @@ import { SolutionRank } from '../script/SolutionRank.mjs';
 /**
  * Rank the suitability of the Shoptet solution based on user preferences.
  */
-export function rankShoptetSolution(preferences) {
+export function rankShoptetSolution(prefecences) {
     const {
-        webType, // <- 'presentation', 'eshop', 'blog', 'application'
+        webType,
         pagesCount,
         productsCount,
         customFunctionsCount,
-        budgetUpfront, // <- In CZK
-        budgetPerMonth, // <- In CZK
+        budgetUpfront,
+        budgetPerMonth,
         daysToDeadline,
         levelOfControl,
-    } = preferences;
+    } = prefecences;
 
     const solutionRank = new SolutionRank(
         'Shoptet',
-        'Jednoduché řešení pro eshopy s širokým spektrem modulů a přednastavených funkcí.',
+        'Řešení všeho potřebného pro online prodej a provoz e-shopu od českého poskytovatele.',
     );
 
-    solutionRank.pro('Optimalizováno pro tvorbu a správu e-shopů.');
-    solutionRank.pro('Snadné použití bez potřeby technických znalostí.');
-    solutionRank.pro('Množství integrovaných platforem pro platby a logistiku.');
-    
-    solutionRank.con('Omezení na úrovni přizpůsobení a rozšiřitelnosti.');
-    solutionRank.con('Měsíční poplatky mohou být vyšší ve srovnání s open-source řešeními.');
+    solutionRank.pro('Vše v jednom pro zahájení a provoz e-shopu.');
+    solutionRank.con('Omezenější úroveň přizpůsobení v porovnání s plně custom řešením.');
 
     solutionRank.goodFor({ webType }, ['eshop']);
     solutionRank.badFor({ webType }, ['presentation', 'blog', 'application']);
@@ -46,43 +42,55 @@ export function rankShoptetSolution(preferences) {
         },
     );
 
+    if (productsCount > 5000) {
+        solutionRank.note(
+            'Pro velmi obsáhlé katalogy produktů může být potřeba navýšení tarifu nebo individuální řešení.',
+        );
+    }
+
     solutionRank.rankPrefecence(
         { customFunctionsCount },
         {
             ideal: 0,
-            possible: 10, // Considering the use of additional modules and some level of customization.
+            possible: 10,
         },
     );
+
+    if (customFunctionsCount > 0) {
+        solutionRank.note(
+            'Integrace s externími službami či vytvoření specifických funkcí je možná, ale může vyžadovat další náklady a práci na míru.',
+        );
+    }
 
     solutionRank.rankPrefecence(
         { budgetUpfront },
         {
-            ideal: 10000 /* CZK */, // Initial setup with some custom design or modules.
-            possible: 0 /* CZK */, // Basic setup without custom needs.
+            ideal: 25000 /* CZK */,
+            possible: 10000 /* CZK */,
         },
     );
 
     solutionRank.rankPrefecence(
         { budgetPerMonth },
         {
-            ideal: 5000 /* CZK */, // For a large shop with high demands on functionality and bandwidth.
-            possible: 1000 /* CZK */, // Basic plan for starting e-shops.
+            ideal: 2000 /* CZK */,
+            possible: 500 /* CZK */,
         },
     );
 
     solutionRank.rankPrefecence(
         { daysToDeadline },
         {
-            ideal: 30 /* days */, // Enough time to set up and customize the shop.
-            possible: 1 /* day */, // Basic setups can be very quick.
+            ideal: 30 /* days */,
+            possible: 7 /* days */,
         },
     );
 
     solutionRank.rankPrefecence(
         { levelOfControl },
         {
-            ideal: 30 /* % */ / 100, // As Shoptet handles a lot of the technical side.
-            possible: 70 /* % */ / 100, // With some custom modul integrations and design changes.
+            ideal: 50 /* % */ / 100,
+            possible: 20 /* % */ / 100,
         },
     );
 

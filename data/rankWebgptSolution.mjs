@@ -17,16 +17,24 @@ export function rankWebgptSolution(prefecences) {
 
     const solutionRank = new SolutionRank(
         'WebGPT',
-        'Inovujte svůj web použitím AI generovaného obsahu a funkcionalit.',
+        'Moderní řešení pro tvorbu dynamických a interaktivních webů s využitím nejnovějších technologií.',
     );
 
-    solutionRank.pro('Pokročilé AI generované obsahy a funkce.');
+    solutionRank.pro('Využívá nejnovější technologie pro tvorbu webů.');
 
-    solutionRank.goodFor({ webType }, ['blog', 'presentation']);
-    solutionRank.badFor({ webType }, ['eshop', 'application']);
+    solutionRank.goodFor({ webType }, ['application', 'eshop']);
+    solutionRank.badFor({ webType }, ['presentation', 'blog']);
 
     solutionRank.rankPrefecence(
         { pagesCount },
+        {
+            ideal: 20,
+            possible: 100,
+        },
+    );
+
+    solutionRank.rankPrefecence(
+        { productsCount },
         {
             ideal: 500,
             possible: 5000,
@@ -34,24 +42,10 @@ export function rankWebgptSolution(prefecences) {
     );
 
     solutionRank.rankPrefecence(
-        { productsCount },
-        {
-            ideal: 0,
-            possible: 500, // <- Limited e-commerce capabilities
-        },
-    );
-
-    if (productsCount > 0) {
-        solutionRank.note(
-            'AI generovaný obsah může oživit popisy produktů, ale e-commerce funkcionalita je omezená.',
-        );
-    }
-
-    solutionRank.rankPrefecence(
         { customFunctionsCount },
         {
-            ideal: 5,
-            possible: 20,
+            ideal: 10,
+            possible: 50,
         },
     );
 
@@ -74,7 +68,7 @@ export function rankWebgptSolution(prefecences) {
     solutionRank.rankPrefecence(
         { daysToDeadline },
         {
-            ideal: 60 /* days */,
+            ideal: 30 /* days */,
             possible: 14 /* days */,
         },
     );
@@ -82,16 +76,28 @@ export function rankWebgptSolution(prefecences) {
     solutionRank.rankPrefecence(
         { levelOfControl },
         {
-            ideal: 20 /* % */ / 100,
-            possible: 50 /* % */ / 100,
+            ideal: 80 /* % */ / 100,
+            possible: 100 /* % */ / 100,
         },
     );
 
-    solutionRank.disadvantages([
-        'Náročnější na obsluhu a pochopení AI výstupů.',
-        'Omezené možnosti pro rozsáhlé e-shop řešení.',
-        'Vyšší náklady na implementaci AI technologií.'
-    ]);
+    if (webType === 'application') {
+        solutionRank.bigPro('Ideální pro komplexní webové aplikace s vysokou mírou interakce.');
+    }
+
+    if (pagesCount > 50) {
+        solutionRank.smallCon('Méně vhodné pro weby s vysokým počtem statických stránek.');
+    }
+
+    if (customFunctionsCount > 20) {
+        solutionRank.note(
+            'Vysoký počet uživatelských funkcí může vyžadovat komplexnější plánování a zvýšené náklady.',
+        );
+    }
+
+    if (budgetUpfront < 25000) {
+        solutionRank.bigCon('Počáteční náklady mohou být pro některé klienty významnou bariérou.');
+    }
 
     return solutionRank.calculate();
 }

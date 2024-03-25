@@ -17,81 +17,85 @@ export function rankShopifySolution(prefecences) {
 
     const solutionRank = new SolutionRank(
         'Shopify',
-        'Využijte oblíbenou platformu pro tvorbu e-shopů s mnoha vestavěnými funkcemi.',
+        'Shopify poskytuje kompletní řešení pro e-shopy s možností snadného rozšiřování funkcí skrze aplikace.',
     );
 
-    solutionRank.pro('Snadné použití bez nutnosti programování.');
-    solutionRank.pro('Mnoho vestavěných funkcí a bezpečnostních prvků.');
-    solutionRank.pro('Spolehlivý hosting a podpora jsou součástí.');
-
-    solutionRank.con('Menší míra přizpůsobení designu a funkcí.');
-    solutionRank.con('Vyšší provozní náklady v porovnání s open-source řešeními.');
-    solutionRank.con('Omezení ve volbě platebních bran bez dalších poplatků.');
+    solutionRank.pro('Ideální řešení pro rychlé spuštění e-shopu.');
 
     solutionRank.goodFor({ webType }, ['eshop']);
-    solutionRank.badFor({ webType }, ['presentation', 'blog', 'application']);
-
-    solutionRank.rankPrefecence(
-        { productsCount },
-        {
-            ideal: 10000,
-            possible: 50000,
-        },
-    );
+    solutionRank.badFor({ webType }, ['presentation', 'application', 'blog']);
 
     solutionRank.rankPrefecence(
         { pagesCount },
         {
             ideal: 100,
-            possible: 500,
+            possible: 1000,
         },
     );
 
     solutionRank.rankPrefecence(
-        { customFunctionsCount },
+        { productsCount },
         {
-            ideal: 10,
-            possible: 50, // <- Via Apps or custom development
+            ideal: 50,
+            possible: 5000,
         },
     );
 
-    if (customFunctionsCount > 0) {
+    if (productsCount > 0) {
         solutionRank.note(
-            'Shopify umožňuje rozšiřování funkcí prostřednictvím aplikací z [Shopify App Store](https://apps.shopify.com/) nebo vlastního vývoje.',
+            'Shopify je vyvinut speciálně pro potřeby e-commerce, a proto poskytuje optimalizované nástroje pro prodej produktů.',
+        );
+    }
+
+    solutionRank.rankPrefecence(
+        { customFunctionsCount },
+        {
+            ideal: 0,
+            possible: 20,
+        },
+    );
+
+    if(customFunctionsCount > 0) {
+        solutionRank.note(
+            'Pro přidání vlastních funkcí je možné využít Shopify App Store nebo speciální vývojářské práce, které mohou vyžadovat zvýšený rozpočet.',
         );
     }
 
     solutionRank.rankPrefecence(
         { budgetUpfront },
         {
-            ideal: 20000, /* CZK - with customization and setup */
-            possible: 10000, /* CZK - minimal setup */
+            ideal: 20000 /* CZK */,
+            possible: 5000 /* CZK */,
         },
     );
 
     solutionRank.rankPrefecence(
         { budgetPerMonth },
         {
-            ideal: 2000, /* CZK - with advanced plans and apps */
-            possible: 500, /* CZK - basic plan */
+            ideal: 2000 /* CZK */,
+            possible: 300 /* CZK */,
         },
     );
 
     solutionRank.rankPrefecence(
         { daysToDeadline },
         {
-            ideal: 30, /* days */
-            possible: 1, /* days - with ready themes */
+            ideal: 30 /* days */,
+            possible: 1 /* day */,
         },
     );
 
     solutionRank.rankPrefecence(
         { levelOfControl },
         {
-            ideal: 20 /* % */ / 100,
-            possible: 40 /* % */ / 100,
+            ideal: 50 /* % */ / 100,
+            possible: 70 /* % */ / 100,
         },
     );
+
+    solutionRank.smallCon('Omezenější úprava designu pro vyšší úroveň kontroly.');
+    solutionRank.bigPro('Rychlé řešení pro spuštění e-shopu bez potřeby technických znalostí.');
+    solutionRank.smallCon('Měsíční poplatky mohou být významnější s růstem e-shopu.');
 
     return solutionRank.calculate();
 }

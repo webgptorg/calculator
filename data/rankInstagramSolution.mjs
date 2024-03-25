@@ -1,99 +1,103 @@
 import { SolutionRank } from '../script/SolutionRank.mjs';
 
 /**
- * Rank the suitability of the Instagram solution based on client preferences for Czech clients.
+ * Rank the suitability of the Instagram solution based on user preferences.
  */
-export function rankInstagramSolution(preferences) {
+export function rankInstagramSolution(prefecences) {
     const {
-        webType, // <- 'personalBrand', 'businessBrand', 'productShowcase', 'eventPromotion'
-        followerCount,
-        engagementRate, // <- in %, indicating the engagement level of followers
-        contentFrequency, // <- posts per week
-        budgetUpfront, // <- In CZK
-        budgetPerMonth, // <- In CZK
+        webType,
+        pagesCount,
+        productsCount,
+        customFunctionsCount,
+        budgetUpfront,
+        budgetPerMonth,
         daysToDeadline,
-        visualContentQuality, // <- in %, 100% being high-quality visuals
-    } = preferences;
+        levelOfControl,
+    } = prefecences;
 
     const solutionRank = new SolutionRank(
-        'Instagram pro marketing',
-        'Využijte sílu vizuálního storytellingu a angažované komunity pro propagaci vaší značky.',
+        'Instagram E-shop and Presentation',
+        'Využijte sílu sociálních médií pro prezentaci vašeho obchodu a produktů.',
     );
 
-    solutionRank.pro('Vysoký dosah a zapojení uživatelů.');
-    solutionRank.pro('Ideální pro vizuálně orientované značky.');
+    solutionRank.pro('Široké možnosti propagace a interakce se zákazníky.');
 
-    solutionRank.goodFor({ webType }, ['personalBrand', 'businessBrand', 'productShowcase']);
-    solutionRank.badFor({ webType }, ['eventPromotion']);
+    solutionRank.goodFor({ webType }, ['eshop', 'presentation']);
+    solutionRank.badFor({ webType }, ['blog', 'application']);
 
     solutionRank.rankPrefecence(
-        { followerCount },
+        { pagesCount },
         {
-            ideal: 10000,
-            possible: 500,
+            ideal: 1, // Instagram, jako platforma, nepracuje s klasickým počtem stránek
+            possible: 5, // Rekreačně lze uvažovat několik "highlight" sekcí
         },
     );
 
     solutionRank.rankPrefecence(
-        { engagementRate },
+        { productsCount },
         {
-            ideal: 5, // <- 5% and above is considered good
-            possible: 1, // <- 1% is on the lower side but acceptable for large followings
+            ideal: 100,  // Při dobré organizaci lze na Instagramu využít obrázky a stories k prezentaci produktů
+            possible: 1000, // Při intenzivním využívání může být přenos daleko větší
         },
     );
 
+    if(productsCount > 1000) {
+        solutionRank.note(
+            'Pro velký počet produktů se doporučuje použít kombinaci s webovou stránkou nebo externím eshopem.',
+        );
+    }
+
     solutionRank.rankPrefecence(
-        { contentFrequency },
+        { customFunctionsCount },
         {
-            ideal: 7, // <- Daily posts
-            possible: 3, // <- At least three posts a week
+            ideal: 0,
+            possible: 5, // Limitované možnosti integrace a customizace mimo standardní funkce Instagramu
         },
     );
+
+    if(customFunctionsCount > 5) {
+        solutionRank.note(
+            'Instagram nabízí omezené možnosti pro vlastní funkce. Pro složitější potřeby je vhodnější alternativní platforma.',
+        );
+    }
 
     solutionRank.rankPrefecence(
         { budgetUpfront },
         {
-            ideal: 10000 /* CZK for creating high-quality content and initial promotion */,
-            possible: 2000 /* CZK minimum for basic content creation tools and promotion */,
+            ideal: 0 /* CZK */,
+            possible: 5000 /* CZK */ // Kvůli možným nákladům na grafiku a marketing
         },
     );
 
     solutionRank.rankPrefecence(
         { budgetPerMonth },
         {
-            ideal: 5000 /* CZK for ongoing promotion and content creation */,
-            possible: 1000 /* CZK for minimal promotion efforts */,
+            ideal: 500 /* CZK */,
+            possible: 5000 /* CZK */, // Pro reklamu a možné propagace na Instagramu
         },
     );
 
     solutionRank.rankPrefecence(
         { daysToDeadline },
         {
-            ideal: 30 /* days to create a strategy and start seeing engagement growth */,
-            possible: 7 /* days for a quick setup and start */,
+            ideal: 7 /* days */,
+            possible: 1 /* day */, // Velmi rychlá nastavení profilu a zveřejnění obsahu
         },
     );
 
     solutionRank.rankPrefecence(
-        { visualContentQuality },
+        { levelOfControl },
         {
-            ideal: 90 /* % - High-quality visuals */,
-            possible: 50 /* % - Average quality but still acceptable */,
+            ideal: 10 /* % */ / 100,
+            possible: 40 /* % */ / 100, // Omezená kontrola nad designem a prezentací ve srovnání s klasickými webovými stránkami
         },
     );
 
+    if(levelOfControl > 0.4) {
+        solutionRank.note(
+            'Instagram nabízí omezené možnosti customizace, pro vyšší kontrolu nad prezentací je potřeba zvážit jiné platformy.',
+        );
+    }
+
     return solutionRank.calculate();
 }
-
-/*
-Advantages:
-- High engagement and visibility for visually compelling brands.
-- Ideal platform for targeting younger demographics with robust targeting options.
-- Effective for establishing a brand's visual identity and increasing brand awareness.
-
-Disadvantages:
-- Less effective for web types focused on event promotion or non-visual content.
-- Requires constant high-quality visual content, which may increase the cost of content production.
-- Rapid changes in Instagram algorithms can affect visibility and engagement unpredictably.
-- May require additional investment in Instagram ads to increase reach among new potential followers.
-*/
