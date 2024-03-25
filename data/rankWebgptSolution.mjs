@@ -1,7 +1,7 @@
 import { SolutionRank } from '../script/SolutionRank.mjs';
 
 /**
- * Rank the suitability of the WebGPT solution for Czech clients.
+ * Rank the suitability of the WebGPT solution based on user preferences.
  */
 export function rankWebgptSolution(prefecences) {
     const {
@@ -17,19 +17,19 @@ export function rankWebgptSolution(prefecences) {
 
     const solutionRank = new SolutionRank(
         'WebGPT',
-        'Moderní přístup k vytváření webových stránek s využitím pokročilého AI.',
+        'Inovujte svůj web použitím AI generovaného obsahu a funkcionalit.',
     );
 
-    solutionRank.pro('Používá pokročilé AI pro generování obsahu.');
+    solutionRank.pro('Pokročilé AI generované obsahy a funkce.');
 
-    solutionRank.goodFor({ webType }, ['presentation', 'blog']);
-    solutionRank.badFor({ webType }, ['application', 'eshop']);
+    solutionRank.goodFor({ webType }, ['blog', 'presentation']);
+    solutionRank.badFor({ webType }, ['eshop', 'application']);
 
     solutionRank.rankPrefecence(
         { pagesCount },
         {
-            ideal: 20,
-            possible: 100,
+            ideal: 500,
+            possible: 5000,
         },
     );
 
@@ -37,9 +37,15 @@ export function rankWebgptSolution(prefecences) {
         { productsCount },
         {
             ideal: 0,
-            possible: 50,
+            possible: 500, // <- Limited e-commerce capabilities
         },
     );
+
+    if (productsCount > 0) {
+        solutionRank.note(
+            'AI generovaný obsah může oživit popisy produktů, ale e-commerce funkcionalita je omezená.',
+        );
+    }
 
     solutionRank.rankPrefecence(
         { customFunctionsCount },
@@ -52,15 +58,15 @@ export function rankWebgptSolution(prefecences) {
     solutionRank.rankPrefecence(
         { budgetUpfront },
         {
-            ideal: 40000 /* CZK */,
-            possible: 10000 /* CZK */,
+            ideal: 50000 /* CZK */,
+            possible: 20000 /* CZK */,
         },
     );
 
     solutionRank.rankPrefecence(
         { budgetPerMonth },
         {
-            ideal: 2000 /* CZK */,
+            ideal: 5000 /* CZK */,
             possible: 500 /* CZK */,
         },
     );
@@ -68,8 +74,8 @@ export function rankWebgptSolution(prefecences) {
     solutionRank.rankPrefecence(
         { daysToDeadline },
         {
-            ideal: 30 /* days */,
-            possible: 5 /* days */,
+            ideal: 60 /* days */,
+            possible: 14 /* days */,
         },
     );
 
@@ -81,9 +87,11 @@ export function rankWebgptSolution(prefecences) {
         },
     );
 
-
-
-
+    solutionRank.disadvantages([
+        'Náročnější na obsluhu a pochopení AI výstupů.',
+        'Omezené možnosti pro rozsáhlé e-shop řešení.',
+        'Vyšší náklady na implementaci AI technologií.'
+    ]);
 
     return solutionRank.calculate();
 }

@@ -1,49 +1,47 @@
 import { SolutionRank } from '../script/SolutionRank.mjs';
 
 /**
- * Ranks the suitability of the ChatGPT solution for website implementation based on user preferences.
+ * Ranks the suitability of the ChatGPT solution for providing system solutions to build a client's web.
  */
-export function rankChatgptSolution(preferences) {
+export function rankChatgptSolution(prefecences) {
     const {
-        webType,
+        webType, // <- 'presentation', 'eshop', 'blog', 'application'
         pagesCount,
-        // !!! interactionsCount, // This replaces productsCount for more generality
+        productsCount,
         customFunctionsCount,
-        budgetUpfront,
-        budgetPerMonth,
+        budgetUpfront, // <- In CZK
+        budgetPerMonth, // <- In CZK
         daysToDeadline,
-        levelOfLocalization, // Added for relevance to Czech clients
-    } = preferences;
+        levelOfControl,
+    } = prefecences;
 
     const solutionRank = new SolutionRank(
-        'ChatGPT for Web',
-        'Využijte pokročilé možnosti ChatGPT pro interaktivní a dynamické webové stránky.',
+        'ChatGPT powered web solution',
+        'Využijte pokročilé AI pro automatizaci, podporu a řízení obsahu na Vašich webových stránkách.',
     );
 
-    solutionRank.pro('Umožňuje vytvoření vysoce interaktivních a personalizovaných webů.');
-    solutionRank.pro('Může automatizovat odpovědi na často kladené otázky.');
+    solutionRank.pro('Schopnost automatizace a generování obsahu.');
+    solutionRank.pro('Pokročilé AI funkce pro zvýšení interaktivnosti webu.');
+    solutionRank.pro('Úspora času a zdrojů na správu obsahu.');
 
-    solutionRank.goodFor({ webType }, ['application', 'blog']);
-    solutionRank.badFor({ webType }, ['eshop', 'presentation']);
+    solutionRank.goodFor({ webType }, ['presentation', 'blog', 'application']);
+    solutionRank.badFor({ webType }, ['eshop']);
 
     solutionRank.rankPrefecence(
         { pagesCount },
         {
-            ideal: 20,
-            possible: 100,
+            ideal: 500,
+            possible: 5000,
         },
     );
 
-    /*
-    !!!
     solutionRank.rankPrefecence(
-        { interactionsCount },
+        { productsCount },
         {
-            ideal: 10000,
-            possible: 100000,
+            ideal: 0,
+            possible: 500, // ChatGPT could be used to generate product descriptions or support interactions but is not ideal for handling transactions.
         },
     );
-    */
 
     solutionRank.rankPrefecence(
         { customFunctionsCount },
@@ -57,14 +55,14 @@ export function rankChatgptSolution(preferences) {
         { budgetUpfront },
         {
             ideal: 20000 /* CZK */,
-            possible: 5000 /* CZK */,
+            possible: 10000 /* CZK */,
         },
     );
 
     solutionRank.rankPrefecence(
         { budgetPerMonth },
         {
-            ideal: 5000 /* CZK */,
+            ideal: 2000 /* CZK */,
             possible: 500 /* CZK */,
         },
     );
@@ -72,25 +70,22 @@ export function rankChatgptSolution(preferences) {
     solutionRank.rankPrefecence(
         { daysToDeadline },
         {
-            ideal: 30 /* days */,
-            possible: 3 /* days */,
+            ideal: 60 /* days */,
+            possible: 30 /* days */,
         },
     );
 
-    /*
-    !!!
     solutionRank.rankPrefecence(
-        { levelOfLocalization },
+        { levelOfControl },
         {
-            ideal: 100 /* % * /,
-            possible: 50 /* % * /,
+            ideal: 50 /* % */ / 100,
+            possible: 70 /* % */ / 100,
         },
     );
-    */
 
-    solutionRank.con('Vyžaduje integraci se serverovými funkcemi pro plnou funkčnost.');
-    solutionRank.con('Může vyžadovat pokročilé programovací znalosti k efektivní implementaci.');
-    solutionRank.con('Může vyžadovat pravidelné úpravy a údržbu pro udržení aktuálnosti odpovědí a interakcí.');
+    solutionRank.con('Omezení v oblasti zpracování komplexních e-commerce řešení.');
+    solutionRank.con('Vyžaduje pravidelné aktualizace a úpravy pro udržení kvality AI modelu.');
+    solutionRank.con('Může vyžadovat dodatečné náklady na API volání pro dynamický obsah.');
 
     return solutionRank.calculate();
 }

@@ -1,4 +1,5 @@
 import { SolutionRank } from '../script/SolutionRank.mjs';
+
 /**
  * Rank the suitability of the Shopify solution based on user preferences.
  */
@@ -16,69 +17,79 @@ export function rankShopifySolution(prefecences) {
 
     const solutionRank = new SolutionRank(
         'Shopify',
-        'Shopify je kompletní e-commerce platforma, která vám umožní začít, provozovat a spravovat obchod.',
+        'Využijte oblíbenou platformu pro tvorbu e-shopů s mnoha vestavěnými funkcemi.',
     );
 
-    solutionRank.pro('Velmi snadná nastavitelnost a použití.');
-    solutionRank.pro('Zahrnuje hosting, SSL certifikát a základní bezpečnostní funkce.');
-    solutionRank.pro('Rozsáhlý výběr témat a aplikací pro rozšíření funkčnosti.');
+    solutionRank.pro('Snadné použití bez nutnosti programování.');
+    solutionRank.pro('Mnoho vestavěných funkcí a bezpečnostních prvků.');
+    solutionRank.pro('Spolehlivý hosting a podpora jsou součástí.');
+
+    solutionRank.con('Menší míra přizpůsobení designu a funkcí.');
+    solutionRank.con('Vyšší provozní náklady v porovnání s open-source řešeními.');
+    solutionRank.con('Omezení ve volbě platebních bran bez dalších poplatků.');
 
     solutionRank.goodFor({ webType }, ['eshop']);
-    solutionRank.badFor({ webType }, ['presentation', 'application', 'blog']);
-
-    solutionRank.rankPrefecence(
-        { pagesCount },
-        {
-            ideal: 50,
-            possible: 100,
-        },
-    );
+    solutionRank.badFor({ webType }, ['presentation', 'blog', 'application']);
 
     solutionRank.rankPrefecence(
         { productsCount },
         {
-            ideal: 500,
-            possible: 5000,
+            ideal: 10000,
+            possible: 50000,
+        },
+    );
+
+    solutionRank.rankPrefecence(
+        { pagesCount },
+        {
+            ideal: 100,
+            possible: 500,
         },
     );
 
     solutionRank.rankPrefecence(
         { customFunctionsCount },
         {
-            ideal: 0,
-            possible: 50, // With Shopify apps and some custom development
+            ideal: 10,
+            possible: 50, // <- Via Apps or custom development
         },
     );
+
+    if (customFunctionsCount > 0) {
+        solutionRank.note(
+            'Shopify umožňuje rozšiřování funkcí prostřednictvím aplikací z [Shopify App Store](https://apps.shopify.com/) nebo vlastního vývoje.',
+        );
+    }
 
     solutionRank.rankPrefecence(
         { budgetUpfront },
         {
-            ideal: 0 /* CZK */, // Shopify's monthly fee means typically low upfront costs
-            possible: 15000 /* CZK */, // Custom themes or development might increase this
+            ideal: 20000, /* CZK - with customization and setup */
+            possible: 10000, /* CZK - minimal setup */
         },
     );
 
     solutionRank.rankPrefecence(
         { budgetPerMonth },
         {
-            ideal: 5000 /* CZK */, // Including Shopify's monthly fees plus any app subscriptions
-            possible: 300 /* CZK */, // On the lowest plan, without additional apps
+            ideal: 2000, /* CZK - with advanced plans and apps */
+            possible: 500, /* CZK - basic plan */
         },
     );
 
     solutionRank.rankPrefecence(
         { daysToDeadline },
         {
-            ideal: 30 /* days */,
-            possible: 1 /* days */, // Shopify stores can be set up very quickly with pre-made themes
+            ideal: 30, /* days */
+            possible: 1, /* days - with ready themes */
         },
     );
 
     solutionRank.rankPrefecence(
         { levelOfControl },
         {
-            ideal: 30 /* % */ / 100,
-            possible: 70 /* % */ / 100, // Shopify offers good control but not as much as a fully custom solution might
+            ideal: 20 /* % */ / 100,
+            possible: 40 /* % */ / 100,
         },
     );
 

@@ -1,4 +1,5 @@
 import { SolutionRank } from '../script/SolutionRank.mjs';
+
 /**
  * Rank the suitability of the Solid Pixels solution based on user preferences.
  */
@@ -15,22 +16,20 @@ export function rankSolidpixelsSolution(prefecences) {
     } = prefecences;
 
     const solutionRank = new SolutionRank(
-        'Solid Pixels', 
-        'Použijte moderní a intuitivní platformu Solid Pixels pro snadnou tvorbu a správu webů.',
+        'Solid Pixels',
+        'Kompletní řešení pro tvorbu webových stránek s unikátním designem bez nutnosti kódování.',
     );
 
-    solutionRank.pro('Snadná tvorba webových stránek bez potřeby technických dovedností.');
-    solutionRank.pro('Vstupní cena zahrnuje webhosting a zabezpečení.');
-    solutionRank.pro('Intuitivní drag & drop editor.');
+    solutionRank.pro('Snadné používání pro nezkušené uživatele.');
 
     solutionRank.goodFor({ webType }, ['presentation', 'blog']);
-    solutionRank.badFor({ webType }, ['eshop', 'application']);
+    solutionRank.badFor({ webType }, ['application']);
 
     solutionRank.rankPrefecence(
         { pagesCount },
         {
-            ideal: 12,
-            possible: 50,
+            ideal: 50,
+            possible: 500,
         },
     );
 
@@ -38,28 +37,22 @@ export function rankSolidpixelsSolution(prefecences) {
         { productsCount },
         {
             ideal: 0,
-            possible: 50, // <- With basic e-commerce solutions
+            possible: 100, // Solid Pixels isn't primarily designed for e-shops
         },
     );
-
-    if (productsCount > 0) {
-        solutionRank.note(
-            'Pro jednodušší e-shop funkce nabízí Solid Pixels zabudované řešení, ale nemůže konkurovat specializovaným e-shop platformám.',
-        );
-    }
 
     solutionRank.rankPrefecence(
         { customFunctionsCount },
         {
             ideal: 0,
-            possible: 10,
+            possible: 10, // Limited by no-code platform capabilities
         },
     );
 
     solutionRank.rankPrefecence(
         { budgetUpfront },
         {
-            ideal: 15000 /* CZK */,
+            ideal: 20000 /* CZK */,
             possible: 5000 /* CZK */,
         },
     );
@@ -67,30 +60,29 @@ export function rankSolidpixelsSolution(prefecences) {
     solutionRank.rankPrefecence(
         { budgetPerMonth },
         {
-            ideal: 500 /* CZK */,
-            possible: 150 /* CZK */,
+            ideal: 1000 /* CZK */,
+            possible: 200 /* CZK */,
         },
     );
 
     solutionRank.rankPrefecence(
         { daysToDeadline },
         {
-            ideal: 14 /* days */,
-            possible: 1 /* day */,
+            ideal: 30 /* days */,
+            possible: 3 /* days */,
         },
     );
 
     solutionRank.rankPrefecence(
         { levelOfControl },
         {
-            ideal: 30 /* % */ / 100,
-            possible: 70 /* % */ / 100,
+            ideal: 20 /* % */ / 100,
+            possible: 50 /* % */ / 100,
         },
     );
 
-    solutionRank.con('Omezené možnosti pro náročnější weby a aplikace.');
-    solutionRank.con('Pro pokročilé funkce může být potřeba integrace externích služeb.');
-    solutionRank.con('E-shop řešení není vhodné pro velká a komplexní obchodní řešení.');
+    solutionRank.disadvantage('Omezená možnost přizpůsobení bez znalosti kódování.');
+    solutionRank.disadvantage('Není ideální pro rozsáhlé eshopy nebo specializované webové aplikace.');
 
     return solutionRank.calculate();
 }

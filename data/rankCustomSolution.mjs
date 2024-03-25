@@ -3,33 +3,34 @@ import { SolutionRank } from '../script/SolutionRank.mjs';
 /**
  * Rank the suitability of the Custom solution based on user preferences.
  */
-export function rankCustomSolution(preferences) {
+export function rankCustomSolution(prefecences) {
     const {
-        webType,
+        webType, // <- 'presentation', 'eshop', 'blog', 'application'
         pagesCount,
         productsCount,
         customFunctionsCount,
-        budgetUpfront,
-        budgetPerMonth,
+        budgetUpfront, // <- In CZK
+        budgetPerMonth, // <- In CZK
         daysToDeadline,
         levelOfControl,
-    } = preferences;
+    } = prefecences;
 
     const solutionRank = new SolutionRank(
         'Custom Solution',
-        'Dokonalé řešení na míru pro vaše specifické podnikatelské potřeby.',
+        'Vytvořte plně přizpůsobitelné webové řešení přesně podle vašich požadavků.',
     );
 
-    solutionRank.pro('Flexibilní a plně přizpůsobitelné řešení.');
-    solutionRank.pro('Optimalizováno pro výkon a SEO.');
+    solutionRank.pro('Plně přizpůsobitelné řešení.');
+    solutionRank.pro('Optimalizováno pro vaši konkrétní potřebu.');
 
-    solutionRank.goodFor({ webType }, ['application', 'eshop', 'presentation', 'blog']);
+    solutionRank.goodFor({ webType }, ['application', 'eshop']);
+    solutionRank.badFor({ webType }, ['blog']);
 
     solutionRank.rankPrefecence(
         { pagesCount },
         {
-            ideal: 20,
-            possible: 500,
+            ideal: 100,
+            possible: 1000,
         },
     );
 
@@ -37,14 +38,14 @@ export function rankCustomSolution(preferences) {
         { productsCount },
         {
             ideal: 100,
-            possible: 5000,
+            possible: 10000,
         },
     );
 
     solutionRank.rankPrefecence(
         { customFunctionsCount },
         {
-            ideal: 5,
+            ideal: 10,
             possible: 100,
         },
     );
@@ -53,14 +54,14 @@ export function rankCustomSolution(preferences) {
         { budgetUpfront },
         {
             ideal: 100000 /* CZK */,
-            possible: 50000 /* CZK */,
+            possible: 30000 /* CZK */,
         },
     );
 
     solutionRank.rankPrefecence(
         { budgetPerMonth },
         {
-            ideal: 2000 /* CZK */,
+            ideal: 5000 /* CZK */,
             possible: 500 /* CZK */,
         },
     );
@@ -76,13 +77,13 @@ export function rankCustomSolution(preferences) {
     solutionRank.rankPrefecence(
         { levelOfControl },
         {
-            ideal: 90 /* % */ / 100,
-            possible: 70 /* % */ / 100,
+            ideal: 70 /* % */ / 100,
+            possible: 90 /* % */ / 100,
         },
     );
 
     solutionRank.con('Vyšší počáteční náklady.');
-    solutionRank.con('Dlouhá doba vývoje.');
+    solutionRank.con('Vyžaduje delší dobu pro vývoj.');
 
     return solutionRank.calculate();
 }

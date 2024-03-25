@@ -1,6 +1,7 @@
 import { SolutionRank } from '../script/SolutionRank.mjs';
+
 /**
- * Rank the suitability of the Wix solution based on user preferences.
+ * Rank the suitability of the Wix solution based on user preferences for Czech clients.
  */
 export function rankWixSolution(prefecences) {
     const {
@@ -16,26 +17,27 @@ export function rankWixSolution(prefecences) {
 
     const solutionRank = new SolutionRank(
         'Wix',
-        'Vytvořte si krásné webové stránky snadno s Wixem, cloudovou platformou pro webdesign.',
+        'Vytvořte svůj web snadno a rychle pomocí nástroje Wix, který nabízí široké možnosti přizpůsobení.',
     );
 
-    solutionRank.pro('Jednoduché drag-and-drop rozhraní.');
+    solutionRank.pro('Jednoduché použití pro uživatele bez technických znalostí.');
+    solutionRank.pro('Bohatá škála šablon a drag-and-drop editor.');
 
-    solutionRank.goodFor({ webType }, ['presentation', 'blog', 'eshop']);
-    solutionRank.badFor({ webType }, ['application']); // Omezené možnosti pro pokročilé webové aplikace
+    solutionRank.goodFor({ webType }, ['presentation', 'eshop', 'blog']);
+    solutionRank.badFor({ webType }, ['application']);
 
     solutionRank.rankPrefecence(
         { pagesCount },
         {
-            ideal: 500,
-            possible: 1000,
+            ideal: 0,
+            possible: 100,
         },
     );
 
     solutionRank.rankPrefecence(
         { productsCount },
         {
-            ideal: 200,
+            ideal: 0,
             possible: 500,
         },
     );
@@ -44,15 +46,15 @@ export function rankWixSolution(prefecences) {
         { customFunctionsCount },
         {
             ideal: 0,
-            possible: 20, // Přes Wix App Market a malý prostor pro vlastní vývoj
+            possible: 20,
         },
     );
 
     solutionRank.rankPrefecence(
         { budgetUpfront },
         {
-            ideal: 10000 /* CZK */,
-            possible: 0 /* CZK */, // Může začít zdarma s možností upgradovat
+            ideal: 0 /* CZK */,
+            possible: 15000 /* CZK */,
         },
     );
 
@@ -60,7 +62,7 @@ export function rankWixSolution(prefecences) {
         { budgetPerMonth },
         {
             ideal: 300 /* CZK */,
-            possible: 150 /* CZK */, // Závisí na požadavcích a vybraném balíčku
+            possible: 5000 /* CZK */,
         },
     );
 
@@ -68,7 +70,7 @@ export function rankWixSolution(prefecences) {
         { daysToDeadline },
         {
             ideal: 30 /* days */,
-            possible: 1 /* day */, // Rychlá implementace díky šablonám a editoru
+            possible: 1 /* day */,
         },
     );
 
@@ -76,9 +78,19 @@ export function rankWixSolution(prefecences) {
         { levelOfControl },
         {
             ideal: 20 /* % */ / 100,
-            possible: 40 /* % */ / 100, // Nižší stupeň kontroly kvůli uzavřené platformě
+            possible: 80 /* % */ / 100,
         },
     );
+
+    // Advantages
+    solutionRank.advantages.push("Rychlá a intuitivní tvorba webů.",
+                                 "Široký výběr přednastavených šablon.",
+                                 "Integrované SEO nástroje.");
+
+    // Disadvantages
+    solutionRank.disadvantages.push("Nižší úroveň kontrolu než u tradičních CMS nebo vlastního kódu.",
+                                    "Vyšší měsíční náklady ve srovnání s hostingem vlastního webu.",
+                                    "Omezené možnosti pro rozsáhlé e-shopy a složité aplikace.");
 
     return solutionRank.calculate();
 }

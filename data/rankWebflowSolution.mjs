@@ -1,4 +1,5 @@
 import { SolutionRank } from '../script/SolutionRank.mjs';
+
 /**
  * Rank the suitability of the Webflow solution based on user preferences.
  */
@@ -16,18 +17,16 @@ export function rankWebflowSolution(prefecences) {
 
     const solutionRank = new SolutionRank(
         'Webflow',
-        'Použijte Webflow pro vizuálně orientované designy a bez nutnosti psát kód.',
+        'Webflow umožňuje vizuálně navrhovat, postavit a spustit úžasné webové stránky.',
     );
 
-    solutionRank.pro('Umožňuje rychlý vývoj bez potřeby psát kód.');
-    solutionRank.pro('Intuitivní drag-and-drop rozhraní.');
-    solutionRank.pro('Výborná volba pro vizuální marketing a prezentace.');
+    solutionRank.pro('Nenáročné na technické znalosti.');
+    solutionRank.pro('Vysoká míra vizuální přizpůsobitelnosti.');
 
-    solutionRank.con('Omezenější možnosti přizpůsobení bez znalostí HTML/CSS.');
-    solutionRank.con('Může být dražší než některé další alternativy v závislosti na rozsahu projektu.');
-    solutionRank.con('Eshop a pokročilé funkce mohou vyžadovat dražší plány.');
+    solutionRank.con('Limitované možnosti pro rozsáhlé eshopy.');
+    solutionRank.con('Vyšší měsíční náklady ve srovnání s některými alternativami.');
 
-    solutionRank.goodFor({ webType }, ['presentation', 'blog']);
+    solutionRank.goodFor({ webType }, ['presentation', 'eshop', 'blog']);
     solutionRank.badFor({ webType }, ['application']);
 
     solutionRank.rankPrefecence(
@@ -42,13 +41,13 @@ export function rankWebflowSolution(prefecences) {
         { productsCount },
         {
             ideal: 0,
-            possible: 200, // <- With Ecommerce plans
+            possible: 2000, // Limited by plan
         },
     );
 
     if (productsCount > 0) {
         solutionRank.note(
-            'Webflow nabízí speciální plány pro E-commerce, které je možné využít k vytvoření eshopu.',
+            'Webflow nabízí integrované nástroje pro eshopy s možností snadné správy produktů.',
         );
     }
 
@@ -56,20 +55,14 @@ export function rankWebflowSolution(prefecences) {
         { customFunctionsCount },
         {
             ideal: 0,
-            possible: 10, // <- With custom code embedding
+            possible: 20, // Dependent on 3rd party integrations or custom code
         },
     );
-
-    if (customFunctionsCount > 0) {
-        solutionRank.note(
-            'Umožňuje vkládání vlastního kódu pro rozšíření funkcionalit, avšak vyžaduje zkušenosti s HTML/CSS a JavaScriptem.',
-        );
-    }
 
     solutionRank.rankPrefecence(
         { budgetUpfront },
         {
-            ideal: 20000 /* CZK */,
+            ideal: 15000 /* CZK */,
             possible: 5000 /* CZK */,
         },
     );
@@ -77,16 +70,16 @@ export function rankWebflowSolution(prefecences) {
     solutionRank.rankPrefecence(
         { budgetPerMonth },
         {
-            ideal: 2000 /* CZK */,
-            possible: 500 /* CZK */,
+            ideal: 500 /* CZK */,
+            possible: 200 /* CZK */,
         },
     );
 
     solutionRank.rankPrefecence(
         { daysToDeadline },
         {
-            ideal: 60 /* days */,
-            possible: 14 /* days */,
+            ideal: 30 /* days */,
+            possible: 1 /* day */,
         },
     );
 
@@ -94,7 +87,7 @@ export function rankWebflowSolution(prefecences) {
         { levelOfControl },
         {
             ideal: 30 /* % */ / 100,
-            possible: 50 /* % */ / 100,
+            possible: 70 /* % */ / 100,
         },
     );
 
