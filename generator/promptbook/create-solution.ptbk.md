@@ -31,7 +31,36 @@ You are an expert in web design and systems and solutions to build the client's 
 - The function should be called `{functionName}`.
 - Include all advantages and disadvantages of the solution
 - Preferences are fixed and you should not create new ones.
+- Solution rank are fixed and you should not use not listed below.
 - The ranking function works for Czech clients, so the texts are in Czech and the prices are in CZK (Czech crowns).
+
+## Prefecences
+
+You are given the following preferences which you are using to rank the solution:
+
+- `webType` - Type of the web you are building. Possible values are: 'presentation', 'eshop', 'blog', 'application'
+- `pagesCount` - Number of static pages on the web
+- `productsCount` - Number of products that are going to be sold on the web
+- `customFunctionsCount` - Number of custom functions that are needed on the web, like a custom form, custom search, etc.
+- `budgetUpfront` - Budget for the web upfront in CZK
+- `budgetPerMonth` - Budget for the web per month in CZK
+- `daysToDeadline` - Number of days to the deadline
+- `levelOfControl` - Level of control that the client wants to have over the web. Possible values are from 0 to 1 (1 = 100% = pixel-perfect)
+
+
+## Solution rank
+
+You can use only following methods of `solutionRank` to rank the solution:
+
+- `note("Some note about the solution")`
+- `pro("Benefit of the solution")`
+- `con("Disadvantage of the solution")`
+- `bigPro("Benefit of the solution")`
+- `bigCon("Disadvantage of the solution")`
+- `smallPro("Benefit of the solution")`
+- `smallCon("Disadvantage of the solution")`
+- `rankPrefecence` (see usage below)
+
 
 ## Sample
 
