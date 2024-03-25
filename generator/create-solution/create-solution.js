@@ -95,7 +95,11 @@ async function createSolution(solutionName) {
     const { outputParameters } = executionResult;
     const { functionName, functionSourceCode } = outputParameters;
 
-    await writeFile(`data/${functionName}.mjs`, functionSourceCode, 'utf-8');
+    await writeFile(
+        `data/${functionName}.mjs`,
+        `import { SolutionRank } from '../script/SolutionRank.mjs';` + '\n\n' + functionSourceCode,
+        'utf-8',
+    );
 
     console.info(`[ Done 🏭  Creating solution ]`);
 }

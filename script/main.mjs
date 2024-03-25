@@ -13,7 +13,6 @@ const valueExponentMax = 10;
 const converter = new showdown.Converter();
 
 export function main() {
-    // console.info(solutions);
     // ======================
 
     const recalculateResult = () => {
@@ -99,7 +98,6 @@ export function main() {
         const initialValue = parseFloat(inputElement.value);
 
         if (scaleType === 'linear') {
-            console.log(inputElement, initialValue);
             inputElement.dataset.value = initialValue;
             // No need to re-set:> inputElement.value = initialValue;
         } else if (scaleType === 'logarithmic') {

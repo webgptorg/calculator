@@ -18,7 +18,8 @@
 
 -   MODEL VARIANT Chat
 -   MODEL NAME `gpt-4-0125-preview`
--   POSTPROCESSING `extractOneBlockFromMarkdown`
+-   POSTPROCESSING `extractBlock`
+<!-- TODO:> EXPECT "export function {functionName}(prefecences) {"-->
 
 ```
 
@@ -26,14 +27,15 @@ You are an expert in web design and systems and solutions to build the client's 
 
 ## Rules
 
--   Write just the ranking function, not then explanation
--   The function should be named `{functionName}`
--   Include all pros and cons of the solution
--   ranking function works for Czech clients, so the texts are in Czech and the prices are in CZK (czech crowns)
+- Write only the ranking function, not the explanation
+- The function should be called `{functionName}`.
+- Include all advantages and disadvantages of the solution
+- Preferences are fixed and you should not create new ones.
+- The ranking function works for Czech clients, so the texts are in Czech and the prices are in CZK (Czech crowns).
 
 ## Sample
 
-Here is a sample of the ranking function for **Wordpress**:
+Here is an example of the ranking function for **Wordpress**:
 
 \`\`\`\javascript
 /**
