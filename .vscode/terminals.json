@@ -6,6 +6,13 @@
             "command": "node ./generator/create-solution/create-solution.js",
             "onlySingle": true,
             "focus": true
+        },
+        {
+            "name": "🏭📖 Prettify promptbook",
+            "command": "npx promptbook prettify generator/promptbook/create-solution.ptbk.md",
+            "execute": false,
+            "onlySingle": false,
+            "focus": false
         }
     ]
 }

@@ -3,13 +3,13 @@
     "private": false,
     "nonce": 1,
     "devDependencies": {
-        "@promptbook/core": "0.41.0-0",
-        "@promptbook/execute-javascript": "0.41.0-0",
-        "@promptbook/openai": "0.41.0-0",
-        "@promptbook/remote-client": "0.41.0-0",
-        "@promptbook/remote-server": "0.41.0-0",
-        "@promptbook/types": "0.41.0-0",
-        "@promptbook/utils": "0.41.0-0",
+        "@promptbook/core": "0.41.105",
+        "@promptbook/execute-javascript": "0.41.105",
+        "@promptbook/openai": "0.41.105",
+        "@promptbook/remote-client": "0.41.105",
+        "@promptbook/remote-server": "0.41.105",
+        "@promptbook/types": "0.41.105",
+        "@promptbook/utils": "0.41.105",
         "configchecker": "^1.5.16",
         "dotenv": "^16.4.5"
     }

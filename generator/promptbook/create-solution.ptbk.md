@@ -4,6 +4,36 @@
 -   OUTPUT PARAM {functionName} Name of the ranking function for the system
 -   OUTPUT PARAM {functionSourceCode} Source code of the ranking function for the system
 
+<!--Graph-->
+<!-- ⚠️ WARNING: This section was auto-generated -->
+
+```mermaid
+%% 🔮 Tip: Open this on GitHub or in the VSCode website to see the Mermaid graph visually
+
+flowchart LR
+  subgraph "Web Ranking Function"
+
+      direction TB
+
+      input((Input)):::input
+      templateFunctionName(Function name)
+      input--"{solutionName}"-->templateFunctionName
+      templateWriteRankingFunctionForSolutionName("Write ranking function for {solutionName}")
+      input--"{solutionName}"-->templateWriteRankingFunctionForSolutionName
+      templateFunctionName--"{functionName}"-->templateWriteRankingFunctionForSolutionName
+
+      templateFunctionName--"{functionName}"-->output
+      templateWriteRankingFunctionForSolutionName--"{functionSourceCode}"-->output
+      output((Output)):::output
+
+      classDef input color: grey;
+      classDef output color: grey;
+
+  end;
+```
+
+<!--/Graph-->
+
 ## Function name
 
 -   EXECUTE SCRIPT
