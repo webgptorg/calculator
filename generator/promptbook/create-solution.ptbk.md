@@ -16,7 +16,7 @@ flowchart LR
       direction TB
 
       input((Input)):::input
-      templateFunctionName(Function name)
+      templateFunctionName("Function name")
       input--"{solutionName}"-->templateFunctionName
       templateWriteRankingFunctionForSolutionName("Write ranking function for {solutionName}")
       input--"{solutionName}"-->templateWriteRankingFunctionForSolutionName
