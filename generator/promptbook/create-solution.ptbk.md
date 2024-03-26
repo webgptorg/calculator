@@ -1,6 +1,7 @@
 # Web Ranking Function
 
 -   INPUT PARAM {solutionName} Name for the system which we can build the web in
+-   INPUT PARAM {solutionDescription} Simple description of the system
 -   OUTPUT PARAM {functionName} Name of the ranking function for the system
 -   OUTPUT PARAM {functionSourceCode} Source code of the ranking function for the system
 
@@ -53,12 +54,13 @@ flowchart LR
 
 ```
 
-You are an expert in web design and systems and solutions to build the client's web, write new ranking function, for **{solutionName}**.
+You are an expert in web design and systems and solutions to build the client's web, write new ranking function, for **{solutionName}** - {solutionDescription}.
 
 ## Rules
 
 - Write only the ranking function, not the explanation
 - The function should be called `{functionName}`.
+- {solutionName} is {solutionDescription}
 - Include all advantages and disadvantages of the solution
 - Ranking must be ballanced, if you use a pro, you should use a con as well, if you use a bigPro, you should use a bigCon as well, etc.
 - Preferences are fixed and you should not create new ones.
