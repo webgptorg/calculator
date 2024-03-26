@@ -3,32 +3,36 @@ import { SolutionRank } from '../script/SolutionRank.mjs';
 /**
  * Rank the suitability of the Custom solution based on user preferences.
  */
-export function rankCustomSolution(preferences) {
+export function rankCustomSolution(prefecences) {
     const {
-        webType, // <- 'presentation', 'eshop', 'blog', 'application'
+        webType,
         pagesCount,
         productsCount,
         customFunctionsCount,
-        budgetUpfront, // <- In CZK
-        budgetPerMonth, // <- In CZK
+        budgetUpfront,
+        budgetPerMonth,
         daysToDeadline,
         levelOfControl,
-    } = preferences;
+    } = prefecences;
 
     const solutionRank = new SolutionRank(
-        'Vlastní řešení',
-        'Nabízíme 100% přizpůsobitelné řešení s nejvyšší flexibilitou a kontrolou.',
+        'Custom Solutions',
+        'Vytvoření webových stránek od základu podle specifických požadavků klienta.',
     );
 
-    solutionRank.pro('100% přizpůsobitelné řešení.');
-    
+    solutionRank.bigPro('Naprostá flexibilita a kontrola nad designem a funkcionalitou.');
+    solutionRank.bigCon('Vysoké náklady na vývoj a údržbu.');
+
+    solutionRank.pro('Lze plně přizpůsobit všechny aspekty webu.');
+    solutionRank.con('Vyžaduje větší časovou investici pro vývoj.');
+
     solutionRank.goodFor({ webType }, ['application', 'eshop']);
     solutionRank.badFor({ webType }, ['presentation', 'blog']);
 
     solutionRank.rankPrefecence(
         { pagesCount },
         {
-            ideal: 20,
+            ideal: 10,
             possible: 100,
         },
     );
@@ -36,16 +40,16 @@ export function rankCustomSolution(preferences) {
     solutionRank.rankPrefecence(
         { productsCount },
         {
-            ideal: 500,
-            possible: 10000,
+            ideal: 50,
+            possible: 5000,
         },
     );
 
     solutionRank.rankPrefecence(
         { customFunctionsCount },
         {
-            ideal: 50,
-            possible: 100,
+            ideal: 5,
+            possible: 50,
         },
     );
 
@@ -60,8 +64,8 @@ export function rankCustomSolution(preferences) {
     solutionRank.rankPrefecence(
         { budgetPerMonth },
         {
-            ideal: 10000 /* CZK */,
-            possible: 2000 /* CZK */,
+            ideal: 5000 /* CZK */,
+            possible: 1000 /* CZK */,
         },
     );
 
@@ -69,7 +73,7 @@ export function rankCustomSolution(preferences) {
         { daysToDeadline },
         {
             ideal: 180 /* days */,
-            possible: 60 /* days */,
+            possible: 30 /* days */,
         },
     );
 
@@ -77,26 +81,12 @@ export function rankCustomSolution(preferences) {
         { levelOfControl },
         {
             ideal: 100 /* % */ / 100,
-            possible: 90 /* % */ / 100,
+            possible: 80 /* % */ / 100,
         },
     );
 
-    if (webType === 'application' || webType === 'eshop') {
-        solutionRank.bigPro('Ideální pro složité projekty s vysokou mírou přizpůsobení.');
-        solutionRank.note('Pro projekty typu aplikace a e-shop nabízíme rozsáhlé možnosti integrace a automatizace.');
-    }
-
-    if (daysToDeadline < 60) {
-        solutionRank.bigCon('Není ideální pro projekty s krátkým deadline.');
-    }
-
-    if (budgetUpfront < 50000) {
-        solutionRank.bigCon('Vyžaduje vyšší počáteční investici.');
-    }
-
-    if (levelOfControl < 0.9) {
-        solutionRank.smallCon('Může být příliš komplexní pro klienty s nižšími nároky na úroveň kontroly.');
-    }
+    solutionRank.smallPro('Plně vlastní vzhled a specifické funkcionality.');
+    solutionRank.smallCon('Vyšší riziko bezpečnostních chyb bez poskytování pravidelné údržby.');
 
     return solutionRank.calculate();
 }

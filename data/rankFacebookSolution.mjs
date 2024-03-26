@@ -1,7 +1,7 @@
 import { SolutionRank } from '../script/SolutionRank.mjs';
 
 /**
- * Rank the suitability of the Facebook solution based on user preferences for Czech clients.
+ * Rank the suitability of the Facebook Page solution based on user preferences.
  */
 export function rankFacebookSolution(prefecences) {
     const {
@@ -16,24 +16,21 @@ export function rankFacebookSolution(prefecences) {
     } = prefecences;
 
     const solutionRank = new SolutionRank(
-        'Facebook pro firmy',
-        'Využijte možností, které nabízí Facebook pro firmy k rychlému spuštění a propagaci Vašeho webu.',
+        'Facebook Page',
+        'Použijte stránku na Facebooku jako svou jedinou internetovou prezentaci.',
     );
 
-    solutionRank.pro('Snadné nasazení a rychlý start.');
-    solutionRank.pro('Široké možnosti propagace.');
-    
-    solutionRank.bigCon('Nedostatečná úroveň kontrolního přizpůsobení pro komplexnější weby.');
-    solutionRank.smallCon('Omezené možnosti vlastních funkcí.');
+    solutionRank.pro('Rychlé zřízení a bez nutnosti technických znalostí.');
+    solutionRank.con('Omezení ve funkčnosti a designu oproti plnohodnotné webové stránce.');
 
-    solutionRank.goodFor({ webType }, ['presentation', 'blog']);
-    solutionRank.badFor({ webType }, ['application', 'eshop']);
+    solutionRank.goodFor({ webType }, ['presentation', 'eshop', 'blog']);
+    solutionRank.badFor({ webType }, ['application']);
 
     solutionRank.rankPrefecence(
         { pagesCount },
         {
-            ideal: 1,
-            possible: 15,
+            ideal: 1, // Since it's a single page usually
+            possible: 10, // Considering tabs and sections as "pages"
         },
     );
 
@@ -41,13 +38,13 @@ export function rankFacebookSolution(prefecences) {
         { productsCount },
         {
             ideal: 0,
-            possible: 50, // <- Prodej přes Facebook Marketplace nebo stránku
+            possible: 50, // Using Facebook shop features
         },
     );
 
     if (productsCount > 0) {
         solutionRank.note(
-            'Facebook Marketplace nabízí možnosti pro prodej produktů bez nutnosti vlastního eshopu.',
+            'Facebook umožňuje přidávat produkty a vytvářet mini-eshop přímo na vaší stránce.',
         );
     }
 
@@ -55,23 +52,23 @@ export function rankFacebookSolution(prefecences) {
         { customFunctionsCount },
         {
             ideal: 0,
-            possible: 5, // <- Omezené na funkce podporované Facebookem
+            possible: 5, // Considering basic integrations and tabs customization
         },
     );
 
     solutionRank.rankPrefecence(
         { budgetUpfront },
         {
-            ideal: 0 /* CZK */, // <- Velmi nízké náklady na zahájení
-            possible: 5000 /* CZK */, // <- V rámci propagace a reklamy
+            ideal: 0 /* CZK */,
+            possible: 1000 /* CZK */, // Considering some potential minor investments
         },
     );
 
     solutionRank.rankPrefecence(
         { budgetPerMonth },
         {
-            ideal: 0 /* CZK */, // <- Bez nutnosti měsíčních poplatků
-            possible: 10000 /* CZK */, // <- Závisí na rozpočtu na reklamu
+            ideal: 0 /* CZK */,
+            possible: 1000 /* CZK */, // Advertisement or promotions
         },
     );
 
@@ -87,7 +84,7 @@ export function rankFacebookSolution(prefecences) {
         { levelOfControl },
         {
             ideal: 10 /* % */ / 100,
-            possible: 40 /* % */ / 100,
+            possible: 30 /* % */ / 100,
         },
     );
 

@@ -1,49 +1,56 @@
 import { SolutionRank } from '../script/SolutionRank.mjs';
 
 /**
- * Rank the suitability of the Instagram solution based on user preferences.
+ * Rank the suitability of using an Instagram account as the sole web presence based on user preferences.
  */
-export function rankInstagramSolution(prefecences) {
+export function rankInstagramSolution(preferences) {
     const {
-        webType,
+        webType, // <- 'presentation', 'eshop', 'blog', 'application'
         pagesCount,
         productsCount,
         customFunctionsCount,
-        budgetUpfront,
-        budgetPerMonth,
+        budgetUpfront, // <- In CZK
+        budgetPerMonth, // <- In CZK
         daysToDeadline,
         levelOfControl,
-    } = prefecences;
+    } = preferences;
 
     const solutionRank = new SolutionRank(
-        'Instagram E-shop and Presentation',
-        'Využijte sílu sociálních médií pro prezentaci vašeho obchodu a produktů.',
+        'Instagram Account',
+        'Využijte platformu Instagram jako hlavní způsob prezentace na internetu.',
     );
 
-    solutionRank.pro('Široké možnosti propagace a interakce se zákazníky.');
+    solutionRank.bigPro('Žádné náklady na spuštění.');
+    solutionRank.bigCon('Omezená kontrola nad designem a funkcionalitou.');
 
-    solutionRank.goodFor({ webType }, ['eshop', 'presentation']);
-    solutionRank.badFor({ webType }, ['blog', 'application']);
+    solutionRank.smallPro('Rychlá implementace.');
+    solutionRank.smallCon('Nízká úroveň personalizace.');
+
+    solutionRank.pro('Široké dosažení cílové skupiny.');    
+    solutionRank.con('Závislost na jedné platformě.');
+
+    solutionRank.goodFor({ webType }, ['presentation', 'blog']);
+    solutionRank.badFor({ webType }, ['eshop', 'application']);
 
     solutionRank.rankPrefecence(
         { pagesCount },
         {
-            ideal: 1, // Instagram, jako platforma, nepracuje s klasickým počtem stránek
-            possible: 5, // Rekreačně lze uvažovat několik "highlight" sekcí
+            ideal: 5,
+            possible: 1, // Considering Instagram's profile and post structure
         },
     );
 
     solutionRank.rankPrefecence(
         { productsCount },
         {
-            ideal: 100,  // Při dobré organizaci lze na Instagramu využít obrázky a stories k prezentaci produktů
-            possible: 1000, // Při intenzivním využívání může být přenos daleko větší
+            ideal: 0,
+            possible: 50, // With Instagram Shopping features
         },
     );
 
-    if(productsCount > 1000) {
+    if (productsCount > 0) {
         solutionRank.note(
-            'Pro velký počet produktů se doporučuje použít kombinaci s webovou stránkou nebo externím eshopem.',
+            'Využijte funkce Instagram Shopping pro prezentaci produktů přímo na vašem profilu.',
         );
     }
 
@@ -51,37 +58,31 @@ export function rankInstagramSolution(prefecences) {
         { customFunctionsCount },
         {
             ideal: 0,
-            possible: 5, // Limitované možnosti integrace a customizace mimo standardní funkce Instagramu
+            possible: 0, // Instagram does not allow custom functions
         },
     );
-
-    if(customFunctionsCount > 5) {
-        solutionRank.note(
-            'Instagram nabízí omezené možnosti pro vlastní funkce. Pro složitější potřeby je vhodnější alternativní platforma.',
-        );
-    }
 
     solutionRank.rankPrefecence(
         { budgetUpfront },
         {
             ideal: 0 /* CZK */,
-            possible: 5000 /* CZK */ // Kvůli možným nákladům na grafiku a marketing
+            possible: 0 /* CZK */, // No upfront cost for using Instagram
         },
     );
 
     solutionRank.rankPrefecence(
         { budgetPerMonth },
         {
-            ideal: 500 /* CZK */,
-            possible: 5000 /* CZK */, // Pro reklamu a možné propagace na Instagramu
+            ideal: 0 /* CZK */,
+            possible: 5000 /* CZK */, // For promoting posts if necessary
         },
     );
 
     solutionRank.rankPrefecence(
         { daysToDeadline },
         {
-            ideal: 7 /* days */,
-            possible: 1 /* day */, // Velmi rychlá nastavení profilu a zveřejnění obsahu
+            ideal: 1 /* days */,
+            possible: 7 /* days */,
         },
     );
 
@@ -89,15 +90,9 @@ export function rankInstagramSolution(prefecences) {
         { levelOfControl },
         {
             ideal: 10 /* % */ / 100,
-            possible: 40 /* % */ / 100, // Omezená kontrola nad designem a prezentací ve srovnání s klasickými webovými stránkami
+            possible: 20 /* % */ / 100,
         },
     );
-
-    if(levelOfControl > 0.4) {
-        solutionRank.note(
-            'Instagram nabízí omezené možnosti customizace, pro vyšší kontrolu nad prezentací je potřeba zvážit jiné platformy.',
-        );
-    }
 
     return solutionRank.calculate();
 }

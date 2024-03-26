@@ -5,25 +5,27 @@ import { SolutionRank } from '../script/SolutionRank.mjs';
  */
 export function rankLinkedinSolution(prefecences) {
     const {
-        webType, // <- 'presentation', 'eshop', 'blog', 'application'
+        webType,
         pagesCount,
         productsCount,
         customFunctionsCount,
-        budgetUpfront, // <- In CZK
-        budgetPerMonth, // <- In CZK
+        budgetUpfront,
+        budgetPerMonth,
         daysToDeadline,
         levelOfControl,
     } = prefecences;
 
     const solutionRank = new SolutionRank(
-        'LinkedIn Profinder',
-        'Využijte platformu LinkedIn k nalezení profesionálů ve vaší oblasti pro vývoj webu.',
+        'LinkedIn jako webová prezentace',
+        'Využijte svůj LinkedIn profil nebo stránku jako primární webovou prezentaci vaší firmy nebo osobní značky.',
     );
 
-    solutionRank.note('LinkedIn Profinder pomáhá klientům najít správné odborníky k realizaci jejich projektů webu.');
-    
-    solutionRank.badFor({webType}, ['eshop', 'application']);
-    solutionRank.goodFor({webType}, ['presentation', 'blog']);
+    solutionRank.pro('Snadná a rychlá implementace bez nutnosti technických znalostí.');
+
+    solutionRank.con('Omezený rozsah přizpůsobení a kontrola nad designem.');
+
+    solutionRank.goodFor({ webType }, ['presentation']);
+    solutionRank.badFor({ webType }, ['eshop', 'blog', 'application']);
 
     solutionRank.rankPrefecence(
         { pagesCount },
@@ -37,7 +39,7 @@ export function rankLinkedinSolution(prefecences) {
         { productsCount },
         {
             ideal: 0,
-            possible: 50,
+            possible: 0,
         },
     );
 
@@ -45,15 +47,15 @@ export function rankLinkedinSolution(prefecences) {
         { customFunctionsCount },
         {
             ideal: 0,
-            possible: 5,
+            possible: 0,
         },
     );
 
     solutionRank.rankPrefecence(
         { budgetUpfront },
         {
-            ideal: 50000 /* CZK */,
-            possible: 10000 /* CZK */,
+            ideal: 0 /* CZK */,
+            possible: 0 /* CZK */,
         },
     );
 
@@ -61,14 +63,14 @@ export function rankLinkedinSolution(prefecences) {
         { budgetPerMonth },
         {
             ideal: 0 /* CZK */,
-            possible: 1000 /* CZK */,
+            possible: 5000 /* CZK */ // Pro potenciální platbu za premium služby LinkedIn
         },
     );
 
     solutionRank.rankPrefecence(
         { daysToDeadline },
         {
-            ideal: 30 /* days */,
+            ideal: 1 /* days */,
             possible: 7 /* days */,
         },
     );
@@ -76,15 +78,18 @@ export function rankLinkedinSolution(prefecences) {
     solutionRank.rankPrefecence(
         { levelOfControl },
         {
-            ideal: 70 /* % */ / 100,
-            possible: 90 /* % */ / 100,
+            ideal: 0 /* % */,
+            possible: 10 /* % */,
         },
     );
 
-    solutionRank.smallPro('Snadné nalezení kvalifikovaných odborníků.');
-    solutionRank.smallCon('Není ideální pro složité webové aplikace nebo eshopy.');
-    solutionRank.bigPro('Přímá komunikace a spolupráce s freelancery a agenturami.');
-    solutionRank.bigCon('Vyšší upfrontové náklady v porovnání s DIY řešeními.');
-    
+    solutionRank.bigPro('Nulové náklady na vývoj a hostování webu.');
+
+    solutionRank.bigCon('Velmi omezené SEO možnosti a nízká kontrola nad uživatelskou zkušeností.');
+
+    solutionRank.smallPro('Vysoká míra důvěry a profesionality spojené s platformou LinkedIn.');
+
+    solutionRank.smallCon('Riziko ztráty dat nebo omezení funkcionality při změnách politik LinkedIn.');
+
     return solutionRank.calculate();
 }

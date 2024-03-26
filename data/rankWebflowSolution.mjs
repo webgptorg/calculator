@@ -1,26 +1,27 @@
 import { SolutionRank } from '../script/SolutionRank.mjs';
 
 /**
- * Rank the suitability of the Webflow solution based on user preferences for Czech clients.
+ * Rank the suitability of the Webflow solution based on user preferences.
  */
-export function rankWebflowSolution(prefecences) {
+export function rankWebflowSolution(preferences) {
     const {
-        webType, // <- 'presentation', 'eshop', 'blog', 'application'
+        webType,
         pagesCount,
         productsCount,
         customFunctionsCount,
-        budgetUpfront, // <- In CZK
-        budgetPerMonth, // <- In CZK
+        budgetUpfront,
+        budgetPerMonth,
         daysToDeadline,
         levelOfControl,
-    } = prefecences;
+    } = preferences;
 
     const solutionRank = new SolutionRank(
         'Webflow',
-        'Webflow nabízí vizuální editaci pro tvorbu respondzivních webových stránek bez nutnosti kódování.',
+        'Pokročilý nástroj pro tvorbu webových stránek s vizuálním editorom na webflow.com.',
     );
 
-    solutionRank.pro('Nenáročné na technické dovednosti díky vizuálnímu editoru.');
+    solutionRank.bigPro('Umožňuje rychlou a flexibilní tvorbu webových stránek bez kódování.');
+    solutionRank.bigCon('Vyšší měsíční náklady v porovnání s hostovanými řešeními.');
 
     solutionRank.goodFor({ webType }, ['presentation', 'blog', 'application']);
     solutionRank.badFor({ webType }, ['eshop']);
@@ -28,8 +29,8 @@ export function rankWebflowSolution(prefecences) {
     solutionRank.rankPrefecence(
         { pagesCount },
         {
-            ideal: 100,
-            possible: 500,
+            ideal: 50,
+            possible: 100,
         },
     );
 
@@ -37,20 +38,20 @@ export function rankWebflowSolution(prefecences) {
         { productsCount },
         {
             ideal: 0,
-            possible: 100, // <- Webflow Ecommerce plans
+            possible: 300, 
         },
     );
 
     if (productsCount > 0) {
         solutionRank.note(
-            'Webflow Ecommerce umožňuje integraci prodeje produktů, ale je více vhodný pro menší obchody.',
+            'I když Webflow podporuje e-shopy, pro velký počet produktů může být cenově nevýhodný.',
         );
     }
 
     solutionRank.rankPrefecence(
         { customFunctionsCount },
         {
-            ideal: 0,
+            ideal: 5,
             possible: 20,
         },
     );
@@ -58,8 +59,8 @@ export function rankWebflowSolution(prefecences) {
     solutionRank.rankPrefecence(
         { budgetUpfront },
         {
-            ideal: 15000 /* CZK */,
-            possible: 3000 /* CZK */,
+            ideal: 20000 /* CZK */,
+            possible: 50000 /* CZK */,
         },
     );
 
@@ -67,29 +68,31 @@ export function rankWebflowSolution(prefecences) {
         { budgetPerMonth },
         {
             ideal: 500 /* CZK */,
-            possible: 200 /* CZK */,
+            possible: 1500 /* CZK */,
         },
     );
 
     solutionRank.rankPrefecence(
         { daysToDeadline },
         {
-            ideal: 60 /* days */,
-            possible: 14 /* days */,
+            ideal: 30 /* days */,
+            possible: 7 /* days */,
         },
     );
 
     solutionRank.rankPrefecence(
         { levelOfControl },
         {
-            ideal: 70 /* % */ / 100,
-            possible: 90 /* % */ / 100,
+            ideal: 90 /* % */ / 100,
+            possible: 50 /* % */ / 100,
         },
     );
 
-    solutionRank.con('Omezení ve funkcionality pro velké eshopy.');
-    solutionRank.smallCon('Vyšší měsíční náklady v porovnání s některými hostovanými řešeními.');
-    solutionRank.smallPro('Rychlé prototypování a zaměření na design bez nutnosti kódování.');
+    solutionRank.pro('Webflow nabízí detailní kontrolu nad designem.');
+    solutionRank.con('Přechod na jinou platformu může být komplikovaný.');
+
+    solutionRank.smallPro('Obsahuje hosting v ceně předplatného.');
+    solutionRank.smallCon('Může vyžadovat čas na učení kvůli bohatému rozhraní a funkcím.');
 
     return solutionRank.calculate();
 }

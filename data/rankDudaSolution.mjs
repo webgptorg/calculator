@@ -1,9 +1,9 @@
 import { SolutionRank } from '../script/SolutionRank.mjs';
 
 /**
- * Rank the suitability of the Wix solution based on user preferences.
+ * Rank the suitability of the Duda solution based on user preferences.
  */
-export function rankWixSolution(prefecences) {
+export function rankDudaSolution(prefecences) {
     const {
         webType, // <- 'presentation', 'eshop', 'blog', 'application'
         pagesCount,
@@ -16,12 +16,11 @@ export function rankWixSolution(prefecences) {
     } = prefecences;
 
     const solutionRank = new SolutionRank(
-        'Wix',
-        'Využijte jednoduchého a intuitivního web builderu pro tvorbu svých webových stránek bez potřeby kódování.',
+        'Duda - Website Builder',
+        'Duda je webový tvůrce speciálně určený pro agentury a freelancery.',
     );
 
     solutionRank.pro('Intuitivní drag-and-drop rozhraní.');
-    solutionRank.con('Nižší míra kontrolu nad webem z hlediska optimalizace a rychlosti.');
 
     solutionRank.goodFor({ webType }, ['presentation', 'blog']);
     solutionRank.badFor({ webType }, ['application']);
@@ -29,40 +28,36 @@ export function rankWixSolution(prefecences) {
     solutionRank.rankPrefecence(
         { pagesCount },
         {
-            ideal: 20,
-            possible: 50,
+            ideal: 50,
+            possible: 200,
         },
     );
+
+    if (webType === 'eshop') {
+        solutionRank.bigPro('Integrované řešení pro e-shopy.');
+        solutionRank.smallCon('Možnosti přizpůsobení e-shopu jsou omezené v porovnání s specializovanými platformami.');
+    }
 
     solutionRank.rankPrefecence(
         { productsCount },
         {
             ideal: 0,
-            possible: 300,
+            possible: 500,
         },
     );
-
-    if (productsCount > 0) {
-        solutionRank.smallPro('Zahrnuje nástroje pro jednoduchou správu produktů.');
-    }
 
     solutionRank.rankPrefecence(
         { customFunctionsCount },
         {
             ideal: 0,
-            possible: 5,
+            possible: 10,
         },
     );
-
-    if (customFunctionsCount > 0) {
-        solutionRank.smallPro('Možnost využití externích aplikací z Wix App Marketu.');
-        solutionRank.smallCon('Omezené možnosti pro složitější custom funkce.');
-    }
 
     solutionRank.rankPrefecence(
         { budgetUpfront },
         {
-            ideal: 15000 /* CZK */,
+            ideal: 20000 /* CZK */,
             possible: 5000 /* CZK */,
         },
     );
@@ -70,7 +65,7 @@ export function rankWixSolution(prefecences) {
     solutionRank.rankPrefecence(
         { budgetPerMonth },
         {
-            ideal: 300 /* CZK */,
+            ideal: 500 /* CZK */,
             possible: 100 /* CZK */,
         },
     );
@@ -79,17 +74,19 @@ export function rankWixSolution(prefecences) {
         { daysToDeadline },
         {
             ideal: 30 /* days */,
-            possible: 7 /* days */,
+            possible: 3 /* days */,
         },
     );
 
     solutionRank.rankPrefecence(
         { levelOfControl },
         {
-            ideal: 20 /* % */ / 100,
-            possible: 1 /* % */ / 100,
+            ideal: 70 /* % */ / 100,
+            possible: 90 /* % */ / 100,
         },
     );
+
+    solutionRank.bigCon('Možnosti pro úplné přizpůsobení a pokročilé funkce jsou omezené.');
 
     return solutionRank.calculate();
 }

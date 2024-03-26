@@ -1,9 +1,9 @@
 import { SolutionRank } from '../script/SolutionRank.mjs';
 
 /**
- * Rank the suitability of the Wix solution based on user preferences.
+ * Rank the suitability of the Squarespace solution based on user preferences.
  */
-export function rankWixSolution(prefecences) {
+export function rankSquarespaceSolution(prefecences) {
     const {
         webType, // <- 'presentation', 'eshop', 'blog', 'application'
         pagesCount,
@@ -16,21 +16,22 @@ export function rankWixSolution(prefecences) {
     } = prefecences;
 
     const solutionRank = new SolutionRank(
-        'Wix',
-        'Využijte jednoduchého a intuitivního web builderu pro tvorbu svých webových stránek bez potřeby kódování.',
+        'Squarespace',
+        'Pokročilý nástroj pro tvorbu webů na squarespace.com.',
     );
 
-    solutionRank.pro('Intuitivní drag-and-drop rozhraní.');
-    solutionRank.con('Nižší míra kontrolu nad webem z hlediska optimalizace a rychlosti.');
+    solutionRank.pro('Intuitivní a uživatelsky přívětivá tvorba obsahu.');
+    solutionRank.con('Nižší úroveň přizpůsobení pro pokročilé funkce a design.');
 
     solutionRank.goodFor({ webType }, ['presentation', 'blog']);
     solutionRank.badFor({ webType }, ['application']);
+    solutionRank.neutralFor({ webType }, ['eshop']);
 
     solutionRank.rankPrefecence(
         { pagesCount },
         {
-            ideal: 20,
-            possible: 50,
+            ideal: 25,
+            possible: 100,
         },
     );
 
@@ -38,40 +39,37 @@ export function rankWixSolution(prefecences) {
         { productsCount },
         {
             ideal: 0,
-            possible: 300,
+            possible: 250, // Squarespace supports e-commerce but might not be ideal for large inventories
         },
     );
 
     if (productsCount > 0) {
-        solutionRank.smallPro('Zahrnuje nástroje pro jednoduchou správu produktů.');
-    }
+        solutionRank.note(
+            'Podpora pro e-commerce je přítomna, ale může být limitující pro velké inventáře.',
+        );
+    } 
 
     solutionRank.rankPrefecence(
         { customFunctionsCount },
         {
             ideal: 0,
-            possible: 5,
+            possible: 10,
         },
     );
-
-    if (customFunctionsCount > 0) {
-        solutionRank.smallPro('Možnost využití externích aplikací z Wix App Marketu.');
-        solutionRank.smallCon('Omezené možnosti pro složitější custom funkce.');
-    }
 
     solutionRank.rankPrefecence(
         { budgetUpfront },
         {
-            ideal: 15000 /* CZK */,
-            possible: 5000 /* CZK */,
+            ideal: 10000 /* CZK */,
+            possible: 15000 /* CZK */,
         },
     );
 
     solutionRank.rankPrefecence(
         { budgetPerMonth },
         {
-            ideal: 300 /* CZK */,
-            possible: 100 /* CZK */,
+            ideal: 500 /* CZK */,
+            possible: 1000 /* CZK */,
         },
     );
 
@@ -86,10 +84,14 @@ export function rankWixSolution(prefecences) {
     solutionRank.rankPrefecence(
         { levelOfControl },
         {
-            ideal: 20 /* % */ / 100,
-            possible: 1 /* % */ / 100,
+            ideal: 30 /* % */ / 100,
+            possible: 70 /* % */ / 100,
         },
     );
+
+    if (levelOfControl > 0.7) {
+        solutionRank.bigCon('Pro velmi specifické nebo detailně přizpůsobené projekty může být Squarespace omezující.');
+    }
 
     return solutionRank.calculate();
 }

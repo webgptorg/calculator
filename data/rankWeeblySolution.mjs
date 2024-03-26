@@ -1,9 +1,9 @@
 import { SolutionRank } from '../script/SolutionRank.mjs';
 
 /**
- * Rank the suitability of the Linktr.ee solution based on user preferences.
+ * Rank the suitability of the Weebly solution for a Czech client based on specified preferences.
  */
-export function rankLinktreeSolution(preferences) {
+export function rankWeeblySolution(prefecences) {
     const {
         webType,
         pagesCount,
@@ -13,15 +13,18 @@ export function rankLinktreeSolution(preferences) {
         budgetPerMonth,
         daysToDeadline,
         levelOfControl,
-    } = preferences;
+    } = prefecences;
 
     const solutionRank = new SolutionRank(
-        'Linktr.ee',
-        'Jednoduchý profil s odkazy pro sjednocení vaší online přítomnosti na jednom místě.',
+        'Weebly',
+        'Jednoduchý nástroj na weebly.com pro tvorbu webových stránek.',
     );
 
-    solutionRank.smallPro('Ideální pro sdružení všech online profilů.');
-    solutionRank.smallCon('Limitovaná personalizace a funkcionalita.');
+    solutionRank.pro('Snadné použití pro začátečníky.');
+    solutionRank.con('Omezené možnosti pokročilého přizpůsobení.');
+
+    solutionRank.smallPro('Rychlý start a žádné nutné programátorské dovednosti.');
+    solutionRank.smallCon('Ne příliš vhodný pro složité aplikace nebo eshopy s mnoha produkty.');
 
     solutionRank.goodFor({ webType }, ['presentation', 'blog']);
     solutionRank.badFor({ webType }, ['application', 'eshop']);
@@ -29,16 +32,16 @@ export function rankLinktreeSolution(preferences) {
     solutionRank.rankPrefecence(
         { pagesCount },
         {
-            ideal: 1,
-            possible: 5,
+            ideal: 50,
+            possible: 500,
         },
     );
 
     solutionRank.rankPrefecence(
         { productsCount },
         {
-            ideal: 0,
-            possible: 0,
+            ideal: 10,
+            possible: 100,
         },
     );
 
@@ -46,44 +49,41 @@ export function rankLinktreeSolution(preferences) {
         { customFunctionsCount },
         {
             ideal: 0,
-            possible: 0,
+            possible: 5,
         },
     );
 
     solutionRank.rankPrefecence(
         { budgetUpfront },
         {
-            ideal: 1000 /* CZK */,
-            possible: 0 /* CZK */,
+            ideal: 8000 /* CZK */,
+            possible: 2000 /* CZK */,
         },
     );
 
     solutionRank.rankPrefecence(
         { budgetPerMonth },
         {
-            ideal: 300 /* CZK */,
-            possible: 0 /* CZK */,
+            ideal: 500 /* CZK */,
+            possible: 200 /* CZK */,
         },
     );
 
     solutionRank.rankPrefecence(
         { daysToDeadline },
         {
-            ideal: 1 /* days */,
-            possible: 0 /* days */,
+            ideal: 30 /* days */,
+            possible: 1 /* day */,
         },
     );
 
     solutionRank.rankPrefecence(
         { levelOfControl },
         {
-            ideal: 5 /* % */ / 100,
-            possible: 10 /* % */ / 100,
+            ideal: 30 /* % */ / 100,
+            possible: 70 /* % */ / 100,
         },
     );
-
-    solutionRank.bigPro('Rychlé nastavení a spuštění.');
-    solutionRank.bigCon('Velmi omezený prostor pro růst a rozšiřování. Nepodporuje eshop ani aplikace.');
 
     return solutionRank.calculate();
 }

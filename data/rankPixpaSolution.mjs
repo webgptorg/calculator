@@ -1,35 +1,36 @@
 import { SolutionRank } from '../script/SolutionRank.mjs';
 
 /**
- * Rank the suitability of the WebGPT solution based on user preferences.
+ * Rank the suitability of the Pixpa solution based on user preferences.
  */
-export function rankWebgptSolution(prefecences) {
+export function rankPixpaSolution(prefecences) {
     const {
-        webType,
+        webType, // <- 'presentation', 'eshop', 'blog', 'application'
         pagesCount,
         productsCount,
         customFunctionsCount,
-        budgetUpfront,
-        budgetPerMonth,
+        budgetUpfront, // <- In CZK
+        budgetPerMonth, // <- In CZK
         daysToDeadline,
         levelOfControl,
     } = prefecences;
 
     const solutionRank = new SolutionRank(
-        'WebGPT',
-        'Použijte AI nástroj pro generování vašeho webu během 2 minut na webgpt.cz.',
+        'Pixpa',
+        'Vytvořte úžasné webové stránky s Pixpa - ideální pro tvůrce, kteří chtějí dát svým dílům prostor.',
     );
 
-    solutionRank.pro('Rychlé nasazení webu.');
+    solutionRank.pro('Jednoduché rozhraní pro snadnou tvorbu webů.');
+    solutionRank.con('Omezená přizpůsobivost v porovnání se samostatnými webovými řešeními.');
 
     solutionRank.goodFor({ webType }, ['presentation', 'blog']);
-    solutionRank.badFor({ webType }, ['application', 'eshop']);
+    solutionRank.badFor({ webType }, ['application']);
 
     solutionRank.rankPrefecence(
         { pagesCount },
         {
             ideal: 20,
-            possible: 50,
+            possible: 100,
         },
     );
 
@@ -37,13 +38,13 @@ export function rankWebgptSolution(prefecences) {
         { productsCount },
         {
             ideal: 0,
-            possible: 20, // Pre-assumption that basic e-commerce features might be supported but limited
+            possible: 50, // Pixpa supports simple e-commerce solutions
         },
     );
 
-    if (webType === 'eshop') {
+    if (productsCount > 0) {
         solutionRank.note(
-            'E-shop funkce můžou být omezené a méně flexibilní než specializované řešení pro e-shopy.',
+            'Pixpa podporuje jednoduché řešení pro eshopy, ale pro rozsáhlý katalog může být méně vhodný.',
         );
     }
 
@@ -55,26 +56,32 @@ export function rankWebgptSolution(prefecences) {
         },
     );
 
+    if (customFunctionsCount > 1) {
+        solutionRank.bigCon(
+            'Pixpa není optimální pro velké množství vlastních funkcí kvůli svým omezením.'
+        );
+    }
+
     solutionRank.rankPrefecence(
         { budgetUpfront },
         {
             ideal: 5000 /* CZK */,
-            possible: 10000 /* CZK */,
+            possible: 0 /* CZK */,
         },
     );
 
     solutionRank.rankPrefecence(
         { budgetPerMonth },
         {
-            ideal: 0 /* CZK */,
-            possible: 500 /* CZK */,
+            ideal: 200 /* CZK */,
+            possible: 50 /* CZK */,
         },
     );
 
     solutionRank.rankPrefecence(
         { daysToDeadline },
         {
-            ideal: 1 /* day */,
+            ideal: 30 /* days */,
             possible: 7 /* days */,
         },
     );
@@ -83,13 +90,9 @@ export function rankWebgptSolution(prefecences) {
         { levelOfControl },
         {
             ideal: 20 /* % */ / 100,
-            possible: 50 /* % */ / 100,
+            possible: 70 /* % */ / 100,
         },
     );
-
-    solutionRank.bigPro('Možnost rychlého testování a prototypování.');
-    
-    solutionRank.bigCon('Limitovaná přizpůsobivost pro složité weby a aplikace.');
 
     return solutionRank.calculate();
 }

@@ -1,9 +1,9 @@
 import { SolutionRank } from '../script/SolutionRank.mjs';
 
 /**
- * Rank the suitability of the Wix solution based on user preferences.
+ * Rank the suitability of the Zyro solution based on user preferences.
  */
-export function rankWixSolution(prefecences) {
+export function rankZyroSolution(prefecences) {
     const {
         webType, // <- 'presentation', 'eshop', 'blog', 'application'
         pagesCount,
@@ -16,21 +16,20 @@ export function rankWixSolution(prefecences) {
     } = prefecences;
 
     const solutionRank = new SolutionRank(
-        'Wix',
-        'Využijte jednoduchého a intuitivního web builderu pro tvorbu svých webových stránek bez potřeby kódování.',
+        'Zyro',
+        'Použijte jednoduchý nástroj na vytvoření webu s Zyro.com.',
     );
 
-    solutionRank.pro('Intuitivní drag-and-drop rozhraní.');
-    solutionRank.con('Nižší míra kontrolu nad webem z hlediska optimalizace a rychlosti.');
+    solutionRank.pro('Přátelské k uživatele s intuitivním drag-and-drop rozhraním.');
 
-    solutionRank.goodFor({ webType }, ['presentation', 'blog']);
+    solutionRank.goodFor({ webType }, ['presentation', 'eshop', 'blog']);
     solutionRank.badFor({ webType }, ['application']);
 
     solutionRank.rankPrefecence(
         { pagesCount },
         {
             ideal: 20,
-            possible: 50,
+            possible: 100,
         },
     );
 
@@ -38,40 +37,31 @@ export function rankWixSolution(prefecences) {
         { productsCount },
         {
             ideal: 0,
-            possible: 300,
+            possible: 100, // Zyro's e-commerce capabilities are improving but still limited
         },
     );
-
-    if (productsCount > 0) {
-        solutionRank.smallPro('Zahrnuje nástroje pro jednoduchou správu produktů.');
-    }
 
     solutionRank.rankPrefecence(
         { customFunctionsCount },
         {
             ideal: 0,
-            possible: 5,
+            possible: 5, // Limited custom functions due to the simplicity of Zyro
         },
     );
-
-    if (customFunctionsCount > 0) {
-        solutionRank.smallPro('Možnost využití externích aplikací z Wix App Marketu.');
-        solutionRank.smallCon('Omezené možnosti pro složitější custom funkce.');
-    }
 
     solutionRank.rankPrefecence(
         { budgetUpfront },
         {
             ideal: 15000 /* CZK */,
-            possible: 5000 /* CZK */,
+            possible: 3000 /* CZK */,
         },
     );
 
     solutionRank.rankPrefecence(
         { budgetPerMonth },
         {
-            ideal: 300 /* CZK */,
-            possible: 100 /* CZK */,
+            ideal: 500 /* CZK */,
+            possible: 200 /* CZK */,
         },
     );
 
@@ -79,7 +69,7 @@ export function rankWixSolution(prefecences) {
         { daysToDeadline },
         {
             ideal: 30 /* days */,
-            possible: 7 /* days */,
+            possible: 1 /* day */, // Quick setup and deployment
         },
     );
 
@@ -87,9 +77,11 @@ export function rankWixSolution(prefecences) {
         { levelOfControl },
         {
             ideal: 20 /* % */ / 100,
-            possible: 1 /* % */ / 100,
+            possible: 50 /* % */ / 100,
         },
     );
+
+    solutionRank.con('Omezený počet možností přizpůsobení v porovnání s komplexnějšími systémy.');
 
     return solutionRank.calculate();
 }

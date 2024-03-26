@@ -17,10 +17,10 @@ export function rankSolidpixelsSolution(prefecences) {
 
     const solutionRank = new SolutionRank(
         'Solid Pixels',
-        'Solid Pixels poskytuje snadno použitelnou platformu pro vytvoření moderních webů bez nutnosti programování.',
+        'Využijte jednoduchou a intuitivní platformu Solid Pixels pro vytvoření vlastní webové prezentace či e-shopu.',
     );
 
-    solutionRank.pro('Snadné použití pro začátečníky i pokročilé.');
+    solutionRank.pro('Snadná a rychlá tvorba webových stránek bez nutnosti programování.');
 
     solutionRank.goodFor({ webType }, ['presentation', 'eshop']);
     solutionRank.badFor({ webType }, ['application', 'blog']);
@@ -29,32 +29,30 @@ export function rankSolidpixelsSolution(prefecences) {
         { pagesCount },
         {
             ideal: 20,
-            possible: 100,
+            possible: 50,
         },
     );
 
     solutionRank.rankPrefecence(
         { productsCount },
         {
-            ideal: 50,
-            possible: 500,
+            ideal: 10,
+            possible: 100,
         },
     );
 
-    if (customFunctionsCount > 0) {
-        solutionRank.bigCon(
-            'Vlastní funkcionality vyžadují externí nástroje nebo služby.',
-        );
-    } else {
-        solutionRank.bigPro(
-            'Základní webové funkce jsou plně podporované bez nutnosti vlastního kódování.',
-        );
-    }
+    solutionRank.rankPrefecence(
+        { customFunctionsCount },
+        {
+            ideal: 0,
+            possible: 5,
+        },
+    );
 
     solutionRank.rankPrefecence(
         { budgetUpfront },
         {
-            ideal: 20000 /* CZK */,
+            ideal: 10000 /* CZK */,
             possible: 5000 /* CZK */,
         },
     );
@@ -62,8 +60,8 @@ export function rankSolidpixelsSolution(prefecences) {
     solutionRank.rankPrefecence(
         { budgetPerMonth },
         {
-            ideal: 500 /* CZK */,
-            possible: 100 /* CZK */,
+            ideal: 1000 /* CZK */,
+            possible: 500 /* CZK */,
         },
     );
 
@@ -71,21 +69,26 @@ export function rankSolidpixelsSolution(prefecences) {
         { daysToDeadline },
         {
             ideal: 30 /* days */,
-            possible: 1 /* day */,
+            possible: 7 /* days */,
         },
     );
 
     solutionRank.rankPrefecence(
         { levelOfControl },
         {
-            ideal: 70 /* % */ / 100,
-            possible: 90 /* % */ / 100,
+            ideal: 60 /* % */ / 100,
+            possible: 80 /* % */ / 100,
         },
     );
 
-    solutionRank.note(
-        'Solid Pixels je vhodný pro projekty, kde je důležitá rychlost vývoje a nejsou požadovány složité vlastní funkce.',
-    );
+    if (webType === 'eshop') {
+        solutionRank.bigPro('Přímočará integrace s platbami a správou produktů.');
+        solutionRank.bigCon('Omezené možnosti individualizace a rozšíření funkcionalit pro komplexnější e-shopy.');
+    }
+
+    if (webType === 'application') {
+        solutionRank.bigCon('Ne vhodný pro vývoj složitých webových aplikací s vysokou mírou custom funkcí.');
+    }
 
     return solutionRank.calculate();
 }

@@ -5,13 +5,12 @@ import { SolutionRank } from '../script/SolutionRank.mjs';
  */
 export function rankWordpressSolution(prefecences) {
     const {
-        webType, // <- 'presentation', 'eshop', 'blog', 'application'
+        webType,
         pagesCount,
         productsCount,
-        // [🆙]  updatesDaysPeriod,
         customFunctionsCount,
-        budgetUpfront, // <- In CZK
-        budgetPerMonth, // <- In CZK
+        budgetUpfront,
+        budgetPerMonth,
         daysToDeadline,
         levelOfControl,
     } = prefecences;
@@ -21,83 +20,86 @@ export function rankWordpressSolution(prefecences) {
         'Využijte nejrozšířenější open-source CMS na světě pro vytvoření svých webových stránek.',
     );
 
-    solutionRank.pro('Nejrozšířenější open-source CMS na světě.');
+    // Balance between pros and cons for each preference
 
-    solutionRank.goodFor({ webType }, ['presentation', 'blog']);
-    solutionRank.badFor({ webType }, ['application', 'eshop']);
+    if (['presentation', 'blog'].includes(webType)) {
+        solutionRank.pro('Ideální pro prezentace a blogy, díky velkému množství šablon a pluginů.');
+    } else if (webType === 'eshop') {
+        solutionRank.pro('Možnost vytvoření eshopu s pluginem WooCommerce.');
+        solutionRank.con('WooCommerce vyžaduje další nastavení a rozšíření pro plně funkční eshop.');
+    } else if (webType === 'application') {
+        solutionRank.con('Pro vytvoření složitějších aplikací nemusí být WordPress nejvhodnějším řešením.');
+    }
 
     solutionRank.rankPrefecence(
         { pagesCount },
         {
             ideal: 1000,
             possible: 10000,
-        },
+        }
     );
 
     solutionRank.rankPrefecence(
         { productsCount },
         {
             ideal: 0,
-            possible: 1000, // <- With some plugins like WooCommerce
-        },
+            possible: 1000,
+        }
     );
-
-    if (productsCount > 0) {
-        solutionRank.note(
-            'Existují pluginy jako [WooCommerce](https://wordpress.org/plugins/woocommerce/), které umožňují vytvořit eshop na WordPressu.',
-        );
-    }
-
-    /*
-    // [🆙] 
-    solutionRank.rankPrefecence(
-        { updatesDaysPeriod },
-        {
-            ideal: /* Update per * / 30 /* days * /,
-            possible: /* Update per * / 90 /* days * /,
-        },
-    );
-    */
 
     solutionRank.rankPrefecence(
         { customFunctionsCount },
         {
             ideal: 0,
             possible: 30,
-        },
+        }
     );
+
+    if (customFunctionsCount > 10) {
+        solutionRank.note('Pro vyšší počet custom funkcí může být potřeba vývojář.');
+    }
 
     solutionRank.rankPrefecence(
         { budgetUpfront },
         {
-            ideal: 30000 /* CZK */,
-            possible: 7000 /* CZK */,
-        },
+            ideal: 30000,
+            possible: 7000,
+        }
     );
 
     solutionRank.rankPrefecence(
         { budgetPerMonth },
         {
-            ideal: 1000 /* CZK */,
-            possible: 100 /* CZK */,
-        },
+            ideal: 1000,
+            possible: 100,
+        }
     );
 
     solutionRank.rankPrefecence(
         { daysToDeadline },
         {
-            ideal: 90 /* days */,
-            possible: 7 /* days */,
-        },
+            ideal: 90,
+            possible: 7,
+        }
     );
+
+    if (daysToDeadline < 30) {
+        solutionRank.con('Krátká doba na deadline může vést ke kompromisům v kvalitě a funkcionalitě.');
+    }
 
     solutionRank.rankPrefecence(
         { levelOfControl },
         {
-            ideal: 40 /* % */ / 100,
-            possible: 60 /* % */ / 100,
-        },
+            ideal: 0.4,
+            possible: 0.6,
+        }
     );
+
+    if (levelOfControl > 0.5) {
+        solutionRank.con('Uživatelé vyžadující vysokou míru kontroly nad designem mohou narazit na omezení WordPress témat a pluginů.');
+    } else {
+        solutionRank.pro('Wordpress poskytuje dostatečnou flexibilitu pro většinu uživatelů s mírnějšími požadavky na kontrolu.');
+    }
 
     return solutionRank.calculate();
 }

@@ -17,19 +17,17 @@ export function rankShopifySolution(prefecences) {
 
     const solutionRank = new SolutionRank(
         'Shopify',
-        'Shopify poskytuje kompletní řešení pro e-shopy s možností snadného rozšiřování funkcí skrze aplikace.',
+        'Shopify je přední e-commerce platforma, která umožňuje jednoduše vytvořit profesionální online obchod bez potřeby pokročilých technických znalostí.',
     );
 
-    solutionRank.pro('Ideální řešení pro rychlé spuštění e-shopu.');
-
     solutionRank.goodFor({ webType }, ['eshop']);
-    solutionRank.badFor({ webType }, ['presentation', 'application', 'blog']);
+    solutionRank.badFor({ webType }, ['presentation', 'blog', 'application']);
 
     solutionRank.rankPrefecence(
         { pagesCount },
         {
-            ideal: 100,
-            possible: 1000,
+            ideal: 50,
+            possible: 500,
         },
     );
 
@@ -41,31 +39,19 @@ export function rankShopifySolution(prefecences) {
         },
     );
 
-    if (productsCount > 0) {
-        solutionRank.note(
-            'Shopify je vyvinut speciálně pro potřeby e-commerce, a proto poskytuje optimalizované nástroje pro prodej produktů.',
-        );
-    }
-
     solutionRank.rankPrefecence(
         { customFunctionsCount },
         {
-            ideal: 0,
+            ideal: 5,
             possible: 20,
         },
     );
 
-    if(customFunctionsCount > 0) {
-        solutionRank.note(
-            'Pro přidání vlastních funkcí je možné využít Shopify App Store nebo speciální vývojářské práce, které mohou vyžadovat zvýšený rozpočet.',
-        );
-    }
-
     solutionRank.rankPrefecence(
         { budgetUpfront },
         {
-            ideal: 20000 /* CZK */,
-            possible: 5000 /* CZK */,
+            ideal: 10000 /* CZK */,
+            possible: 3000 /* CZK */,
         },
     );
 
@@ -88,14 +74,19 @@ export function rankShopifySolution(prefecences) {
     solutionRank.rankPrefecence(
         { levelOfControl },
         {
-            ideal: 50 /* % */ / 100,
-            possible: 70 /* % */ / 100,
+            ideal: 70 /* % */ / 100,
+            possible: 50 /* % */ / 100,
         },
     );
 
-    solutionRank.smallCon('Omezenější úprava designu pro vyšší úroveň kontroly.');
-    solutionRank.bigPro('Rychlé řešení pro spuštění e-shopu bez potřeby technických znalostí.');
-    solutionRank.smallCon('Měsíční poplatky mohou být významnější s růstem e-shopu.');
+    solutionRank.pro('Snadná integrace s mnoha platebními bránami.');
+    solutionRank.con('Messy for small-scale shops due to the plethora of features.');
+
+    solutionRank.bigPro('Robustní e-commerce funkce "out-of-the-box".');
+    solutionRank.bigCon('Omezená možnost zákaznického přizpůsobení bez placených aplikací.');
+
+    solutionRank.smallPro('Vynikající zákaznická podpora.');
+    solutionRank.smallCon('Měsíční poplatky mohou být vysoké s rostoucím počtem aplikací.');
 
     return solutionRank.calculate();
 }

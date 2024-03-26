@@ -1,9 +1,9 @@
 import { SolutionRank } from '../script/SolutionRank.mjs';
 
 /**
- * Rank the suitability of the WebGPT solution based on user preferences.
+ * Rank the suitability of the Strikingly solution for single page websites based on user preferences.
  */
-export function rankWebgptSolution(prefecences) {
+export function rankStrikinglySolution(prefecences) {
     const {
         webType,
         pagesCount,
@@ -16,20 +16,27 @@ export function rankWebgptSolution(prefecences) {
     } = prefecences;
 
     const solutionRank = new SolutionRank(
-        'WebGPT',
-        'Použijte AI nástroj pro generování vašeho webu během 2 minut na webgpt.cz.',
+        'Strikingly',
+        'Vytvořte si atraktivní jednostránkovou webovou prezentaci pomocí Strikingly.',
     );
 
-    solutionRank.pro('Rychlé nasazení webu.');
+    solutionRank.pro('Ideální pro jednostránkové weby.');
+    
+    solutionRank.con('Není vhodné pro složité weby a aplikace.');
 
-    solutionRank.goodFor({ webType }, ['presentation', 'blog']);
-    solutionRank.badFor({ webType }, ['application', 'eshop']);
+    solutionRank.rankPrefecence(
+        { webType },
+        {
+            ideal: 'presentation',
+            possible: 'blog',
+        },
+    );
 
     solutionRank.rankPrefecence(
         { pagesCount },
         {
-            ideal: 20,
-            possible: 50,
+            ideal: 1,
+            possible: 5, // Even though Strikingly focuses on single-page, it can somewhat handle a few more pages.
         },
     );
 
@@ -37,13 +44,13 @@ export function rankWebgptSolution(prefecences) {
         { productsCount },
         {
             ideal: 0,
-            possible: 20, // Pre-assumption that basic e-commerce features might be supported but limited
+            possible: 20, // Strikingly does offer some e-commerce capabilities but is limited.
         },
     );
-
-    if (webType === 'eshop') {
+    
+    if (productsCount > 0) {
         solutionRank.note(
-            'E-shop funkce můžou být omezené a méně flexibilní než specializované řešení pro e-shopy.',
+            'Strikingly poskytuje základní možnosti pro e-commerce, ale je vhodnější pro menší počet produktů.',
         );
     }
 
@@ -51,14 +58,14 @@ export function rankWebgptSolution(prefecences) {
         { customFunctionsCount },
         {
             ideal: 0,
-            possible: 5,
+            possible: 5, // Strikingly's customization is limited compared to other platforms.
         },
     );
 
     solutionRank.rankPrefecence(
         { budgetUpfront },
         {
-            ideal: 5000 /* CZK */,
+            ideal: 0 /* CZK */,
             possible: 10000 /* CZK */,
         },
     );
@@ -66,7 +73,7 @@ export function rankWebgptSolution(prefecences) {
     solutionRank.rankPrefecence(
         { budgetPerMonth },
         {
-            ideal: 0 /* CZK */,
+            ideal: 200 /* CZK */,
             possible: 500 /* CZK */,
         },
     );
@@ -74,8 +81,8 @@ export function rankWebgptSolution(prefecences) {
     solutionRank.rankPrefecence(
         { daysToDeadline },
         {
-            ideal: 1 /* day */,
-            possible: 7 /* days */,
+            ideal: 7 /* days */,
+            possible: 1 /* day */, // Strikingly is quick to deploy but might require some setup.
         },
     );
 
@@ -86,10 +93,6 @@ export function rankWebgptSolution(prefecences) {
             possible: 50 /* % */ / 100,
         },
     );
-
-    solutionRank.bigPro('Možnost rychlého testování a prototypování.');
-    
-    solutionRank.bigCon('Limitovaná přizpůsobivost pro složité weby a aplikace.');
 
     return solutionRank.calculate();
 }

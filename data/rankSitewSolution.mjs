@@ -1,9 +1,9 @@
 import { SolutionRank } from '../script/SolutionRank.mjs';
 
 /**
- * Rank the suitability of the Wix solution based on user preferences.
+ * Rank the suitability of the SiteW solution for small businesses based on user preferences.
  */
-export function rankWixSolution(prefecences) {
+export function rankSitewSolution(prefecences) {
     const {
         webType, // <- 'presentation', 'eshop', 'blog', 'application'
         pagesCount,
@@ -16,15 +16,24 @@ export function rankWixSolution(prefecences) {
     } = prefecences;
 
     const solutionRank = new SolutionRank(
-        'Wix',
-        'Využijte jednoduchého a intuitivního web builderu pro tvorbu svých webových stránek bez potřeby kódování.',
+        'SiteW',
+        'Využijte jednoduchý a intuitivní nástroj SiteW pro rychlé vytvoření webu pro malé podniky.',
     );
 
-    solutionRank.pro('Intuitivní drag-and-drop rozhraní.');
-    solutionRank.con('Nižší míra kontrolu nad webem z hlediska optimalizace a rychlosti.');
+    solutionRank.pro('Jednoduché a intuitivní uživatelské rozhraní.');
 
     solutionRank.goodFor({ webType }, ['presentation', 'blog']);
     solutionRank.badFor({ webType }, ['application']);
+    
+    if (webType === 'eshop') {
+        solutionRank.smallPro(
+            'Základní nástroje pro správu produktů a objednávek.',
+        );
+    } else {
+        solutionRank.smallCon(
+            'Omezené možnosti pro rozsáhlé eshopy s pokročilými funkcemi.',
+        );
+    }
 
     solutionRank.rankPrefecence(
         { pagesCount },
@@ -38,39 +47,30 @@ export function rankWixSolution(prefecences) {
         { productsCount },
         {
             ideal: 0,
-            possible: 300,
+            possible: 100, // SiteW offers basic e-commerce capabilities
         },
     );
-
-    if (productsCount > 0) {
-        solutionRank.smallPro('Zahrnuje nástroje pro jednoduchou správu produktů.');
-    }
 
     solutionRank.rankPrefecence(
         { customFunctionsCount },
         {
             ideal: 0,
-            possible: 5,
+            possible: 10, // Limited by the simplicity of the platform
         },
     );
-
-    if (customFunctionsCount > 0) {
-        solutionRank.smallPro('Možnost využití externích aplikací z Wix App Marketu.');
-        solutionRank.smallCon('Omezené možnosti pro složitější custom funkce.');
-    }
 
     solutionRank.rankPrefecence(
         { budgetUpfront },
         {
-            ideal: 15000 /* CZK */,
-            possible: 5000 /* CZK */,
+            ideal: 7000 /* CZK */,
+            possible: 0 /* CZK */,
         },
     );
 
     solutionRank.rankPrefecence(
         { budgetPerMonth },
         {
-            ideal: 300 /* CZK */,
+            ideal: 500 /* CZK */,
             possible: 100 /* CZK */,
         },
     );
@@ -79,15 +79,16 @@ export function rankWixSolution(prefecences) {
         { daysToDeadline },
         {
             ideal: 30 /* days */,
-            possible: 7 /* days */,
+            possible: 1 /* day */,
         },
     );
 
+    // SiteW's simplicity means less control over fine details.
     solutionRank.rankPrefecence(
         { levelOfControl },
         {
             ideal: 20 /* % */ / 100,
-            possible: 1 /* % */ / 100,
+            possible: 50 /* % */ / 100,
         },
     );
 
