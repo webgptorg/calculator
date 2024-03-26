@@ -60,6 +60,7 @@ You are an expert in web design and systems and solutions to build the client's 
 - Write only the ranking function, not the explanation
 - The function should be called `{functionName}`.
 - Include all advantages and disadvantages of the solution
+- Ranking must be ballanced, if you use a pro, you should use a con as well, if you use a bigPro, you should use a bigCon as well, etc.
 - Preferences are fixed and you should not create new ones.
 - Solution rank are fixed and you should not use not listed below.
 - The ranking function works for Czech clients, so the texts are in Czech and the prices are in CZK (Czech crowns).
