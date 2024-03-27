@@ -2,14 +2,20 @@
     "autokill": true,
     "terminals": [
         {
-            "name": "🏭🖼️ Generate solutions",
-            "command": "node ./generator/create-solution/create-solution.js",
+            "name": "🏭✍ Generate solutions",
+            "command": "node ./scripts/generate-solutions/generate-solutions.js",
+            "onlySingle": true,
+            "focus": true
+        },
+        {
+            "name": "🏭⚖ Balance solutions",
+            "command": "node ./scripts/balance-solutions/balance-solutions.js",
             "onlySingle": true,
             "focus": true
         },
         {
             "name": "🏭📖 Prettify promptbook",
-            "command": "npx promptbook prettify generator/promptbook/create-solution.ptbk.md",
+            "command": "npx promptbook prettify scripts/create-solutions/generate-solutions.ptbk.md",
             "execute": false,
             "onlySingle": false,
             "focus": false

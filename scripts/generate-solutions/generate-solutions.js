@@ -8,19 +8,21 @@ import { CallbackInterfaceTools, createPromptbookExecutor, promptbookStringToJso
 import { JavascriptEvalExecutionTools } from '@promptbook/execute-javascript';
 import { OpenAiExecutionTools } from '@promptbook/openai';
 import { assertsExecutionSuccessful } from '@promptbook/utils';
-// import chalk from 'chalk';
+import colors from 'colors';
 import { readFile, writeFile } from 'fs/promises';
-import { OPENAI_API_KEY } from './config.js';
+import path, { join } from 'path';
+import { fileURLToPath } from 'url';
+import { OPENAI_API_KEY } from '../config.js';
 
-/*
-TODO: !!!
+const __filename = fileURLToPath(import.meta.url);
+const __dirname = path.dirname(__filename);
+
 if (process.cwd() !== join(__dirname, '../..')) {
-    console.error(/*chalk.red(* / `CWD must be root of the project`);
+    console.error(colors.red(`CWD must be root of the project`));
     process.exit(1);
 }
-*/
 
-createSolutions()
+generateSolutions()
     .catch((error) => {
         console.error(/*chalk.bgRed(*/ error.name || 'NamelessError');
         console.error(error);
@@ -30,8 +32,11 @@ createSolutions()
         process.exit(0);
     });
 
-async function createSolutions() {
+async function generateSolutions() {
+    console.info(`🏭 Generating solutions`);
     for (const [solutionName, solutionDescription] of [
+        // TODO: Separate to text or markdown file
+
         ['Wordpress', 'Self-hosted website builder'],
         ['Wordpress.com', 'Hosted Wordpress website builder on wordpress.com'],
         ['Custom', 'Make everything by yourself'],
@@ -68,15 +73,13 @@ async function createSolutions() {
         // <- TODO: To some configuration
     ]) {
         await createSolution(solutionName, solutionDescription);
+        console.log(colors.green(solutionName));
     }
+    console.info(colors.bgGreen(`[ Done 🏭  Generating solutions ]`));
 }
 
 async function createSolution(solutionName, solutionDescription) {
-    console.info(`🏭 Creating solution`);
-
-    const promptbook = promptbookStringToJson(
-        await readFile('./generator/promptbook/create-solution.ptbk.md', 'utf-8'),
-    );
+    const promptbook = promptbookStringToJson(await readFile(join(__dirname, 'generate-solutions.ptbk.md'), 'utf-8'));
 
     const executor = createPromptbookExecutor({
         promptbook,
@@ -84,7 +87,7 @@ async function createSolution(solutionName, solutionDescription) {
             natural: new OpenAiExecutionTools({
                 isVerbose: false,
                 openAiApiKey: OPENAI_API_KEY,
-                user: 'calculator/create-solution',
+                user: 'calculator/create-solutions',
             }),
             script: [
                 new JavascriptEvalExecutionTools(
@@ -122,11 +125,10 @@ async function createSolution(solutionName, solutionDescription) {
         `import { SolutionRank } from '../script/SolutionRank.mjs';` + '\n\n' + functionSourceCode,
         'utf-8',
     );
-
-    console.info(`[ Done 🏭  Creating solution ]`);
 }
 
 /**
+ * TODO: !!! Not balanced + generated disclaimer
  * TODO: !!! Add generated disclaimer to generated files (and maybe make this as postprocessing function + [🧠] maybe prettifyWhatever (+ it should wor))
  * TODO: !!! Generated ranks must be ballanced
  */
