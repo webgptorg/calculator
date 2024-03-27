@@ -61,7 +61,7 @@ export function main() {
                 <li>
                     
                     <b>${title}</b> ${converter.makeHtml(description)}
-                    <i class="debug">(${fit > 0 ? '+' + fit : fit})</i>
+                    <i class="debug">(${fit > 0 ? '+' : ''}${Math.round(fit * 10) / 10/* <- [♎] Should be in one place */})</i>
 
                     <div class="proscons">
                         <ul class="pros">

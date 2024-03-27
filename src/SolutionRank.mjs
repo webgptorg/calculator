@@ -109,59 +109,118 @@ export class SolutionRank {
         const [key, value] = this._extractPartialPrefecencesKeyValuePair(partialPrefecences);
         const { ideal, possible } = prefecences;
 
-        // TODO: !!! Use also big and small cons and pros in some range
+        if (key === 'webType') {
+            throw new Error(`For ${this.title} can not rank webType, use goodFor or badFor instead`);
+        }
+
+        /*/
+        // Note: Keep for testing one parameter in isolation
+        if (key !== 'pagesCount') {
+            return;
+        }
+        /**/
+
+        console.log(this.title, key, value, { ideal, possible });
+
+        let fit;
+
+        if (ideal === possible) {
+            if (ideal !== 0) {
+                throw new Error(
+                    `For ${this.title} ideal and possible can not have same value (${ideal}), only 0 is allowed`,
+                );
+            }
+
+            if (value === 0) {
+                return;
+            }
+
+            fit = -Infinity; // <- Note: User wants something that system can not provide, so it’s a huge con
+        } else {
+            // Note: The ideal and possible values sets the scale for the fit as follows:
+            //     | 1.5    1    0.5    0   -0.5    -1
+            //     |    ―――――――――――――――――――――――
+            //     |        ↑           ↑
+            //     |     [ideal]    [possible]
+
+            fit = (value - possible) / (ideal - possible);
+        }
+
+        // Note: If the pro or con is very small, it’s not worth mentioning
+        if (Math.abs(fit) < 0.2) {
+            return;
+        }
+
+        // Note: Limiting fit to not give too much weight to one preference
+        if (fit > 5) {
+            fit = 5;
+        } else if (fit < -5) {
+            fit = -5;
+        }
+
+        let fitWord;
+        if (fit > 2) {
+            fitWord = 'Naprosto ideální';
+        } else if (fit > 1) {
+            fitWord = 'Ideální';
+        } else if (fit > 0.5) {
+            fitWord = 'Dobrý';
+        } else if (fit > 0) {
+            fitWord = 'Ucházející';
+        }
+        // TODO: Maybe same pattern for cons
 
         if (false) {
         } else if (key === 'pagesCount') {
-            if (value <= ideal) {
-                return this.pro(`Ideální počet stránek`);
+            if (fit > 0) {
+                return this.pushBenefit(fit, `${fitWord} počet stránek`);
             } else if (value > possible) {
-                return this.con(`Příliš mnoho stránek`);
+                return this.pushBenefit(fit, `Příliš mnoho stránek`);
             }
         } else if (key === 'productsCount') {
-            if (value <= ideal) {
-                return this.pro(`Ideální počet produktů`);
+            if (fit > 0) {
+                return this.pushBenefit(fit, `${fitWord} počet produktů`);
             } else if (value > possible) {
-                return this.con(`Příliš mnoho produktů`);
+                return this.pushBenefit(fit, `Příliš mnoho produktů`);
             }
         } else if (key === 'updatesDaysPeriod') {
             // [🆙]
             /*
-            if (value <= ideal) {
-                return this.pro(`Ideální frekvence aktualizací`);
+            if (fit>0) {
+                return this.pushBenefit(fit,`${fitWord} frekvence aktualizací`);
             } else if (value > possible) {
-                return this.con(`Příliš mnoho `);
+                return this.pushBenefit(fit,`Příliš mnoho `);
             }
             */
         } else if (key === 'customFunctionsCount') {
-            if (value <= ideal) {
-                return this.pro(`Ideální počet vlastních funkcí`);
+            if (fit > 0) {
+                return this.pushBenefit(fit, `${fitWord} počet vlastních funkcí`);
             } else if (value > possible) {
-                return this.con(`Příliš mnoho vlastních funkcí`);
+                return this.pushBenefit(fit, `Příliš mnoho vlastních funkcí`);
             }
         } else if (key === 'budgetUpfront') {
-            if (value >= ideal) {
-                return this.pro(`Ideální rozpočet na začátek`);
+            if (fit > 0) {
+                return this.pushBenefit(fit, `${fitWord} rozpočet na začátek`);
             } else if (value < possible) {
-                return this.con(`Neadekvátní rozpočet na začátek`);
+                return this.pushBenefit(fit, `Neadekvátní rozpočet na začátek`);
             }
         } else if (key === 'budgetPerMonth') {
-            if (value >= ideal) {
-                return this.pro(`Ideální rozpočet na měsíc`);
+            if (fit > 0) {
+                return this.pushBenefit(fit, `${fitWord} rozpočet na měsíc`);
             } else if (value < possible) {
-                return this.con(`Neadekvátní rozpočet na měsíc`);
+                return this.pushBenefit(fit, `Neadekvátní rozpočet na měsíc`);
             }
         } else if (key === 'daysToDeadline') {
-            if (value >= ideal) {
-                return this.pro(`Ideální čas na dokončení`);
+            if (fit > 0) {
+                return this.pushBenefit(fit, `${fitWord} čas na dokončení`);
             } else if (value < possible) {
-                return this.con(`Moc krátký čas na dokončení`);
+                return this.pushBenefit(fit, `Moc krátký čas na dokončení`);
             }
         } else if (key === 'levelOfControl') {
-            if (value <= ideal) {
-                return this.pro(`Ideální míra přizpůsobení`);
+            if (fit > 0) {
+                return this.pushBenefit(fit, `${fitWord} míra přizpůsobení`);
             } else if (value > possible) {
-                return this.con(`Mnoho věcí nebudete mít pod kontrolou`);
+                return this.pushBenefit(fit, `Mnoho věcí nebudete mít pod kontrolou`);
             }
         } else {
             throw new Error(`Unknown preference: ${key}`);
@@ -176,14 +235,22 @@ export class SolutionRank {
         return this.benefits
             .filter((benefit) => benefit.fit > 0)
             .sort((a, b) => b.fit - a.fit)
-            .map((benefit) => benefit.reason + `<i class="debug">(+${benefit.fit})</i>`);
+            .map(
+                (benefit) =>
+                    benefit.reason +
+                    `<i class="debug">(+${Math.round(benefit.fit * 10) / 10 /* <- [♎] Should be in one place */})</i>`,
+            );
     }
 
     get cons() {
         return this.benefits
             .filter((benefit) => benefit.fit < 0)
             .sort((a, b) => a.fit - b.fit)
-            .map((benefit) => benefit.reason + `<i class="debug">(${benefit.fit})</i>`);
+            .map(
+                (benefit) =>
+                    benefit.reason +
+                    `<i class="debug">(${Math.round(benefit.fit * 10) / 10 /* <- [♎] Should be in one place */})</i>`,
+            );
     }
 
     calculate() {

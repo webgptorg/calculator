@@ -29,7 +29,7 @@ balanceSolutions()
 
 async function balanceSolutions() {
     console.info(`🏭⚖  Balancing solutions`);
-    // TODO: !!! Implement
+    // TODO: !!! Implement - maybe use index
 
     glob('./solutions/**/*.json');
 

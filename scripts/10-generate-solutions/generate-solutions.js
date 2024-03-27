@@ -125,6 +125,8 @@ async function createSolution(solutionName, solutionDescription) {
         `import { SolutionRank } from '../src/SolutionRank.mjs';` + '\n\n' + functionSourceCode,
         'utf-8',
     );
+
+    // TODO: !!! Auto-build index
 }
 
 /**

@@ -50,7 +50,7 @@ export function rankFacebookSolution(prefecences) {
         { customFunctionsCount },
         {
             ideal: 0,
-            possible: 5, // Considering basic integrations and tabs customization
+            possible: 0,
         },
     );
 
