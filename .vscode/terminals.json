@@ -3,13 +3,13 @@
     "terminals": [
         {
             "name": "🏭✍ Generate solutions",
-            "command": "node ./scripts/generate-solutions/generate-solutions.js",
+            "command": "node ./scripts/10-generate-solutions/generate-solutions.js",
             "onlySingle": true,
             "focus": true
         },
         {
             "name": "🏭⚖ Balance solutions",
-            "command": "node ./scripts/balance-solutions/balance-solutions.js",
+            "command": "node ./scripts/20-balance-solutions/balance-solutions.js",
             "onlySingle": true,
             "focus": true
         },
