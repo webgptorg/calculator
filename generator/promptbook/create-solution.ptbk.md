@@ -21,6 +21,7 @@ flowchart LR
       input--"{solutionName}"-->templateFunctionName
       templateWriteRankingFunctionForSolutionName("Write ranking function for {solutionName}")
       input--"{solutionName}"-->templateWriteRankingFunctionForSolutionName
+      input--"{solutionDescription}"-->templateWriteRankingFunctionForSolutionName
       templateFunctionName--"{functionName}"-->templateWriteRankingFunctionForSolutionName
 
       templateFunctionName--"{functionName}"-->output
