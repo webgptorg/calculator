@@ -61,7 +61,7 @@ export function main() {
                 <li>
                     
                     <b>${title}</b> ${converter.makeHtml(description)}
-                    <i class="debug">(${Math.round(fit * 100)}%)</i>
+                    <i class="debug">(${fit > 0 ? '+' + fit : fit})</i>
 
                     <div class="proscons">
                         <ul class="pros">

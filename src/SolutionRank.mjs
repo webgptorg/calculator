@@ -23,12 +23,12 @@ export class SolutionRank {
         this.description += '\n\n' + note;
     }
 
-    pushBenefit(fitExponent, reason) {
-        if (fitExponent === 0) {
+    pushBenefit(fit, reason) {
+        if (fit === 0) {
             // TODO: [🧠] Probbably accept notes this way
-            throw new Error('fitExponent must be non-zero');
+            throw new Error('fit must be non-zero');
         }
-        this.benefits.push({ fitExponent, reason });
+        this.benefits.push({ fit, reason });
     }
 
     pro(reason) {
@@ -169,23 +169,21 @@ export class SolutionRank {
     }
 
     get fit() {
-        return this.benefits.reduce((acc, benefit) => {
-            return acc * Math.pow(2, benefit.fitExponent);
-        }, 1);
+        return this.benefits.reduce((sum, { fit }) => sum + fit, 0);
     }
 
     get pros() {
         return this.benefits
-            .filter((benefit) => benefit.fitExponent > 0)
-            .sort((a, b) => b.fitExponent - a.fitExponent)
-            .map((benefit) => benefit.reason + `<i class="debug">(${benefit.fitExponent})</i>`);
+            .filter((benefit) => benefit.fit > 0)
+            .sort((a, b) => b.fit - a.fit)
+            .map((benefit) => benefit.reason + `<i class="debug">(+${benefit.fit})</i>`);
     }
 
     get cons() {
         return this.benefits
-            .filter((benefit) => benefit.fitExponent < 0)
-            .sort((a, b) => a.fitExponent - b.fitExponent)
-            .map((benefit) => benefit.reason + `<i class="debug">(${benefit.fitExponent})</i>`);
+            .filter((benefit) => benefit.fit < 0)
+            .sort((a, b) => a.fit - b.fit)
+            .map((benefit) => benefit.reason + `<i class="debug">(${benefit.fit})</i>`);
     }
 
     calculate() {
