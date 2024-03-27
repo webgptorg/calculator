@@ -10,12 +10,12 @@ import { OpenAiExecutionTools } from '@promptbook/openai';
 import { assertsExecutionSuccessful } from '@promptbook/utils';
 import colors from 'colors';
 import { readFile, writeFile } from 'fs/promises';
-import path, { join } from 'path';
+import { dirname, join } from 'path';
 import { fileURLToPath } from 'url';
 import { OPENAI_API_KEY } from '../config.js';
 
 const __filename = fileURLToPath(import.meta.url);
-const __dirname = path.dirname(__filename);
+const __dirname = dirname(__filename);
 
 if (process.cwd() !== join(__dirname, '../..')) {
     console.error(colors.red(`CWD must be root of the project`));
@@ -33,7 +33,7 @@ generateSolutions()
     });
 
 async function generateSolutions() {
-    console.info(`🏭 Generating solutions`);
+    console.info(`🏭✍  Generating solutions`);
     for (const [solutionName, solutionDescription] of [
         // TODO: Separate to text or markdown file
 
@@ -75,7 +75,7 @@ async function generateSolutions() {
         await createSolution(solutionName, solutionDescription);
         console.log(colors.green(solutionName));
     }
-    console.info(colors.bgGreen(`[ Done 🏭  Generating solutions ]`));
+    console.info(colors.bgGreen(`[ Done 🏭✍  Generating solutions ]`));
 }
 
 async function createSolution(solutionName, solutionDescription) {
