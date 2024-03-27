@@ -17,7 +17,7 @@
         },
         {
             "name": "🏭📖 Prettify promptbook",
-            "command": "npx promptbook prettify scripts/create-solutions/generate-solutions.ptbk.md",
+            "command": "npx promptbook prettify scripts/10-create-solutions/generate-solutions.ptbk.md",
             "execute": false,
             "onlySingle": false,
             "focus": false
