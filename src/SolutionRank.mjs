@@ -1,4 +1,4 @@
-import { webTypeToMessage } from '../data/other/webTypeToMessage.mjs';
+import { webTypeToMessage } from './other/webTypeToMessage.mjs';
 
 export class SolutionRank {
     constructor(title, description) {

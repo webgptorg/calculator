@@ -122,7 +122,7 @@ async function createSolution(solutionName, solutionDescription) {
 
     await writeFile(
         `data/${functionName}.mjs`,
-        `import { SolutionRank } from '../script/SolutionRank.mjs';` + '\n\n' + functionSourceCode,
+        `import { SolutionRank } from '../src/SolutionRank.mjs';` + '\n\n' + functionSourceCode,
         'utf-8',
     );
 }
