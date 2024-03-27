@@ -20,16 +20,8 @@ export function rankWordpressSolution(prefecences) {
         'Využijte nejrozšířenější open-source CMS na světě pro vytvoření svých webových stránek.',
     );
 
-    // Balance between pros and cons for each preference
-
-    if (['presentation', 'blog'].includes(webType)) {
-        solutionRank.pro('Ideální pro prezentace a blogy, díky velkému množství šablon a pluginů.');
-    } else if (webType === 'eshop') {
-        solutionRank.pro('Možnost vytvoření eshopu s pluginem WooCommerce.');
-        solutionRank.con('WooCommerce vyžaduje další nastavení a rozšíření pro plně funkční eshop.');
-    } else if (webType === 'application') {
-        solutionRank.con('Pro vytvoření složitějších aplikací nemusí být WordPress nejvhodnějším řešením.');
-    }
+    solutionRank.goodFor({ webType }, ['presentation', 'blog']);
+    solutionRank.badFor({ webType }, ['application']);
 
     solutionRank.rankPrefecence(
         { pagesCount },

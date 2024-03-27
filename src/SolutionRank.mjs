@@ -189,7 +189,7 @@ export class SolutionRank {
     calculate() {
         if (this._preferencesToBeRanked.size > 0) {
             console.warn(
-                `There are ${this._preferencesToBeRanked.size} preferences not ranked: ${Array.from(
+                `For ${this.title} there are ${this._preferencesToBeRanked.size} preferences not ranked: ${Array.from(
                     this._preferencesToBeRanked,
                 ).join(', ')}`,
             );
