@@ -23,17 +23,8 @@ export function rankSitebuilderSolution(prefecences) {
     solutionRank.pro('Intuitivní drag-and-drop rozhraní.');
     solutionRank.con('Omezené možnosti přizpůsobení pro pokročilé uživatele.');
 
-    solutionRank.rankPrefecence(
-        { webType },
-        {
-            ideal: ['presentation', 'blog'],
-            possible: ['eshop'],
-        },
-    );
-
-    if (webType === 'application') {
-        solutionRank.bigCon('Není vhodný pro komplexní webové aplikace.');
-    }
+    solutionRank.goodFor({ webType }, ['prezentace', 'blog']);
+    solutionRank.badFor({ webType }, ['aplikace', 'eshop']);
 
     solutionRank.rankPrefecence(
         { pagesCount },

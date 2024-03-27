@@ -105,6 +105,10 @@ export class SolutionRank {
         }
     }
 
+    neutralFor(partialPrefecences, webTypes) {
+        // Note: Do nothing
+    }
+
     rankPrefecence(partialPrefecences, prefecences) {
         const [key, value] = this._extractPartialPrefecencesKeyValuePair(partialPrefecences);
         const { ideal, possible } = prefecences;
@@ -120,7 +124,7 @@ export class SolutionRank {
         }
         /**/
 
-        console.log(this.title, key, value, { ideal, possible });
+        // console.log(this.title, key, value, { ideal, possible });
 
         let fit;
 

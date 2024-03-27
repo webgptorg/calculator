@@ -15,13 +15,9 @@ export function rankChatgptSolution(preferences) {
         levelOfControl,
     } = preferences;
 
-    const solutionRank = new SolutionRank(
-        'AI ChatGPT Web',
-        'Vytvořte svůj web s AI chatbotem, kde můžete ručně řídit interakce a obsah.',
-    );
+    const solutionRank = new SolutionRank('ChatGPT', 'Vytvořte svůj pomocí ChatGPT (plus)');
 
-    solutionRank.pro('Inovativní přístup k interakci s návštěvníky webu.');
-    solutionRank.con('Vyžaduje pravidelnou údržbu a aktualizaci odpovědí chatbota.');
+    solutionRank.smallCon('Vše si musíte nastavit a napromptovat sami');
 
     solutionRank.goodFor({ webType }, ['application', 'eshop']);
     solutionRank.badFor({ webType }, ['presentation', 'blog']);
@@ -58,7 +54,7 @@ export function rankChatgptSolution(preferences) {
         { budgetUpfront },
         {
             ideal: 50000 /* CZK */,
-            possible: 15000 /* CZK */,
+            possible: 500 /* CZK */,
         },
     );
 

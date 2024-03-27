@@ -23,14 +23,6 @@ export function rankSite123Solution(prefecences) {
     solutionRank.pro('Velmi jednoduché rozhraní vhodné pro úplné začátečníky.');
     solutionRank.con('Omezené možnosti přizpůsobení a rozšíření.');
 
-    solutionRank.rankPrefecence(
-        { webType },
-        {
-            ideal: 'presentation', // Site123 is great for simple presentation sites
-            possible: ['blog', 'eshop'], // It can handle these but with limitations
-        },
-    );
-
     solutionRank.goodFor({ webType }, ['presentation', 'blog']);
     solutionRank.badFor({ webType }, ['application', 'eshop']);
 

@@ -21,16 +21,10 @@ export function rankStrikinglySolution(prefecences) {
     );
 
     solutionRank.pro('Ideální pro jednostránkové weby.');
-
     solutionRank.con('Není vhodné pro složité weby a aplikace.');
 
-    solutionRank.rankPrefecence(
-        { webType },
-        {
-            ideal: 'presentation',
-            possible: 'blog',
-        },
-    );
+    solutionRank.goodFor({ webType }, ['presentation']);
+    solutionRank.badFor({ webType }, ['application', 'eshop']);
 
     solutionRank.rankPrefecence(
         { pagesCount },

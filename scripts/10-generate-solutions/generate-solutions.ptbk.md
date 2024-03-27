@@ -86,6 +86,7 @@ You are given the following preferences which you are using to rank the solution
 
 You can use only following methods of `solutionRank` to rank the solution:
 
+- `goodFor`, `badFor`, `neutralFor` (see usage below)
 - `note("Some note about the solution")`
 - `pro("Benefit of the solution")`
 - `con("Disadvantage of the solution")`
@@ -125,6 +126,8 @@ export function rankWordpressSolution(prefecences) {
 
     solutionRank.goodFor({ webType }, ['presentation', 'blog']);
     solutionRank.badFor({ webType }, ['application', 'eshop']);
+    solutionRank.neutralFor({ webType }, ['eshop']);
+
 
     solutionRank.rankPrefecence(
         { pagesCount },
