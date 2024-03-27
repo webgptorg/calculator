@@ -4,14 +4,16 @@
         {
             "name": "🏭✍ Generate solutions",
             "command": "node ./scripts/10-generate-solutions/generate-solutions.js",
-            "onlySingle": true,
-            "focus": true
+            "execute": false,
+            "onlySingle": false,
+            "focus": false
         },
         {
             "name": "🏭⚖ Balance solutions",
             "command": "node ./scripts/20-balance-solutions/balance-solutions.js",
-            "onlySingle": true,
-            "focus": true
+            "execute": false,
+            "onlySingle": false,
+            "focus": false
         },
         {
             "name": "🏭📖 Prettify promptbook",
