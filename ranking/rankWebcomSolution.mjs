@@ -100,6 +100,5 @@ export function rankWebcomSolution(prefecences) {
         );
     }
 
-    solutionRank.pushBenefit(1.290694172835109,'balancing');
-return solutionRank.calculate();
+    return solutionRank.calculate();
 }

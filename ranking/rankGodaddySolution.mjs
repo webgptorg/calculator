@@ -88,6 +88,5 @@ export function rankGodaddySolution(prefecences) {
         },
     );
 
-    solutionRank.pushBenefit(0.3878073623183426,'balancing');
-return solutionRank.calculate();
+    return solutionRank.calculate();
 }

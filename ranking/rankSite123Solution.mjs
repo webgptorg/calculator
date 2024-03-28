@@ -85,6 +85,5 @@ export function rankSite123Solution(prefecences) {
         },
     );
 
-    solutionRank.pushBenefit(0.6901674074091577,'balancing');
-return solutionRank.calculate();
+    return solutionRank.calculate();
 }

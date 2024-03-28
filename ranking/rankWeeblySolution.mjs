@@ -82,6 +82,5 @@ export function rankWeeblySolution(prefecences) {
         },
     );
 
-    solutionRank.pushBenefit(-1.7596507875731986,'balancing');
-return solutionRank.calculate();
+    return solutionRank.calculate();
 }

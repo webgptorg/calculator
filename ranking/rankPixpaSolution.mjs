@@ -92,6 +92,5 @@ export function rankPixpaSolution(prefecences) {
         },
     );
 
-    solutionRank.pushBenefit(0.8761566956556567,'balancing');
-return solutionRank.calculate();
+    return solutionRank.calculate();
 }
