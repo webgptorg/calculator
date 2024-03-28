@@ -28,7 +28,7 @@ import { rankWordpresscomSolution } from './rankWordpresscomSolution.mjs';
 import { rankWordpressSolution } from './rankWordpressSolution.mjs';
 import { rankZyroSolution } from './rankZyroSolution.mjs';
 
-export default [
+export {
     rankChatgptSolution,
     rankCustomSolution,
     rankDudaSolution,
@@ -58,4 +58,4 @@ export default [
     rankWordpresscomSolution,
     rankWordpressSolution,
     rankZyroSolution,
-];
+};

@@ -11,10 +11,10 @@
         "@promptbook/types": "0.41.110",
         "@promptbook/utils": "0.41.110",
         "configchecker": "^1.5.16",
-        "dotenv": "^16.4.5",
-        "glob-promise": "^6.0.5"
+        "dotenv": "^16.4.5"
     },
     "dependencies": {
-        "@promptbook/cli": "0.41.110"
+        "@promptbook/cli": "0.41.110",
+        "waitasecond": "^1.11.46"
     }
 }

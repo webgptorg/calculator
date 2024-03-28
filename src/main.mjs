@@ -3,7 +3,7 @@
 import { normalizeTo_camelCase } from 'https://cdn.jsdelivr.net/npm/n12@1.8.28/+esm';
 import showdown from 'https://cdn.jsdelivr.net/npm/showdown@2.1.0/+esm';
 import { spaceTrim } from 'https://cdn.jsdelivr.net/npm/spacetrim@0.11.4/+esm';
-import solutions from '../ranking/index.mjs';
+import * as solutions from '../ranking/index.mjs';
 
 const valueExponentBase = 2; // <- Which is better 2 OR Math.E;
 const valueExponentStep = 0.00001;
@@ -47,7 +47,7 @@ export function main() {
             inputParameters[normalizeTo_camelCase(id)] = value;
         }
 
-        const solutionsForMe = solutions
+        const solutionsForMe = Object.values(solutions)
             .map((solution) => solution(inputParameters))
             // !!! .filter((solution) => solution.fit > 0.2)
             .sort((a, b) => b.fit - a.fit);
@@ -61,7 +61,9 @@ export function main() {
                 <li>
                     
                     <b>${title}</b> ${converter.makeHtml(description)}
-                    <i class="debug">(${fit > 0 ? '+' : ''}${Math.round(fit * 10) / 10/* <- [♎] Should be in one place */})</i>
+                    <i class="debug">(${fit > 0 ? '+' : ''}${
+                    Math.round(fit * 10) / 10 /* <- [♎] Should be in one place */
+                })</i>
 
                     <div class="proscons">
                         <ul class="pros">
