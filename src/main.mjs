@@ -5,6 +5,7 @@ import showdown from 'https://cdn.jsdelivr.net/npm/showdown@2.1.0/+esm';
 import { spaceTrim } from 'https://cdn.jsdelivr.net/npm/spacetrim@0.11.4/+esm';
 import * as solutions from '../ranking/index.mjs';
 
+// TODO: !!! To Global config
 const valueExponentBase = 2; // <- Which is better 2 OR Math.E;
 const valueExponentStep = 0.00001;
 const valueExponentMin = 0;

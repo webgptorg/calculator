@@ -22,7 +22,7 @@ if (process.cwd() !== join(__dirname, '../..')) {
     process.exit(1);
 }
 
-generateSolutions()
+/* not await */generateSolutions()
     .catch((error) => {
         console.error(/*chalk.bgRed(*/ error.name || 'NamelessError');
         console.error(error);
