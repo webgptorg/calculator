@@ -38,30 +38,49 @@ async function balanceSolutions() {
     const t0 = performance.now();
 
     for (const webType of ['presentation', 'eshop', 'blog', 'application']) {
-        for (let pagesCount = 1; pagesCount <= 10000; pagesCount += 10) {
-            const parameters = {
-                webType,
-                pagesCount,
-                productsCount: 10,
-                customFunctionsCount: 10,
-                budgetUpfront: 10,
-                budgetPerMonth: 10,
-                daysToDeadline: 10,
-                levelOfControl: 0.5,
-            };
+        for (let productsCount = 0; productsCount <= 100000; productsCount += 100) {
+            for (let pagesCount = 0; pagesCount <= 10000; pagesCount += 10) {
+                for (let customFunctionsCount = 0; customFunctionsCount <= 100; customFunctionsCount += 2) {
+                    for (let budgetUpfront = 0; budgetUpfront <= 10000000; budgetUpfront += 10000000 / 10) {
+                        for (let budgetPerMonth = 0; budgetPerMonth <= 100000; budgetPerMonth += 100000 / 10) {
+                            for (let daysToDeadline = 0; daysToDeadline <= 500; daysToDeadline += 20) {
+                                for (let levelOfControl = 0; levelOfControl <= 1; levelOfControl += 0.1) {
+                                    const parameters = {
+                                        webType,
+                                        pagesCount,
+                                        productsCount,
+                                        customFunctionsCount,
+                                        budgetUpfront,
+                                        budgetPerMonth,
+                                        daysToDeadline,
+                                        levelOfControl,
+                                    };
 
-            for (const [key, rankingFunction] of Object.entries(solutions)) {
-                const ranking = rankingFunction(parameters);
+                                    for (const [key, rankingFunction] of Object.entries(solutions)) {
+                                        const ranking = rankingFunction(parameters);
 
-                if (!solutionsAggregatedFit[key]) {
-                    solutionsAggregatedFit[key] = 0;
+                                        if (!solutionsAggregatedFit[key]) {
+                                            solutionsAggregatedFit[key] = 0;
+                                        }
+
+                                        solutionsAggregatedFit[key] += ranking.fit;
+                                    }
+
+                                    await forImmediate();
+                                }
+                                console.log('a');
+                            }
+                            console.log('b');
+                        }
+                        console.log('c');
+                    }
+                    console.log('d');
                 }
-
-                solutionsAggregatedFit[key] += ranking.fit;
+                console.log('e');
             }
-
-            await forImmediate();
+            console.log('f');
         }
+        console.log('g');
     }
 
     const t1 = performance.now();
