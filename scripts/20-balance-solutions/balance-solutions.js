@@ -196,7 +196,7 @@ async function applyAggregatedFitOnSolutions(solutionsAverageFit) {
 
         rankingFunctionCode =
             rankingFunctionCode.slice(0, returnIndex) +
-            `\n\n    solutionRank.balance(${-solutionAverageFit});\n\n` +
+            `\n\n    solutionRank.balance(${-solutionAverageFit});\n\n    ` +
             rankingFunctionCode.slice(returnIndex);
 
         await writeFile(rankingFunctionFilename, rankingFunctionCode, 'utf-8');

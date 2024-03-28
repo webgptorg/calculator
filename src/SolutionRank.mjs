@@ -231,6 +231,10 @@ export class SolutionRank {
         }
     }
 
+    balance(fit) {
+        return this.pushBenefit(fit, 'balance' /* <- !!! */);
+    }
+
     get fit() {
         return this.benefits.reduce((sum, { fit }) => sum + fit, 0);
     }
