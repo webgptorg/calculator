@@ -188,10 +188,16 @@ async function applyAggregatedFitOnSolutions(solutionsAverageFit) {
         const rankingFunctionFilename = `ranking/${rankingFunctionName}.mjs`;
         let rankingFunctionCode = await readFile(rankingFunctionFilename, 'utf-8');
 
-        rankingFunctionCode = rankingFunctionCode.replace(
-            'return solutionRank.calculate();',
-            `solutionRank.pushBenefit(${-solutionAverageFit},'balancing');\nreturn solutionRank.calculate();`,
-        );
+        const returnIndex = rankingFunctionCode.indexOf('return solutionRank.calculate()');
+
+        if (returnIndex === -1) {
+            throw new Error(`return solutionRank.calculate() not found in ranking function ${rankingFunctionName}`);
+        }
+
+        rankingFunctionCode =
+            rankingFunctionCode.slice(0, returnIndex) +
+            `\n\n    solutionRank.balance(${-solutionAverageFit});\n\n` +
+            rankingFunctionCode.slice(returnIndex);
 
         await writeFile(rankingFunctionFilename, rankingFunctionCode, 'utf-8');
     }
