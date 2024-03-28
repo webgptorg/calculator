@@ -103,5 +103,6 @@ export function rankMozelloSolution(preferences) {
         solutionRank.smallPro('Vhodné pro klienty, kteří preferují jednoduchost před komplexností.');
     }
 
-    return solutionRank.calculate();
+    solutionRank.pushBenefit(0.6274185528182088,'balancing');
+return solutionRank.calculate();
 }

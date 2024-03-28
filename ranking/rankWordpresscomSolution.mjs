@@ -95,5 +95,6 @@ export function rankWordpresscomSolution(prefecences) {
         },
     );
 
-    return solutionRank.calculate();
+    solutionRank.pushBenefit(-1.5711101455944088,'balancing');
+return solutionRank.calculate();
 }

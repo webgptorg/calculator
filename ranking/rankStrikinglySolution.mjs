@@ -88,5 +88,6 @@ export function rankStrikinglySolution(prefecences) {
         },
     );
 
-    return solutionRank.calculate();
+    solutionRank.pushBenefit(3.4525788148541166,'balancing');
+return solutionRank.calculate();
 }

@@ -88,5 +88,6 @@ export function rankShopifySolution(prefecences) {
     solutionRank.smallPro('Vynikající zákaznická podpora.');
     solutionRank.smallCon('Měsíční poplatky mohou být vysoké s rostoucím počtem aplikací.');
 
-    return solutionRank.calculate();
+    solutionRank.pushBenefit(-4.997061933405652,'balancing');
+return solutionRank.calculate();
 }

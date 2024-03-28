@@ -91,5 +91,6 @@ export function rankWixSolution(prefecences) {
         },
     );
 
-    return solutionRank.calculate();
+    solutionRank.pushBenefit(-3.5832398969171324,'balancing');
+return solutionRank.calculate();
 }

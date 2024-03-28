@@ -88,5 +88,6 @@ export function rankSquarespaceSolution(prefecences) {
         solutionRank.bigCon('Pro velmi specifické nebo detailně přizpůsobené projekty může být Squarespace omezující.');
     }
 
-    return solutionRank.calculate();
+    solutionRank.pushBenefit(-0.1218273043457708,'balancing');
+return solutionRank.calculate();
 }

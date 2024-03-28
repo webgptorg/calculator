@@ -92,5 +92,6 @@ export function rankInstagramSolution(preferences) {
         },
     );
 
-    return solutionRank.calculate();
+    solutionRank.pushBenefit(3.649388889006976,'balancing');
+return solutionRank.calculate();
 }

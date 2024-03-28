@@ -86,5 +86,6 @@ export function rankFacebookSolution(prefecences) {
         },
     );
 
-    return solutionRank.calculate();
+    solutionRank.pushBenefit(8.420901481444963,'balancing');
+return solutionRank.calculate();
 }

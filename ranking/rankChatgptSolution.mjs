@@ -85,5 +85,6 @@ export function rankChatgptSolution(preferences) {
         },
     );
 
-    return solutionRank.calculate();
+    solutionRank.pushBenefit(-1.1551012345537028,'balancing');
+return solutionRank.calculate();
 }
