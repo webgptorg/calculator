@@ -152,17 +152,18 @@ export class SolutionRank {
 
         /*
         // Note: If the pro or con is very small, it’s not worth mentioning
+        // TODO: !!! Just don’t mention but count
         if (Math.abs(fit) < 0.2) {
             return;
         }
+        */
 
         // Note: Limiting fit to not give too much weight to one preference
-        if (fit > 5) {
-            fit = 5;
-        } else if (fit < -5) {
-            fit = -5;
+        if (fit > 15) {
+            fit = 15;
+        } else if (fit < -15) {
+            fit = -15;
         }
-        */
 
         let fitWord;
         if (fit > 2) {

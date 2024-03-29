@@ -50,6 +50,7 @@ export function main() {
 
         const solutionsForMe = Object.values(solutions)
             .map((solution) => solution(inputParameters))
+            // TODO: Warn when there is infinite fit here or during balancing
             .filter((solution) => solution.fit !== Infinity && solution.fit !== -Infinity)
             // !!! .filter((solution) => solution.fit > 0.2)
             .sort((a, b) => b.fit - a.fit);
