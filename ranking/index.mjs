@@ -35,7 +35,7 @@ export {
 };
 /**/
 
-/*/
+/**/
 import { rankDudaSolution } from './rankDudaSolution.mjs';
 import { rankFormatSolution } from './rankFormatSolution.mjs';
 import { rankGodaddySolution } from './rankGodaddySolution.mjs';
