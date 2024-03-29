@@ -33,7 +33,7 @@ export function rankChatgptSolution(preferences) {
         levelOfControl,
     }).reopen();
 
-    solutionRank.name = 'ChatGPT';
+    solutionRank.title = 'ChatGPT';
     solutionRank.description = 'Vytvořte svůj pomocí ChatGPT';
 
     solutionRank.note(

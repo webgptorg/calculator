@@ -17,7 +17,7 @@ export function rankWordpresscomSolution(prefecences) {
     } = prefecences;
 
     const solutionRank = new SolutionRank(
-        'Wordpress.com Hosted',
+        'Wordpress.com',
         'Hostovaná verze Wordpress pro snazší správu webu bez znalosti programování.',
     );
 

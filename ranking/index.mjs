@@ -1,14 +1,29 @@
+/**/
+import { rankWebgptSolution } from './rankWebgptSolution.mjs';
+
+export {
+    // Note: Theese human-supervised solutions
+    rankWebgptSolution,
+};
+/**/
+
+/**/
+import { rankWordpresscomSolution } from './rankWordpresscomSolution.mjs';
+import { rankWordpressSolution } from './rankWordpressSolution.mjs';
+
+export {
+    // Note: Theese human-supervised solutions
+    rankWordpresscomSolution,
+    rankWordpressSolution,
+};
+/**/
+
+/**/
 import { rankChatgptSolution } from './rankChatgptSolution.mjs';
 import { rankCustomSolution } from './rankCustomSolution.mjs';
 import { rankFacebookSolution } from './rankFacebookSolution.mjs';
 import { rankLinktreeSolution } from './rankLinktreeSolution.mjs';
 import { rankShopifySolution } from './rankShopifySolution.mjs';
-import { rankTestSolution } from './rankTestSolution.mjs';
-import { rankWebgptSolution } from './rankWebgptSolution.mjs';
-import { rankWordpresscomSolution } from './rankWordpresscomSolution.mjs';
-import { rankWordpressSolution } from './rankWordpressSolution.mjs';
-
-export { rankTestSolution };
 
 export {
     // Note: Theese human-supervised solutions
@@ -17,12 +32,10 @@ export {
     rankFacebookSolution,
     rankLinktreeSolution,
     rankShopifySolution,
-    rankWebgptSolution,
-    rankWordpresscomSolution,
-    rankWordpressSolution,
 };
-
 /**/
+
+/*/
 import { rankDudaSolution } from './rankDudaSolution.mjs';
 import { rankFormatSolution } from './rankFormatSolution.mjs';
 import { rankGodaddySolution } from './rankGodaddySolution.mjs';
@@ -69,4 +82,9 @@ export {
     rankWixSolution,
     rankZyroSolution,
 };
+/**/
+
+/*/
+import { rankTestSolution } from './rankTestSolution.mjs';
+export { rankTestSolution };
 /**/

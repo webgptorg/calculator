@@ -15,7 +15,7 @@ export function rankCustomSolution(prefecences) {
         levelOfControl,
     } = prefecences;
 
-    const solutionRank = new SolutionRank('Vlastní řešení', 'Zce');
+    const solutionRank = new SolutionRank('Vlastní řešení', '');
 
     // TODO: Maybe put to some reusable util
     let completityLevel = 'lowpage'; // <- 'lowpage', 'highpage', 'dynamic', 'complex'

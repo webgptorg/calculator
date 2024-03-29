@@ -16,7 +16,7 @@ export function rankWordpressSolution(prefecences) {
     } = prefecences;
 
     const solutionRank = new SolutionRank(
-        'Self-hosted WordPress',
+        'WordPress na vlastním serveru',
         'Využijte nejrozšířenější open-source CMS na světě pro vytvoření svých webových stránek.',
     );
 
@@ -48,7 +48,7 @@ export function rankWordpressSolution(prefecences) {
         { customFunctionsCount },
         {
             ideal: 0,
-            possible: 10,
+            possible: 100,
         },
     );
 

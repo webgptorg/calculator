@@ -24,11 +24,7 @@ export function rankWebgptSolution(prefecences) {
     solutionRank.bigPro('Velmi rychlé nasazení webu.');
 
     if (pagesCount + productsCount + customFunctionsCount > 20) {
-        solutionRank.bigCon(
-            spaceTrim(`
-                Není vhodné pro velké weby s mnoha stránkami a funkcemi.
-            `),
-        );
+        solutionRank.bigCon(`Není vhodné pro rozsáhlé weby`);
     }
 
     solutionRank.goodFor({ webType }, ['presentation', 'blog']);

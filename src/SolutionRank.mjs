@@ -87,7 +87,7 @@ export class SolutionRank {
         const webType = value;
 
         if (webTypes.includes(webType)) {
-            this.pro(`Dobrá volba pro ${webTypeToMessage(webType, 2)}`);
+            this._pushBenefit(100, `Dobrá volba pro ${webTypeToMessage(webType, 2)}`);
         }
     }
 
@@ -101,7 +101,7 @@ export class SolutionRank {
         const webType = value;
 
         if (webTypes.includes(webType)) {
-            this.con(`Nevhodná volba pro ${webTypeToMessage(webType, 2)}`);
+            this._pushBenefit(-100, `Nevhodná volba pro ${webTypeToMessage(webType, 2)}`);
         }
     }
 
@@ -277,7 +277,7 @@ export class SolutionRank {
         const { fit } = this;
         const { fitAverage, fitMin, fitMax } = this.stats;
 
-        const percentile = (this.fit - fitAverage) / (fitMax - fitAverage);
+        const percentile = (this.fit - fitAverage) / (fitMax - fitMin);
 
         if (this.title === 'Wordpress.com Hosted') {
             console.log(JSON.stringify([fitMin, fit, fitMax]));
