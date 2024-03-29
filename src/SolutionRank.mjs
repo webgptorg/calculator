@@ -210,7 +210,7 @@ export class SolutionRank {
             if (fit > 0) {
                 return this._pushBenefit(fit, `${fitWord} počet vlastních funkcí`);
             } else if (value > ideal) {
-                return this._pushBenefit(fit, `Příliš mnoho vlastních funkcí`);
+                return this._pushBenefit(fit, `Požadujete příliš mnoho vlastních funkcí`);
             } else if (value < ideal) {
                 return this._pushBenefit(fit, `Zbytečně složité řešení na vámi požadovaný počet vlastních funkcí`);
             }

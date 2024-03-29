@@ -23,7 +23,7 @@ export function rankWordpresscomSolution(prefecences) {
 
     // General pros and cons for Wordpress.com as a Hosted solution
     solutionRank.bigPro('Rychlý start bez technických znalostí');
-    solutionRank.bigCon('Nižší úroveň přizpůsobení ve srovnání s self-hosted WordPress');
+    solutionRank.bigCon('Nižší úroveň přizpůsobení oproti WordPressu na vlastním serveru');
 
     solutionRank.pro('Automatické aktualizace a zálohy');
     solutionRank.con('Měsíční náklady mohou růst s rozšiřujícími se potřebami webu');

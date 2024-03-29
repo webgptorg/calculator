@@ -52,7 +52,7 @@ export function main() {
             .map((solution) => solution(inputParameters))
             // TODO: Warn when there is infinite fit here or during balancing
             .filter((solution) => solution.percentile !== Infinity && solution.fit !== -Infinity)
-            // !!! .filter((solution) => solution.fit > 0.2)
+            .filter((solution) => solution.percentile > 0)
             .sort((a, b) => b.percentile - a.percentile);
 
         const solutionsElement = document.getElementById('solutions');
@@ -66,14 +66,18 @@ export function main() {
                     <b>${title}</b> ${converter.makeHtml(description)}
                     <i class="debug">(${percentile > 0 ? '+' : ''}${
                     Math.round(percentile * 100 * 10) / 10 /* <- [♎] Should be in one place */
-                })</i>
+                }%)</i>
 
                     <div class="proscons">
                         <ul class="pros">
-                            ${block(pros.map((text) => `<li>${converter.makeHtml(text)}</li>`).join('\n'))}
+                            ${block(
+                                pros.map((text) => `<li><b>+</b>&nbsp;${converter.makeHtml(text)}</li>`).join('\n'),
+                            )}
                         </ul>
                         <ul class="cons">
-                            ${block(cons.map((text) => `<li>${converter.makeHtml(text)}</li>`).join('\n'))}
+                            ${block(
+                                cons.map((text) => `<li><b>-</b>&nbsp;${converter.makeHtml(text)}</li>`).join('\n'),
+                            )}
                         </ul>
                     </div>
 

@@ -116,7 +116,12 @@ header h1 {
 }
 
 #solutions > li {
+    padding-top: 20px;
     padding-bottom: 20px;
+}
+
+#solutions > li:not(:last-child) {
+    border-bottom: 1px solid #ccc;
 }
 
 #solutions li .proscons {
@@ -136,28 +141,39 @@ header h1 {
 }
 
 #solutions li .proscons ul.pros {
+    /*/
+    outline: 1px solid rgb(102, 255, 0);
+    /**/
+
+    isolation: isolate; /* <- Note: [🌓] Ignore darkmode */
     color: rgb(54, 172, 54);
     list-style: none;
 }
 
-#solutions li .proscons ul.pros li::before {
-    font-weight: bold;
-    content: '+ ';
-}
-
 #solutions li .proscons ul.cons {
+    /*/
+    outline: 1px solid rgb(102, 255, 0);
+    /**/
+
+    isolation: isolate; /* <- Note: [🌓] Ignore darkmode */
     color: #f66;
     list-style: none;
 }
 
-#solutions li .proscons ul.cons li::before {
-    font-weight: bold;
-    content: '- ';
+#solutions li .proscons li {
+    margin-top: 5px;
+    margin-bottom: 5px;
+}
+
+#solutions li .proscons p {
+    display: inline; /* <- Note: To mitigate markdown */
 }
 
 /*=================================================*/
 
 .debug {
+    isolation: isolate; /* <- Note: [🌓] Ignore darkmode */
     outline: 1px dotted rgb(102, 255, 0);
+    color: #777;
     display: inline-block;
 }

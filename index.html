@@ -15,6 +15,21 @@
         <script src="//cdn.jsdelivr.net/npm/eruda"></script>
         <script>eruda.init();</script>
         -->
+
+        <script async defer src="//cdn.jsdelivr.net/npm/darkmode-js@1.5.7/lib/darkmode-js.min.js"></script>
+        <script async defer>
+            function addDarkmodeWidget() {
+                const darkmode = new Darkmode({
+                    // bottom: 'unset',
+                    // top: '16px',
+                    // right: '16px',
+                    label: '🌓',
+                });
+
+                darkmode.showWidget();
+            }
+            window.addEventListener('load', addDarkmodeWidget);
+        </script>
     </head>
     <body>
         <header>
