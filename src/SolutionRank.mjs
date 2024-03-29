@@ -271,14 +271,20 @@ export class SolutionRank {
     }
 
     calculate() {
-        if (this._preferencesToBeRanked.size > 0) {
+        if (this._preferencesToBeRanked.size > 0 && !reportedCalculateWarningFor.has(this.title)) {
             console.warn(
                 `For ${this.title} there are ${this._preferencesToBeRanked.size} preferences not ranked: ${Array.from(
                     this._preferencesToBeRanked,
                 ).join(', ')}`,
             );
+            reportedCalculateWarningFor.add(this.title);
         }
 
         return this;
     }
 }
+
+/**
+ * @singleton
+ */
+let reportedCalculateWarningFor = new Set();
