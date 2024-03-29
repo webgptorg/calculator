@@ -82,5 +82,9 @@ export function rankWeeblySolution(prefecences) {
         },
     );
 
+    
+
+    solutionRank.balance(-54.06018003404561);
+
     return solutionRank.calculate();
 }

@@ -100,5 +100,9 @@ export function rankWebcomSolution(prefecences) {
         );
     }
 
+    
+
+    solutionRank.balance(135.56847195067868);
+
     return solutionRank.calculate();
 }

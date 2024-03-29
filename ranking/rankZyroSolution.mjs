@@ -80,5 +80,9 @@ export function rankZyroSolution(prefecences) {
 
     solutionRank.con('Omezený počet možností přizpůsobení v porovnání s komplexnějšími systémy.');
 
+    
+
+    solutionRank.balance(4.887345274580474);
+
     return solutionRank.calculate();
 }

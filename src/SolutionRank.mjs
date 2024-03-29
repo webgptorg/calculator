@@ -150,6 +150,7 @@ export class SolutionRank {
             fit = (value - possible) / (ideal - possible);
         }
 
+        /*
         // Note: If the pro or con is very small, it’s not worth mentioning
         if (Math.abs(fit) < 0.2) {
             return;
@@ -161,6 +162,7 @@ export class SolutionRank {
         } else if (fit < -5) {
             fit = -5;
         }
+        */
 
         let fitWord;
         if (fit > 2) {

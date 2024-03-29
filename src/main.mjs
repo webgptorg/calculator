@@ -5,7 +5,7 @@ import showdown from 'https://cdn.jsdelivr.net/npm/showdown@2.1.0/+esm';
 import { spaceTrim } from 'https://cdn.jsdelivr.net/npm/spacetrim@0.11.4/+esm';
 import * as solutions from '../ranking/index.mjs';
 
-// TODO: !!! To Global config
+// TODO: [💫] Maybe to some global config
 const valueExponentBase = 2; // <- Which is better 2 OR Math.E;
 const valueExponentStep = 0.00001;
 const valueExponentMin = 0;
@@ -50,6 +50,7 @@ export function main() {
 
         const solutionsForMe = Object.values(solutions)
             .map((solution) => solution(inputParameters))
+            .filter((solution) => solution.fit !== Infinity && solution.fit !== -Infinity)
             // !!! .filter((solution) => solution.fit > 0.2)
             .sort((a, b) => b.fit - a.fit);
 

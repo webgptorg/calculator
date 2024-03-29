@@ -38,7 +38,7 @@ async function balanceSolutions() {
         if (value === 0) {
             return 1;
         } else {
-            return value * 2; // <- TODO: Tweak this exponent
+            return value * 2; // <- TODO: [💫] Tweak this exponent
         }
     }
 
@@ -123,6 +123,10 @@ async function applyAggregatedFitOnSolution(rankingFunctionName, solutionAverage
 
     if (returnIndex === -1) {
         throw new Error(`return solutionRank.calculate() not found in ranking function ${rankingFunctionName}`);
+    }
+
+    if (Math.abs(solutionAverageFit) < 0.000001) {
+        solutionAverageFit = 0;
     }
 
     rankingFunctionCode =

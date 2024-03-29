@@ -88,5 +88,9 @@ export function rankSitewSolution(prefecences) {
         },
     );
 
+    
+
+    solutionRank.balance(-9.49030287357378);
+
     return solutionRank.calculate();
 }

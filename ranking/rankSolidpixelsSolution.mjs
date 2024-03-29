@@ -90,5 +90,9 @@ export function rankSolidpixelsSolution(prefecences) {
         solutionRank.bigCon('Ne vhodný pro vývoj složitých webových aplikací s vysokou mírou custom funkcí.');
     }
 
+    
+
+    solutionRank.balance(-33.73664216855809);
+
     return solutionRank.calculate();
 }

@@ -86,5 +86,9 @@ export function rankFacebookSolution(prefecences) {
         },
     );
 
+    
+
+    solutionRank.balance(Infinity);
+
     return solutionRank.calculate();
 }
