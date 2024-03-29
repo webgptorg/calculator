@@ -103,5 +103,9 @@ export function rankShoptetSolution(prefecences) {
         solutionRank.smallCon('Vyšší požadavky na kontrolu nad designem mohou být v Shoptetu obtížně splnitelné.');
     }
 
+    
+
+    solutionRank.balance({"fitAverage":-7.220816547603103,"fitMin":-37.44583333333333,"fitMax":26.649132066017877});
+
     return solutionRank.calculate();
 }

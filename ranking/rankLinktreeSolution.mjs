@@ -87,7 +87,7 @@ export function rankLinktreeSolution(preferences) {
 
     
 
-    solutionRank.balance({"fitAverage":-2598.6834099901666,"fitMin":-3196.5555555555557,"fitMax":20.336888888888886});
+    solutionRank.balance({"fitAverage":-21.691744609462425,"fitMin":-36,"fitMax":20.336888888888886});
 
     return solutionRank.calculate();
 }

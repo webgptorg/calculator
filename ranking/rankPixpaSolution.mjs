@@ -92,5 +92,9 @@ export function rankPixpaSolution(prefecences) {
         },
     );
 
+    
+
+    solutionRank.balance({"fitAverage":-9.896591351256063,"fitMin":-39,"fitMax":34.28936072774628});
+
     return solutionRank.calculate();
 }

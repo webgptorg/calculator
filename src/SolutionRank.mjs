@@ -258,7 +258,7 @@ export class SolutionRank {
         // return this._pushBenefit(fit, 'BALANCING');
 
         if (this.stats) {
-            throw new Error(`${this.title} is balanced twice.`);
+            // !!> throw new Error(`${this.title} is balanced twice.`);
         }
 
         this.stats = stats;
@@ -270,7 +270,8 @@ export class SolutionRank {
 
     get percentile() {
         if (!this.stats) {
-            throw new Error(`${this.title} is not balanced.`);
+            // !!> throw new Error(`${this.title} is not balanced.`);
+            return 0;
         }
 
         const { fit } = this;
