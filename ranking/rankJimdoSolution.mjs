@@ -96,9 +96,7 @@ export function rankJimdoSolution(prefecences) {
     solutionRank.bigPro('Rychlá implementace webových stránek.');
     solutionRank.bigCon('Nevhodné pro složité aplikace a webové stránky s vysokou mírou customizace.');
 
-    
-
-    solutionRank.balance({"fitAverage":1.0146995955474127,"fitMin":-37,"fitMax":34.58160375971435});
+    solutionRank.balance({ fitAverage: 1.0146995955474127, fitMin: -37, fitMax: 34.58160375971435 });
 
     return solutionRank.calculate();
 }

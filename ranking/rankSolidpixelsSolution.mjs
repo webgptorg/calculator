@@ -90,9 +90,7 @@ export function rankSolidpixelsSolution(prefecences) {
         solutionRank.bigCon('Ne vhodný pro vývoj složitých webových aplikací s vysokou mírou custom funkcí.');
     }
 
-    
-
-    solutionRank.balance({"fitAverage":-17.079910638049583,"fitMin":-38,"fitMax":26.205541991943804});
+    solutionRank.balance({ fitAverage: -17.079910638049583, fitMin: -38, fitMax: 26.205541991943804 });
 
     return solutionRank.calculate();
 }

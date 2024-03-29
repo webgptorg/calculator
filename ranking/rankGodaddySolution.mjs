@@ -88,9 +88,7 @@ export function rankGodaddySolution(prefecences) {
         },
     );
 
-    
-
-    solutionRank.balance({"fitAverage":-7.694116121726428,"fitMin":-36,"fitMax":33.06510979441294});
+    solutionRank.balance({ fitAverage: -7.694116121726428, fitMin: -36, fitMax: 33.06510979441294 });
 
     return solutionRank.calculate();
 }
