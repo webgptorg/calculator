@@ -45,8 +45,10 @@ async function balanceSolutions() {
     for (const [rankingFunctionName, rankingFunction] of Object.entries(solutions)) {
         console.info(colors.cyan(`Balancing ${rankingFunctionName}`));
 
-        let solutionCount = 0;
-        let solutionAggregatedFit = 0;
+        let fitCount = 0;
+        let fitSum = 0;
+        let fitMin = null;
+        let fitMax = null;
 
         const t0 = performance.now();
 
@@ -90,8 +92,15 @@ async function balanceSolutions() {
                                         };
 
                                         const ranking = rankingFunction(parameters);
-                                        solutionCount++;
-                                        solutionAggregatedFit += ranking.fit;
+                                        fitCount++;
+                                        fitSum += ranking.fit;
+
+                                        if (fitMin === null || ranking.fit < fitMin) {
+                                            fitMin = ranking.fit;
+                                        }
+                                        if (fitMax === null || ranking.fit > fitMax) {
+                                            fitMax = ranking.fit;
+                                        }
                                     }
                                 }
                             }
@@ -103,9 +112,9 @@ async function balanceSolutions() {
 
         const t1 = performance.now();
 
-        const solutionAverageFit = solutionAggregatedFit / solutionCount;
+        const fitAverage = fitSum / fitCount;
 
-        await applyAggregatedFitOnSolution(rankingFunctionName, solutionAverageFit);
+        await applyAggregatedFitOnSolution(rankingFunctionName, { fitAverage /* fitSum, fitCount */, fitMin, fitMax });
 
         console.info(colors.green(`Done in ${Math.round(((t1 - t0) / 1000 / 60) * 10) / 10} minutes`));
     }
@@ -113,7 +122,7 @@ async function balanceSolutions() {
     console.info(colors.bgGreen(`[ Done 🏭⚖  Balancing solutions ]`));
 }
 
-async function applyAggregatedFitOnSolution(rankingFunctionName, solutionAverageFit) {
+async function applyAggregatedFitOnSolution(rankingFunctionName, fitStats) {
     const rankingFunctionFilename = `ranking/${rankingFunctionName}.mjs`;
     let rankingFunctionCode = await readFile(rankingFunctionFilename, 'utf-8');
 
@@ -129,7 +138,7 @@ async function applyAggregatedFitOnSolution(rankingFunctionName, solutionAverage
 
     rankingFunctionCode =
         rankingFunctionCode.slice(0, returnIndex) +
-        `\n\n    solutionRank.balance(${-solutionAverageFit});\n\n    ` +
+        `\n\n    solutionRank.balance(${JSON.stringify(fitStats)});\n\n    ` +
         rankingFunctionCode.slice(returnIndex);
 
     await writeFile(rankingFunctionFilename, rankingFunctionCode, 'utf-8');
