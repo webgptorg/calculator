@@ -112,7 +112,11 @@ async function balanceSolutions() {
 
         const t1 = performance.now();
 
-        const fitAverage = fitSum / fitCount;
+        let fitAverage = fitSum / fitCount;
+
+        if (Math.abs(fitAverage) < 0.000001) {
+            fitAverage = 0;
+        }
 
         await applyAggregatedFitOnSolution(rankingFunctionName, { fitAverage /* fitSum, fitCount */, fitMin, fitMax });
 
@@ -130,10 +134,6 @@ async function applyAggregatedFitOnSolution(rankingFunctionName, fitStats) {
 
     if (returnIndex === -1) {
         throw new Error(`return solutionRank.calculate() not found in ranking function ${rankingFunctionName}`);
-    }
-
-    if (Math.abs(solutionAverageFit) < 0.000001) {
-        solutionAverageFit = 0;
     }
 
     rankingFunctionCode =

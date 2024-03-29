@@ -86,5 +86,9 @@ export function rankFacebookSolution(prefecences) {
         },
     );
 
+    
+
+    solutionRank.balance({"fitAverage":-1908.1516446734229,"fitMin":-3121,"fitMax":30.89795918367347});
+
     return solutionRank.calculate();
 }

@@ -51,21 +51,21 @@ export function main() {
         const solutionsForMe = Object.values(solutions)
             .map((solution) => solution(inputParameters))
             // TODO: Warn when there is infinite fit here or during balancing
-            .filter((solution) => solution.fit !== Infinity && solution.fit !== -Infinity)
+            .filter((solution) => solution.percentile !== Infinity && solution.fit !== -Infinity)
             // !!! .filter((solution) => solution.fit > 0.2)
-            .sort((a, b) => b.fit - a.fit);
+            .sort((a, b) => b.percentile - a.percentile);
 
         const solutionsElement = document.getElementById('solutions');
 
         solutionsElement.innerHTML = '';
-        for (const { fit, title, description, pros, cons } of solutionsForMe) {
+        for (const { percentile, title, description, pros, cons } of solutionsForMe) {
             solutionsElement.innerHTML += spaceTrim(
                 (block) => `
                 <li>
                     
                     <b>${title}</b> ${converter.makeHtml(description)}
-                    <i class="debug">(${fit > 0 ? '+' : ''}${
-                    Math.round(fit * 10) / 10 /* <- [♎] Should be in one place */
+                    <i class="debug">(${percentile > 0 ? '+' : ''}${
+                    Math.round(percentile * 100 * 10) / 10 /* <- [♎] Should be in one place */
                 })</i>
 
                     <div class="proscons">

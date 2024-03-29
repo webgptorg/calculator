@@ -153,14 +153,16 @@ export class SolutionRank {
             //                ↑           ↑
             //             [ideal]    [possible]
 
-            fit = (1 - Math.pow((value - ideal) / (possible - ideal), 2)) * 5;
+            fit =
+                (1 - Math.pow((value - ideal) / (possible - ideal), 2)) * 5 /*(1 / (Math.abs(possible - ideal) * 2))*/;
         }
 
         // Note: Limiting fit to not give too much weight to one preference
-        if (fit > 1000) {
-            fit = 1000;
-        } else if (fit < -1000) {
-            fit = -1000;
+        if (fit > 5) {
+            console.warn('--> Fit is limited to 5');
+            fit = 5;
+        } else if (fit < -5) {
+            fit = -5;
         }
 
         let fitWord;
@@ -175,69 +177,112 @@ export class SolutionRank {
         }
         // TODO: Maybe same pattern for cons
 
-        if (false) {
+        if (fit === 0) {
+            return;
         } else if (key === 'pagesCount') {
             if (fit > 0) {
                 return this._pushBenefit(fit, `${fitWord} počet stránek`);
-            } else if (value > possible) {
+            } else if (value > ideal) {
                 return this._pushBenefit(fit, `Příliš mnoho stránek`);
+            } else if (value < ideal) {
+                return this._pushBenefit(fit, `Zbytečně složité řešení na vámi požadovaný počet stránek`);
             }
         } else if (key === 'productsCount') {
             if (fit > 0) {
                 return this._pushBenefit(fit, `${fitWord} počet produktů`);
-            } else if (value > possible) {
+            } else if (value > ideal) {
                 return this._pushBenefit(fit, `Příliš mnoho produktů`);
+            } else if (value < ideal) {
+                return this._pushBenefit(fit, `Zbytečně složité řešení na vámi požadovaný počet produktů`);
             }
         } else if (key === 'updatesDaysPeriod') {
             // [🆙]
             /*
             if (fit>0) {
                 return this.pushBenefit(fit,`${fitWord} frekvence aktualizací`);
-            } else if (value > possible) {
+            } else if (value > ideal) {
                 return this.pushBenefit(fit,`Příliš mnoho `);
+            } else if (value < ideal) {
+                return this._pushBenefit(fit, ``);
             }
             */
         } else if (key === 'customFunctionsCount') {
             if (fit > 0) {
                 return this._pushBenefit(fit, `${fitWord} počet vlastních funkcí`);
-            } else if (value > possible) {
+            } else if (value > ideal) {
                 return this._pushBenefit(fit, `Příliš mnoho vlastních funkcí`);
+            } else if (value < ideal) {
+                return this._pushBenefit(fit, `Zbytečně složité řešení na vámi požadovaný počet vlastních funkcí`);
             }
         } else if (key === 'budgetUpfront') {
             if (fit > 0) {
                 return this._pushBenefit(fit, `${fitWord} rozpočet na začátek`);
-            } else if (value < possible) {
+            } else if (value < ideal) {
                 return this._pushBenefit(fit, `Neadekvátní rozpočet na začátek`);
+            } else if (value > ideal) {
+                return this._pushBenefit(fit, `S vaším rozpočtem dokážete zvolit lepší řešení`);
             }
         } else if (key === 'budgetPerMonth') {
             if (fit > 0) {
                 return this._pushBenefit(fit, `${fitWord} rozpočet na měsíc`);
-            } else if (value < possible) {
+            } else if (value < ideal) {
                 return this._pushBenefit(fit, `Neadekvátní rozpočet na měsíc`);
+            } else if (value > ideal) {
+                return this._pushBenefit(fit, `S vaším rozpočtem na měsíc dokážete zvolit lepší řešení`);
             }
         } else if (key === 'daysToDeadline') {
             if (fit > 0) {
                 return this._pushBenefit(fit, `${fitWord} čas na dokončení`);
-            } else if (value < possible) {
+            } else if (value < ideal) {
                 return this._pushBenefit(fit, `Moc krátký čas na dokončení`);
+            } else if (value > ideal) {
+                return this._pushBenefit(fit, `V rámci času na dokončení dokážete zvolit propracovanější řešení`);
             }
         } else if (key === 'levelOfControl') {
             if (fit > 0) {
                 return this._pushBenefit(fit, `${fitWord} míra přizpůsobení`);
-            } else if (value > possible) {
+            } else if (value > ideal) {
                 return this._pushBenefit(fit, `Mnoho věcí nebudete mít pod kontrolou`);
+            } else if (value < ideal) {
+                return this._pushBenefit(
+                    fit,
+                    `Zvolte víc šablonové řešení, pokud nepotřebujete mít věci tolik pod kontrolou`,
+                );
             }
         } else {
             throw new Error(`Unknown preference: ${key}`);
         }
     }
 
-    balance(fit) {
-        return this._pushBenefit(fit, 'BALANCING');
+    balance(stats) {
+        // return this._pushBenefit(fit, 'BALANCING');
+
+        if (this.stats) {
+            throw new Error(`${this.title} is balanced twice.`);
+        }
+
+        this.stats = stats;
     }
 
     get fit() {
         return this.benefits.reduce((sum, { fit }) => sum + fit, 0);
+    }
+
+    get percentile() {
+        if (!this.stats) {
+            throw new Error(`${this.title} is not balanced.`);
+        }
+
+        const { fit } = this;
+        const { fitAverage, fitMin, fitMax } = this.stats;
+
+        const percentile = (this.fit - fitAverage) / (fitMax - fitAverage);
+
+        if (this.title === 'Wordpress.com Hosted') {
+            console.log(JSON.stringify([fitMin, fit, fitMax]));
+        }
+
+        return percentile;
     }
 
     get pros() {
@@ -286,7 +331,23 @@ export class SolutionRank {
             reportedCalculateWarningFor.add(this.title);
         }
 
-        return this;
+        // Note: Materializing the calculated values for performance reasons
+        const { title, description, fit, percentile, pros, cons } = this;
+
+        const solutionRank = this;
+
+        return {
+            title,
+            description,
+            fit,
+            percentile,
+            pros,
+            cons,
+            reopen() {
+                delete solutionRank.stats;
+                return solutionRank;
+            },
+        };
     }
 }
 

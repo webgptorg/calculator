@@ -19,5 +19,9 @@ export function rankTestSolution(prefecences) {
 
     solutionRank.bigPro('Hey bro');
 
+    
+
+    solutionRank.balance({"fitAverage":3,"fitMin":3,"fitMax":3});
+
     return solutionRank.calculate();
 }

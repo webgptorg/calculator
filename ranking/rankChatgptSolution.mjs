@@ -31,7 +31,7 @@ export function rankChatgptSolution(preferences) {
         budgetPerMonth: (budgetPerMonth - 650) * chatgptEfficiency, // <- Note: Price for ChatGPT+
         daysToDeadline: daysToDeadline * chatgptEfficiency,
         levelOfControl,
-    });
+    }).reopen();
 
     solutionRank.name = 'ChatGPT';
     solutionRank.description = 'Vytvořte svůj pomocí ChatGPT';
@@ -52,6 +52,8 @@ export function rankChatgptSolution(preferences) {
     if (webType === 'application') {
         solutionRank.note('Do mnoha funkcí lze integrovat (Chat)GPT hlouběji.');
     }
+
+    solutionRank.balance({ fitAverage: -11.140942796386996, fitMin: -224.20668166265466, fitMax: 14.131965078123459 });
 
     return solutionRank.calculate();
 }
