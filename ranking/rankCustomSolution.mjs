@@ -177,5 +177,13 @@ export function rankCustomSolution(prefecences) {
         },
     );
 
+    
+
+    solutionRank.balance(4.778709919289349);
+
+    
+
+    solutionRank.balance(0);
+
     return solutionRank.calculate();
 }

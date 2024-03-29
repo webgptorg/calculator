@@ -1,4 +1,4 @@
-import spaceTrim from 'spaceTrim';
+import { spaceTrim } from 'https://cdn.jsdelivr.net/npm/spacetrim@0.11.4/+esm';
 import { SolutionRank } from '../src/SolutionRank.mjs';
 
 /**
@@ -97,6 +97,10 @@ export function rankWebgptSolution(prefecences) {
             `),
         );
     }
+
+    
+
+    solutionRank.balance(1414.4145458603632);
 
     return solutionRank.calculate();
 }

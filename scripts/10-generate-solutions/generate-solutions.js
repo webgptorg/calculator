@@ -11,6 +11,7 @@ import { assertsExecutionSuccessful } from '@promptbook/utils';
 import colors from 'colors';
 import { readFile, writeFile } from 'fs/promises';
 import { dirname, join } from 'path';
+import { spaceTrim } from 'spacetrim';
 import { fileURLToPath } from 'url';
 import { OPENAI_API_KEY } from '../config.js';
 
@@ -22,7 +23,7 @@ if (process.cwd() !== join(__dirname, '../..')) {
     process.exit(1);
 }
 
-/* not await */generateSolutions()
+/* not await */ generateSolutions()
     .catch((error) => {
         console.error(/*chalk.bgRed(*/ error.name || 'NamelessError');
         console.error(error);
@@ -122,7 +123,17 @@ async function createSolution(solutionName, solutionDescription) {
 
     await writeFile(
         `data/${functionName}.mjs`,
-        `import { SolutionRank } from '../src/SolutionRank.mjs';` + '\n\n' + functionSourceCode,
+
+        spaceTrim(
+            (block) => `
+            import { spaceTrim } from 'https://cdn.jsdelivr.net/npm/spacetrim@0.11.4/+esm';
+            import { SolutionRank } from '../src/SolutionRank.mjs';
+            
+                
+            ${block(functionSourceCode)}
+
+        `,
+        ),
         'utf-8',
     );
 

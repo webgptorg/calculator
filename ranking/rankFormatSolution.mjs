@@ -91,5 +91,9 @@ export function rankFormatSolution(prefecences) {
 
     solutionRank.smallCon('Může chybět pokročilá úprava pro personalizované požadavky.');
 
+    
+
+    solutionRank.balance(1014.7945790257091);
+
     return solutionRank.calculate();
 }

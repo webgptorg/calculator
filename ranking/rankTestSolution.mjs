@@ -22,5 +22,13 @@ export function rankTestSolution(prefecences) {
 
     solutionRank.bigPro('Hey bro');
 
+    
+
+    solutionRank.balance(-3);
+
+    
+
+    solutionRank.balance(0);
+
     return solutionRank.calculate();
 }

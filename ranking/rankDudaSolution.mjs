@@ -88,5 +88,9 @@ export function rankDudaSolution(prefecences) {
 
     solutionRank.bigCon('Možnosti pro úplné přizpůsobení a pokročilé funkce jsou omezené.');
 
+    
+
+    solutionRank.balance(484.0943360094358);
+
     return solutionRank.calculate();
 }

@@ -30,7 +30,7 @@ export function rankLinktreeSolution(preferences) {
         { pagesCount },
         {
             ideal: 1,
-            possible: 1,
+            possible: 2,
         },
     );
 
@@ -84,6 +84,10 @@ export function rankLinktreeSolution(preferences) {
 
     solutionRank.bigPro('Rychlé nastavení a spuštění.');
     solutionRank.bigCon('Velmi omezený prostor pro růst a rozšiřování. Nepodporuje eshop ani aplikace.');
+
+    
+
+    solutionRank.balance(2598.6834099901666);
 
     return solutionRank.calculate();
 }

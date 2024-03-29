@@ -1,4 +1,4 @@
-import { spaceTrim } from 'spaceTrim';
+import { spaceTrim } from 'https://cdn.jsdelivr.net/npm/spacetrim@0.11.4/+esm';
 import { SolutionRank } from '../src/SolutionRank.mjs';
 
 /**
@@ -105,6 +105,10 @@ export function rankWordpresscomSolution(prefecences) {
             possible: 70 /* % */ / 100,
         },
     );
+
+    
+
+    solutionRank.balance(358.7053128161659);
 
     return solutionRank.calculate();
 }
