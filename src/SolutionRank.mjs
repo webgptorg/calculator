@@ -139,15 +139,21 @@ export class SolutionRank {
                 return;
             }
 
-            fit = -Infinity; // <- Note: User wants something that system can not provide, so it’s a huge con
+            fit = -Infinity; // <- Note: User wants something that system can not provide, so it’s a huge con, this will be limited bellow
         } else {
-            // Note: The ideal and possible values sets the scale for the fit as follows:
-            //     | 1.5    1    0.5    0   -0.5    -1
-            //     |    ―――――――――――――――――――――――
-            //     |        ↑           ↑
-            //     |     [ideal]    [possible]
+            // Note: The ideal and possible values sets the parabolic scale for the fit as follows:
+            //
+            //               🟪                 <- [ fit  = 5 ]
+            //          🟪       🟪
+            //       🟪            🟪
+            //    🟪                  🟪
+            //   🟪                    🟪       <- [ fit = 0 ]
+            //  -1    -0.5    0    0.5    1    1.5
+            //  ―――――――――――――――――――――――――――――――――――
+            //                ↑           ↑
+            //             [ideal]    [possible]
 
-            fit = (value - possible) / (ideal - possible);
+            fit = (1 - Math.pow((value - ideal) / (possible - ideal), 2)) * 5;
         }
 
         /*
@@ -159,10 +165,10 @@ export class SolutionRank {
         */
 
         // Note: Limiting fit to not give too much weight to one preference
-        if (fit > 15) {
-            fit = 15;
-        } else if (fit < -15) {
-            fit = -15;
+        if (fit > 1000) {
+            fit = 1000;
+        } else if (fit < -1000) {
+            fit = -1000;
         }
 
         let fitWord;
