@@ -98,9 +98,5 @@ export function rankWebgptSolution(prefecences) {
         );
     }
 
-    
-
-    solutionRank.balance(1414.4145458603632);
-
     return solutionRank.calculate();
 }

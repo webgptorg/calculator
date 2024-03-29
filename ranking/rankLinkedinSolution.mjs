@@ -91,9 +91,5 @@ export function rankLinkedinSolution(prefecences) {
 
     solutionRank.smallCon('Riziko ztráty dat nebo omezení funkcionality při změnách politik LinkedIn.');
 
-    
-
-    solutionRank.balance(2294.317275363025);
-
     return solutionRank.calculate();
 }

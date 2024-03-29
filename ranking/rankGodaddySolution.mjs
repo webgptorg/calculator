@@ -88,9 +88,5 @@ export function rankGodaddySolution(prefecences) {
         },
     );
 
-    
-
-    solutionRank.balance(767.042771040137);
-
     return solutionRank.calculate();
 }

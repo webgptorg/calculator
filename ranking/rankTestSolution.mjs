@@ -15,20 +15,9 @@ export function rankTestSolution(prefecences) {
         levelOfControl,
     } = prefecences;
 
-    const solutionRank = new SolutionRank(
-        'Test',
-        'Test test',
-    );
+    const solutionRank = new SolutionRank('Test', 'Test test');
 
     solutionRank.bigPro('Hey bro');
-
-    
-
-    solutionRank.balance(-3);
-
-    
-
-    solutionRank.balance(0);
 
     return solutionRank.calculate();
 }
