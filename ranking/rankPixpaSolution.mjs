@@ -92,9 +92,5 @@ export function rankPixpaSolution(prefecences) {
         },
     );
 
-    
-
-    solutionRank.balance(-23.534648341366378);
-
     return solutionRank.calculate();
 }

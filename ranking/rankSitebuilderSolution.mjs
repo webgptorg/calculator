@@ -86,9 +86,5 @@ export function rankSitebuilderSolution(prefecences) {
         solutionRank.bigCon('Nedostatečná kontrola nad designem pro vysoký požadavek na úroveň kontroly.');
     }
 
-    
-
-    solutionRank.balance(-49.17684393163996);
-
     return solutionRank.calculate();
 }

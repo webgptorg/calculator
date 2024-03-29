@@ -89,9 +89,5 @@ export function rankWebgptSolution(prefecences) {
 
     solutionRank.bigCon('Limitovaná přizpůsobivost pro složité weby a aplikace.');
 
-    
-
-    solutionRank.balance(397.0833973339097);
-
     return solutionRank.calculate();
 }

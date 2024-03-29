@@ -88,9 +88,5 @@ export function rankCustomSolution(prefecences) {
     solutionRank.smallPro('Plně vlastní vzhled a specifické funkcionality.');
     solutionRank.smallCon('Vyšší riziko bezpečnostních chyb bez poskytování pravidelné údržby.');
 
-    
-
-    solutionRank.balance(-3.905804126824752);
-
     return solutionRank.calculate();
 }

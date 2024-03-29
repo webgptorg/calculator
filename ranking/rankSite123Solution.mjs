@@ -85,9 +85,5 @@ export function rankSite123Solution(prefecences) {
         },
     );
 
-    
-
-    solutionRank.balance(67.93034281487066);
-
     return solutionRank.calculate();
 }
