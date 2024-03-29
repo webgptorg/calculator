@@ -30,7 +30,7 @@ export function rankFacebookSolution(prefecences) {
         { pagesCount },
         {
             ideal: 1, // Since it's a single page usually
-            possible: 10, // Considering tabs and sections as "pages"
+            possible: 5, // Considering tabs and sections as "pages"
         },
     );
 
@@ -43,7 +43,7 @@ export function rankFacebookSolution(prefecences) {
     );
 
     if (productsCount > 0) {
-        solutionRank.note('Facebook umožňuje přidávat produkty a vytvářet mini-eshop přímo na vaší stránce.');
+        solutionRank.note('Facebook umožňuje přidávat produkty a vytvářet "mini-eshop" přímo na vaší stránce.');
     }
 
     solutionRank.rankPrefecence(
@@ -66,23 +66,23 @@ export function rankFacebookSolution(prefecences) {
         { budgetPerMonth },
         {
             ideal: 0 /* CZK */,
-            possible: 1000 /* CZK */, // Advertisement or promotions
+            possible: 100 /* CZK */, // Advertisement or promotions are not considered
         },
     );
 
     solutionRank.rankPrefecence(
         { daysToDeadline },
         {
-            ideal: 1 /* days */,
-            possible: 7 /* days */,
+            ideal: 7 /* days */,
+            possible: 0 /* days */,
         },
     );
 
     solutionRank.rankPrefecence(
         { levelOfControl },
         {
-            ideal: 10 /* % */ / 100,
-            possible: 30 /* % */ / 100,
+            ideal: 0 /* % */ / 100,
+            possible: 20 /* % */ / 100,
         },
     );
 

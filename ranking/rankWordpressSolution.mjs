@@ -23,6 +23,11 @@ export function rankWordpressSolution(prefecences) {
     solutionRank.goodFor({ webType }, ['presentation', 'blog']);
     solutionRank.badFor({ webType }, ['application']);
 
+    if (pagesCount + productsCount + customFunctionsCount > 500) {
+        // TODO: Add here link
+        solutionRank.note('Pokud uvažujete o rozsáhlém webu na Wordpressu, zvažte JetPack plugin.');
+    }
+
     solutionRank.rankPrefecence(
         { pagesCount },
         {
@@ -35,7 +40,7 @@ export function rankWordpressSolution(prefecences) {
         { productsCount },
         {
             ideal: 0,
-            possible: 1000,
+            possible: 5000,
         },
     );
 
@@ -43,7 +48,7 @@ export function rankWordpressSolution(prefecences) {
         { customFunctionsCount },
         {
             ideal: 0,
-            possible: 30,
+            possible: 10,
         },
     );
 
@@ -54,16 +59,16 @@ export function rankWordpressSolution(prefecences) {
     solutionRank.rankPrefecence(
         { budgetUpfront },
         {
-            ideal: 30000,
-            possible: 7000,
+            ideal: 50000 /* CZK */,
+            possible: 1000 /* CZK */,
         },
     );
 
     solutionRank.rankPrefecence(
         { budgetPerMonth },
         {
-            ideal: 1000,
-            possible: 100,
+            ideal: 5000 /* CZK */,
+            possible: 100 /* CZK */,
         },
     );
 
@@ -82,8 +87,8 @@ export function rankWordpressSolution(prefecences) {
     solutionRank.rankPrefecence(
         { levelOfControl },
         {
-            ideal: 0.4,
-            possible: 0.6,
+            ideal: 40 /* % */ / 100,
+            possible: 90 /* % */ / 100,
         },
     );
 

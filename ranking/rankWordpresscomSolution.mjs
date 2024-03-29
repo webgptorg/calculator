@@ -1,3 +1,4 @@
+import { spaceTrim } from 'spaceTrim';
 import { SolutionRank } from '../src/SolutionRank.mjs';
 
 /**
@@ -42,8 +43,8 @@ export function rankWordpresscomSolution(prefecences) {
     solutionRank.rankPrefecence(
         { pagesCount },
         {
-            ideal: 0,
-            possible: 100,
+            ideal: 1000,
+            possible: 10000,
         },
     );
 
@@ -55,42 +56,52 @@ export function rankWordpresscomSolution(prefecences) {
         },
     );
 
+    if (customFunctionsCount > 0 || webType === 'application' || levelOfControl > 0.5) {
+        // TODO: Add here link
+        solutionRank.note(
+            spaceTrim(`
+                Pokud uvažujete vlastní funkce a větší kontrolu, hostujte si Wordpress sami
+                Wordpress.com je řešení s jednodušší správou, ale s omezenými možnostmi úprav.
+            `),
+        );
+    }
+
     solutionRank.rankPrefecence(
         { customFunctionsCount },
         {
             ideal: 0,
-            possible: 10, // Custom functionality is limited without plugins
+            possible: 2,
         },
     );
 
     solutionRank.rankPrefecence(
         { budgetUpfront },
         {
-            ideal: 5000 /* CZK */,
-            possible: 15000 /* CZK */,
+            ideal: 50000 /* CZK */,
+            possible: 1000 /* CZK */,
         },
     );
 
     solutionRank.rankPrefecence(
         { budgetPerMonth },
         {
-            ideal: 500 /* CZK */,
-            possible: 3000 /* CZK */, // Ecommerce plan can touch this limit
+            ideal: 3000 /* CZK */, // Ecommerce plan can touch this limit
+            possible: 0 /* CZK */,
         },
     );
 
     solutionRank.rankPrefecence(
         { daysToDeadline },
         {
-            ideal: 30 /* days */,
-            possible: 1 /* day */, // Rapid deployment is possible
+            ideal: 80,
+            possible: 7,
         },
     );
 
     solutionRank.rankPrefecence(
         { levelOfControl },
         {
-            ideal: 20 /* % */ / 100,
+            ideal: 40 /* % */ / 100,
             possible: 70 /* % */ / 100,
         },
     );

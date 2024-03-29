@@ -26,7 +26,7 @@ export function rankShopifySolution(prefecences) {
     solutionRank.rankPrefecence(
         { pagesCount },
         {
-            ideal: 50,
+            ideal: 10,
             possible: 500,
         },
     );
@@ -35,15 +35,15 @@ export function rankShopifySolution(prefecences) {
         { productsCount },
         {
             ideal: 50,
-            possible: 5000,
+            possible: 100000,
         },
     );
 
     solutionRank.rankPrefecence(
         { customFunctionsCount },
         {
-            ideal: 5,
-            possible: 20,
+            ideal: 0,
+            possible: 5, 
         },
     );
 
@@ -67,14 +67,14 @@ export function rankShopifySolution(prefecences) {
         { daysToDeadline },
         {
             ideal: 30 /* days */,
-            possible: 1 /* day */,
+            possible: 2 /* day */,
         },
     );
 
     solutionRank.rankPrefecence(
         { levelOfControl },
         {
-            ideal: 70 /* % */ / 100,
+            ideal: 30 /* % */ / 100,
             possible: 50 /* % */ / 100,
         },
     );

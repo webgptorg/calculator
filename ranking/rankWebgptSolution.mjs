@@ -1,3 +1,4 @@
+import spaceTrim from 'spaceTrim';
 import { SolutionRank } from '../src/SolutionRank.mjs';
 
 /**
@@ -20,7 +21,15 @@ export function rankWebgptSolution(prefecences) {
         'Použijte AI nástroj pro generování vašeho webu během 2 minut na webgpt.cz.',
     );
 
-    solutionRank.pro('Rychlé nasazení webu.');
+    solutionRank.bigPro('Velmi rychlé nasazení webu.');
+
+    if (pagesCount + productsCount + customFunctionsCount > 20) {
+        solutionRank.bigCon(
+            spaceTrim(`
+                Není vhodné pro velké weby s mnoha stránkami a funkcemi.
+            `),
+        );
+    }
 
     solutionRank.goodFor({ webType }, ['presentation', 'blog']);
     solutionRank.badFor({ webType }, ['application', 'eshop']);
@@ -28,52 +37,48 @@ export function rankWebgptSolution(prefecences) {
     solutionRank.rankPrefecence(
         { pagesCount },
         {
-            ideal: 20,
-            possible: 50,
+            ideal: 1,
+            possible: 5,
         },
     );
 
     solutionRank.rankPrefecence(
         { productsCount },
         {
-            ideal: 0,
-            possible: 20, // Pre-assumption that basic e-commerce features might be supported but limited
+            ideal: 1,
+            possible: 12,
         },
     );
-
-    if (webType === 'eshop') {
-        solutionRank.note('E-shop funkce můžou být omezené a méně flexibilní než specializované řešení pro e-shopy.');
-    }
 
     solutionRank.rankPrefecence(
         { customFunctionsCount },
         {
             ideal: 0,
-            possible: 5,
+            possible: 2,
         },
     );
 
     solutionRank.rankPrefecence(
         { budgetUpfront },
         {
-            ideal: 5000 /* CZK */,
-            possible: 10000 /* CZK */,
+            ideal: 3000 /* CZK */,
+            possible: 0 /* CZK */,
         },
     );
 
     solutionRank.rankPrefecence(
         { budgetPerMonth },
         {
-            ideal: 0 /* CZK */,
-            possible: 500 /* CZK */,
+            ideal: 600 /* CZK */,
+            possible: 0 /* CZK */,
         },
     );
 
     solutionRank.rankPrefecence(
         { daysToDeadline },
         {
-            ideal: 1 /* day */,
-            possible: 7 /* days */,
+            ideal: 7 /* day */,
+            possible: 1 /* days */,
         },
     );
 
@@ -85,9 +90,13 @@ export function rankWebgptSolution(prefecences) {
         },
     );
 
-    solutionRank.bigPro('Možnost rychlého testování a prototypování.');
-
-    solutionRank.bigCon('Limitovaná přizpůsobivost pro složité weby a aplikace.');
+    if (levelOfControl > 0.5) {
+        solutionRank.note(
+            spaceTrim(`
+                Pokud chcete mít větší kontrolu nad svým webem, můžete si vygenerovat web pomocí WebGPT a následně upravit kód dle svých představ.
+            `),
+        );
+    }
 
     return solutionRank.calculate();
 }

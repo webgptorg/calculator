@@ -103,13 +103,11 @@ async function balanceSolutions() {
 
         const t1 = performance.now();
 
-        console.info(colors.green(`Done in ${Math.round(((t1 - t0) / 1000 / 60) * 10) / 10} minutes`));
-
         const solutionAverageFit = solutionAggregatedFit / solutionCount;
 
         await applyAggregatedFitOnSolution(rankingFunctionName, solutionAverageFit);
 
-        console.info(colors.bgGreen(`[ Saved ]`));
+        console.info(colors.green(`Done in ${Math.round(((t1 - t0) / 1000 / 60) * 10) / 10} minutes`));
     }
 
     console.info(colors.bgGreen(`[ Done 🏭⚖  Balancing solutions ]`));

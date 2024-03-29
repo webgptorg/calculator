@@ -30,7 +30,7 @@ export function rankLinktreeSolution(preferences) {
         { pagesCount },
         {
             ideal: 1,
-            possible: 5,
+            possible: 1,
         },
     );
 
@@ -53,7 +53,7 @@ export function rankLinktreeSolution(preferences) {
     solutionRank.rankPrefecence(
         { budgetUpfront },
         {
-            ideal: 1000 /* CZK */,
+            ideal: 0 /* CZK */,
             possible: 0 /* CZK */,
         },
     );
@@ -61,7 +61,7 @@ export function rankLinktreeSolution(preferences) {
     solutionRank.rankPrefecence(
         { budgetPerMonth },
         {
-            ideal: 300 /* CZK */,
+            ideal: 600 /* CZK */,
             possible: 0 /* CZK */,
         },
     );
@@ -78,7 +78,7 @@ export function rankLinktreeSolution(preferences) {
         { levelOfControl },
         {
             ideal: 5 /* % */ / 100,
-            possible: 10 /* % */ / 100,
+            possible: 20 /* % */ / 100,
         },
     );
 

@@ -1,4 +1,4 @@
-import { SolutionRank } from '../src/SolutionRank.mjs';
+import { rankCustomSolution } from './rankCustomSolution.mjs';
 
 /**
  * Rank the suitability of a Generate website with AI chatbot solution based on user preferences.
@@ -15,75 +15,43 @@ export function rankChatgptSolution(preferences) {
         levelOfControl,
     } = preferences;
 
-    const solutionRank = new SolutionRank('ChatGPT', 'Vytvořte svůj pomocí ChatGPT (plus)');
+    /**
+     * How much quicker is ChatGPT compared to creating a website from scratch.
+     */
+    const chatgptEfficiency = 0.8;
+
+    const solutionRank = rankCustomSolution({
+        webType,
+        pagesCount,
+        productsCount,
+        customFunctionsCount,
+        budgetUpfront: budgetUpfront * chatgptEfficiency,
+
+        // TODO: !!! Handle possibly negative budget
+        budgetPerMonth: (budgetPerMonth - 650) * chatgptEfficiency, // <- Note: Price for ChatGPT+
+        daysToDeadline: daysToDeadline * chatgptEfficiency,
+        levelOfControl,
+    });
+
+    solutionRank.name = 'ChatGPT';
+    solutionRank.description = 'Vytvořte svůj pomocí ChatGPT';
+
+    solutionRank.note(
+        'Tvořit web pomocí ChatGPT je podobné jako tvořit web zcela sami. AI vám s mnoha úkoli pomůže, ale i tak si vše musíte nastavit, zařídit a napromptovat sami.',
+    );
+    solutionRank.note('Zkuste se podívat na další alternativy, jako je Microsoft Bing Copilot.');
+    solutionRank.note('Zkuste vyzkoušet OpenAI playground, kde máte výrazně více možností.');
+    solutionRank.note('Zvažte zakoupení ChatGPT+ pro lepší výsledky.');
 
     solutionRank.smallCon('Vše si musíte nastavit a napromptovat sami');
 
-    solutionRank.goodFor({ webType }, ['application', 'eshop']);
-    solutionRank.badFor({ webType }, ['presentation', 'blog']);
-
-    solutionRank.rankPrefecence(
-        { pagesCount },
-        {
-            ideal: 20,
-            possible: 50,
-        },
-    );
-
-    solutionRank.rankPrefecence(
-        { productsCount },
-        {
-            ideal: 0,
-            possible: 500,
-        },
-    );
-
     if (productsCount > 0) {
-        solutionRank.note('AI chatbot může pomoci s navigací a zlepšit zákaznický servis na e-shopech.');
+        solutionRank.note('AI chatbot může pomoci zlepšit zákaznický servis na e-shopech.');
     }
 
-    solutionRank.rankPrefecence(
-        { customFunctionsCount },
-        {
-            ideal: 5,
-            possible: 15,
-        },
-    );
-
-    solutionRank.rankPrefecence(
-        { budgetUpfront },
-        {
-            ideal: 50000 /* CZK */,
-            possible: 500 /* CZK */,
-        },
-    );
-
-    solutionRank.rankPrefecence(
-        { budgetPerMonth },
-        {
-            ideal: 5000 /* CZK */,
-            possible: 500 /* CZK */,
-        },
-    );
-
-    solutionRank.rankPrefecence(
-        { daysToDeadline },
-        {
-            ideal: 60 /* days */,
-            possible: 30 /* days */,
-        },
-    );
-
-    solutionRank.smallPro('Snižuje potřebu lidského zákaznického servisu.');
-    solutionRank.smallCon('Může vyžadovat čas na učení a optimalizaci pro dosažení efektivní komunikace.');
-
-    solutionRank.rankPrefecence(
-        { levelOfControl },
-        {
-            ideal: 60 /* % */ / 100,
-            possible: 80 /* % */ / 100,
-        },
-    );
+    if (webType === 'application') {
+        solutionRank.note('Do mnoha funkcí lze integrovat (Chat)GPT hlouběji.');
+    }
 
     return solutionRank.calculate();
 }
