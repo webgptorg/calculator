@@ -82,7 +82,7 @@ export function rankWeeblySolution(prefecences) {
         },
     );
 
-    solutionRank.balance({ fitAverage: -7.961595402094544, fitMin: -36, fitMax: 33.14329014518284 });
+    solutionRank.balance({ fitAverage: -7.961595401855911, fitMin: -135, fitMax: 132.14329014518282 });
 
     return solutionRank.calculate();
 }

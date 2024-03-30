@@ -92,7 +92,7 @@ export function rankInstagramSolution(preferences) {
         },
     );
 
-    solutionRank.balance({ fitAverage: -14.058106899424633, fitMin: -36, fitMax: 20.6875 });
+    solutionRank.balance({ fitAverage: -14.058106899743787, fitMin: -135, fitMax: 119.6875 });
 
     return solutionRank.calculate();
 }

@@ -92,7 +92,7 @@ export function rankPixpaSolution(prefecences) {
         },
     );
 
-    solutionRank.balance({ fitAverage: -9.896591351256063, fitMin: -39, fitMax: 34.28936072774628 });
+    solutionRank.balance({ fitAverage: 14.853408648910754, fitMin: -138, fitMax: 133.28936072774624 });
 
     return solutionRank.calculate();
 }

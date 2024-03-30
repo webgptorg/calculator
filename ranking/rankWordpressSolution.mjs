@@ -102,7 +102,7 @@ export function rankWordpressSolution(prefecences) {
         );
     }
 
-    solutionRank.balance({ fitAverage: 6.779119107910764, fitMin: -27.39289283950617, fitMax: 32.63650567229327 });
+    solutionRank.balance({ fitAverage: 35.46905660795568, fitMin: -118.44089283950618, fitMax: 131.63650567229328 });
 
     return solutionRank.calculate();
 }

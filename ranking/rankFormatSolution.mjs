@@ -91,7 +91,7 @@ export function rankFormatSolution(prefecences) {
 
     solutionRank.smallCon('Může chybět pokročilá úprava pro personalizované požadavky.');
 
-    solutionRank.balance({ fitAverage: -10.431653500696905, fitMin: -32.66666666666667, fitMax: 28.588778491083673 });
+    solutionRank.balance({ fitAverage: -59.93165349832149, fitMin: -131.66666666666666, fitMax: 127.58877849108369 });
 
     return solutionRank.calculate();
 }

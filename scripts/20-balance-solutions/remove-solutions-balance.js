@@ -36,7 +36,7 @@ async function removeSolutionsBalance() {
     Now doing by:
 
     Find:
-    ^\s+solutionRank.balance(.*)$
+    ^\s+solutionRank.balance((.|\n)*?)$
 
     And replace
     

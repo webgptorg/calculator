@@ -88,7 +88,7 @@ export function rankDudaSolution(prefecences) {
 
     solutionRank.bigCon('Možnosti pro úplné přizpůsobení a pokročilé funkce jsou omezené.');
 
-    solutionRank.balance({ fitAverage: -9.942509243950965, fitMin: -38, fitMax: 25.300610579972563 });
+    solutionRank.balance({ fitAverage: 14.807490756087864, fitMin: -137, fitMax: 122.6339439133059 });
 
     return solutionRank.calculate();
 }

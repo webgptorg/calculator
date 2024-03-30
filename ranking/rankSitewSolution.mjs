@@ -88,7 +88,9 @@ export function rankSitewSolution(prefecences) {
         },
     );
 
-    solutionRank.balance({ fitAverage: -4.659032405676289, fitMin: -35.33333333333333, fitMax: 34.182288220264724 });
+    
+
+    solutionRank.balance({"fitAverage":20.09096759408683,"fitMin":-134.33333333333331,"fitMax":133.1822882202647});
 
     return solutionRank.calculate();
 }
