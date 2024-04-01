@@ -92,7 +92,7 @@ export function rankSolidpixelsSolution(prefecences) {
 
     
 
-    solutionRank.balance({"fitAverage":-11.374265794909014,"fitMin":-134,"fitMax":105.34788792270531});
+    solutionRank.balance({"fitAverage":-266.74987004617674,"fitMin":-2925.8863536231884,"fitMax":105.34788792270531});
 
     return solutionRank.calculate();
 }

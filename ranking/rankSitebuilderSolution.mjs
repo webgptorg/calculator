@@ -88,7 +88,7 @@ export function rankSitebuilderSolution(prefecences) {
 
     
 
-    solutionRank.balance({"fitAverage":-12.394484683747963,"fitMin":-134.66666666666666,"fitMax":105.38868717948716});
+    solutionRank.balance({"fitAverage":-368.9674973334287,"fitMin":-3873.0336512820513,"fitMax":105.38868717948716});
 
     return solutionRank.calculate();
 }

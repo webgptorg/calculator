@@ -105,7 +105,7 @@ export function rankShoptetSolution(prefecences) {
 
     
 
-    solutionRank.balance({"fitAverage":-56.87020783198844,"fitMin":-129.85,"fitMax":105.7228657004831});
+    solutionRank.balance({"fitAverage":-104.15492892270359,"fitMin":-742.4863980676329,"fitMax":105.7228657004831});
 
     return solutionRank.calculate();
 }

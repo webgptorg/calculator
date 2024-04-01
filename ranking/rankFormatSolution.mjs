@@ -93,7 +93,7 @@ export function rankFormatSolution(prefecences) {
 
     
 
-    solutionRank.balance({"fitAverage":-57.707725925958684,"fitMin":-127.3333333333333,"fitMax":107.97125925925926});
+    solutionRank.balance({"fitAverage":-815.8329585182097,"fitMin":-7766.293037037038,"fitMax":107.97125925925926});
 
     return solutionRank.calculate();
 }

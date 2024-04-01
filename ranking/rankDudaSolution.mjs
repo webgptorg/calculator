@@ -90,7 +90,7 @@ export function rankDudaSolution(prefecences) {
 
     
 
-    solutionRank.balance({"fitAverage":15.61300318519706,"fitMin":-134.5,"fitMax":103.06152592592592});
+    solutionRank.balance({"fitAverage":-60.2116400740791,"fitMin":-1019.1195703703703,"fitMax":103.06152592592592});
 
     return solutionRank.calculate();
 }

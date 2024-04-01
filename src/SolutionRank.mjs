@@ -160,6 +160,7 @@ export class SolutionRank {
             //     1 - Math.abs((7 - 5) / (10 - 5)) = 0.6
         }
 
+        /*
         // Note: Limiting fit to not give too much weight to one preference
         if (fit > 5) {
             console.warn('--> Fit is limited to 5');
@@ -167,6 +168,7 @@ export class SolutionRank {
         } else if (fit < -5) {
             fit = -5;
         }
+        */
 
         let k = 0.62;
         let fitWord;

@@ -102,7 +102,7 @@ export function rankWebcomSolution(prefecences) {
 
     
 
-    solutionRank.balance({"fitAverage":13.758718074145166,"fitMin":-136,"fitMax":107.58999999999999});
+    solutionRank.balance({"fitAverage":-202.41174000005023,"fitMin":-2270.934977777778,"fitMax":107.58999999999999});
 
     return solutionRank.calculate();
 }

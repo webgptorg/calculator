@@ -90,7 +90,7 @@ export function rankGodaddySolution(prefecences) {
 
     
 
-    solutionRank.balance({"fitAverage":-9.337046782742696,"fitMin":-131.66666666666666,"fitMax":105.6559768115942});
+    solutionRank.balance({"fitAverage":-269.1057088124251,"fitMin":-2749.993553623188,"fitMax":105.6559768115942});
 
     return solutionRank.calculate();
 }

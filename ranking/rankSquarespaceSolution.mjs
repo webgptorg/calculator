@@ -90,7 +90,7 @@ export function rankSquarespaceSolution(prefecences) {
 
     
 
-    solutionRank.balance({"fitAverage":15.364468772973236,"fitMin":-133.75,"fitMax":105.68411014492754});
+    solutionRank.balance({"fitAverage":-167.03491325602386,"fitMin":-2290.807020289855,"fitMax":105.68411014492754});
 
     return solutionRank.calculate();
 }

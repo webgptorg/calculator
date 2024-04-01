@@ -96,7 +96,9 @@ export function rankWebgptSolution(prefecences) {
         );
     }
 
-    solutionRank.balance({ fitAverage: -13.598341481440556, fitMin: -131.66666666666666, fitMax: 108.70266666666666 });
+    
+
+    solutionRank.balance({"fitAverage":-1180.9593653167296,"fitMin":-11078.073272727273,"fitMax":108.70266666666666});
 
     return solutionRank.calculate();
 }

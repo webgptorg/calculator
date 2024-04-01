@@ -82,7 +82,7 @@ export function rankZyroSolution(prefecences) {
 
     
 
-    solutionRank.balance({"fitAverage":40.681732375575045,"fitMin":-131.66666666666666,"fitMax":106.0590344827586});
+    solutionRank.balance({"fitAverage":-116.29805796952017,"fitMin":-1788.3571034482757,"fitMax":106.0590344827586});
 
     return solutionRank.calculate();
 }

@@ -98,7 +98,7 @@ export function rankJimdoSolution(prefecences) {
 
     
 
-    solutionRank.balance({"fitAverage":41.62512306655872,"fitMin":-132.66666666666666,"fitMax":107.0531884057971});
+    solutionRank.balance({"fitAverage":-176.83164740746398,"fitMin":-2303.7899536231885,"fitMax":107.0531884057971});
 
     return solutionRank.calculate();
 }
