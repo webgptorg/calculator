@@ -21,6 +21,8 @@ export function rankWordpresscomSolution(prefecences) {
         'Hostovaná verze Wordpress pro snazší správu webu bez znalosti programování.',
     );
 
+    solutionRank.color = '#21759b';
+
     // General pros and cons for Wordpress.com as a Hosted solution
     solutionRank.bigPro('Rychlý start bez technických znalostí');
     solutionRank.bigCon('Nižší úroveň přizpůsobení oproti WordPressu na vlastním serveru');
@@ -105,6 +107,8 @@ export function rankWordpresscomSolution(prefecences) {
             possible: 70 /* % */ / 100,
         },
     );
+
+    solutionRank.balance({ fitAverage: 21.011007436604288, fitMin: -122.54340334855404, fitMax: 104.47709402665177 });
 
     return solutionRank.calculate();
 }

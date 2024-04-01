@@ -115,23 +115,23 @@ header h1 {
     padding-left: 0;
 }
 
-#solutions > li {
+#solutions-list > li {
     padding-top: 20px;
     padding-bottom: 20px;
 }
 
-#solutions > li:not(:last-child) {
+#solutions-list > li:not(:last-child) {
     border-bottom: 1px solid #ccc;
 }
 
-#solutions li .proscons {
+#solutions-list li .proscons {
     display: flex;
     flex-direction: row;
     flex-wrap: wrap;
     justify-content: flex-start;
 }
 
-#solutions li .proscons ul {
+#solutions-list li .proscons ul {
     /*/
     outline: 1px solid rgb(102, 255, 0);
     /**/
@@ -140,7 +140,7 @@ header h1 {
     padding-left: 10px;
 }
 
-#solutions li .proscons ul.pros {
+#solutions-list li .proscons ul.pros {
     /*/
     outline: 1px solid rgb(102, 255, 0);
     /**/
@@ -150,7 +150,7 @@ header h1 {
     list-style: none;
 }
 
-#solutions li .proscons ul.cons {
+#solutions-list li .proscons ul.cons {
     /*/
     outline: 1px solid rgb(102, 255, 0);
     /**/
@@ -160,12 +160,12 @@ header h1 {
     list-style: none;
 }
 
-#solutions li .proscons li {
+#solutions-list li .proscons li {
     margin-top: 5px;
     margin-bottom: 5px;
 }
 
-#solutions li .proscons p {
+#solutions-list li .proscons p {
     display: inline; /* <- Note: To mitigate markdown */
 }
 
@@ -176,4 +176,8 @@ header h1 {
     outline: 1px dotted rgb(102, 255, 0);
     color: #777;
     display: inline-block;
+}
+
+#solutions-graph-source {
+    display: none;
 }

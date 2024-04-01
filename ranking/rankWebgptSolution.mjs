@@ -21,6 +21,8 @@ export function rankWebgptSolution(prefecences) {
         'Použijte AI nástroj pro generování vašeho webu během 2 minut na webgpt.cz.',
     );
 
+    solutionRank.color = '#5555ff';
+
     solutionRank.bigPro('Velmi rychlé nasazení webu.');
 
     if (pagesCount + productsCount + customFunctionsCount > 20) {
@@ -93,6 +95,8 @@ export function rankWebgptSolution(prefecences) {
             `),
         );
     }
+
+    solutionRank.balance({ fitAverage: -13.598341481440556, fitMin: -131.66666666666666, fitMax: 108.70266666666666 });
 
     return solutionRank.calculate();
 }

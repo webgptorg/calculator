@@ -20,6 +20,8 @@ export function rankLinktreeSolution(preferences) {
         'Jednoduchý profil s odkazy pro sjednocení vaší online přítomnosti na jednom místě.',
     );
 
+    solutionRank.color = '#39E09B';
+
     solutionRank.smallPro('Ideální pro sdružení všech online profilů.');
     solutionRank.smallCon('Limitovaná personalizace a funkcionalita.');
 
@@ -85,9 +87,7 @@ export function rankLinktreeSolution(preferences) {
     solutionRank.bigPro('Rychlé nastavení a spuštění.');
     solutionRank.bigCon('Velmi omezený prostor pro růst a rozšiřování. Nepodporuje eshop ani aplikace.');
 
-    
-
-    solutionRank.balance({"fitAverage":-24.24398148208034,"fitMin":-135,"fitMax":103.52000000000001});
+    solutionRank.balance({ fitAverage: -24.24398148208034, fitMin: -135, fitMax: 103.52000000000001 });
 
     return solutionRank.calculate();
 }

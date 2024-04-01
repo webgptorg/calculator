@@ -20,6 +20,8 @@ export function rankFacebookSolution(prefecences) {
         'Použijte stránku na Facebooku jako svou jedinou internetovou prezentaci.',
     );
 
+    solutionRank.color = '#3b5998';
+
     solutionRank.pro('Rychlé zřízení a bez nutnosti technických znalostí.');
     solutionRank.con('Omezení ve funkčnosti a designu oproti plnohodnotné webové stránce.');
 
@@ -86,9 +88,7 @@ export function rankFacebookSolution(prefecences) {
         },
     );
 
-    
-
-    solutionRank.balance({"fitAverage":33.371248888617814,"fitMin":-134,"fitMax":105.85714285714286});
+    solutionRank.balance({ fitAverage: 33.371248888617814, fitMin: -134, fitMax: 105.85714285714286 });
 
     return solutionRank.calculate();
 }

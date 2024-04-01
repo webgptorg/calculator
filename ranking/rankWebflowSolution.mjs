@@ -92,5 +92,9 @@ export function rankWebflowSolution(preferences) {
     solutionRank.smallPro('Obsahuje hosting v ceně předplatného.');
     solutionRank.smallCon('Může vyžadovat čas na učení kvůli bohatému rozhraní a funkcím.');
 
+    
+
+    solutionRank.balance({"fitAverage":43.87173469885308,"fitMin":-129.18333333333334,"fitMax":106.18384347826088});
+
     return solutionRank.calculate();
 }

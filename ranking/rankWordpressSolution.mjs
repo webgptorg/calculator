@@ -20,6 +20,8 @@ export function rankWordpressSolution(prefecences) {
         'Využijte nejrozšířenější open-source CMS na světě pro vytvoření svých webových stránek.',
     );
 
+    solutionRank.color = '#21759b';
+
     solutionRank.goodFor({ webType }, ['presentation', 'blog']);
     solutionRank.badFor({ webType }, ['application']);
 
@@ -101,6 +103,8 @@ export function rankWordpressSolution(prefecences) {
             'Wordpress poskytuje dostatečnou flexibilitu pro většinu uživatelů s mírnějšími požadavky na kontrolu.',
         );
     }
+
+    solutionRank.balance({ fitAverage: 24.48558434986128, fitMin: -116.7234484605087, fitMax: 106.38252930087698 });
 
     return solutionRank.calculate();
 }

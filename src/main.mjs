@@ -1,9 +1,12 @@
 #!/usr/bin/env node
 
+import mermaid from 'https://cdn.jsdelivr.net/npm/mermaid@10/dist/mermaid.esm.min.mjs';
 import { normalizeTo_camelCase } from 'https://cdn.jsdelivr.net/npm/n12@1.8.28/+esm';
 import showdown from 'https://cdn.jsdelivr.net/npm/showdown@2.1.0/+esm';
 import { spaceTrim } from 'https://cdn.jsdelivr.net/npm/spacetrim@0.11.4/+esm';
-import * as solutions from '../ranking/index.mjs';
+import * as solutions from '../ranking/index.used.mjs';
+
+//mermaid.initialize({ startOnLoad: false });
 
 // TODO: [💫] Maybe to some global config
 const valueExponentBase = 2; // <- Which is better 2 OR Math.E;
@@ -16,7 +19,7 @@ const converter = new showdown.Converter();
 export function main() {
     // ======================
 
-    const recalculateResult = () => {
+    const recalculateResult = async () => {
         const inputParameters = {};
         for (const id of [
             'web-type',
@@ -48,18 +51,36 @@ export function main() {
             inputParameters[normalizeTo_camelCase(id)] = value;
         }
 
-        const solutionsForMe = Object.values(solutions)
-            .map((solution) => solution(inputParameters))
+        const solutionsForMeUnfiltered = Object.values(solutions)
+            .map(
+                (solution) => solution(inputParameters),
+                /*{
+                    const solutionForMe = solution(inputParameters);
+
+                    if (solutionForMe.color === undefined) {
+                        // TODO: Each solution should have its own FIXED color
+                        solutionForMe.color = faker.internet.color();
+                    }
+
+                    return solutionForMe;
+                }*/
+            )
             // TODO: Warn when there is infinite fit here or during balancing
-            .filter((solution) => solution.percentile !== Infinity && solution.fit !== -Infinity)
+            .filter((solution) => solution.percentile !== Infinity && solution.fit !== -Infinity);
+
+        const solutionsForList = [...solutionsForMeUnfiltered]
             .filter((solution) => solution.percentile > 0)
             .sort((a, b) => b.percentile - a.percentile);
 
-        const solutionsElement = document.getElementById('solutions');
+        const solutionsForGraph = [...solutionsForMeUnfiltered].sort((a, b) => a.title < b.title);
 
-        solutionsElement.innerHTML = '';
-        for (const { percentile, title, description, pros, cons } of solutionsForMe) {
-            solutionsElement.innerHTML += spaceTrim(
+        const solutionsListElement = document.getElementById('solutions-list');
+        const solutionsGraphElement = document.getElementById('solutions-graph');
+        const solutionsGraphSourceElement = document.getElementById('solutions-graph-source');
+
+        solutionsListElement.innerHTML = '';
+        for (const { percentile, title, description, pros, cons } of solutionsForList) {
+            solutionsListElement.innerHTML += spaceTrim(
                 (block) => `
                 <li>
                     
@@ -85,6 +106,44 @@ export function main() {
             `,
             );
         }
+
+        const mermaidConfig = {
+            theme: 'base',
+            themeVariables: Object.fromEntries(
+                solutionsForGraph.map(({ color }, i) => [`pie${i + 1}`, color || `#000000`]),
+            ),
+        };
+        const graphSource = spaceTrim(
+            (block) => `
+                pie
+                    ${block(solutionsForGraph.map(({ title, percentile }) => `"${title}" : ${percentile}`).join('\n'))}
+            `,
+        );
+
+        solutionsGraphSourceElement.innerHTML = spaceTrim(
+            `
+                %%${JSON.stringify({
+                    init: mermaidConfig,
+                })}%%
+                ${graphSource}
+            `,
+        );
+
+        solutionsGraphElement.innerHTML = graphSource;
+        delete solutionsGraphElement.dataset.processed;
+
+        await mermaid.initialize(mermaidConfig);
+
+        await mermaid.run({
+            nodes: [solutionsGraphElement],
+        });
+        /**/
+
+        /*
+        await mermaid.render('solutions-graph', graphSource, (a) => {
+            console.log({ a });
+        });
+        */
     };
 
     // ======================
@@ -257,9 +316,9 @@ export function main() {
             inputElement.nextElementSibling.value = valueFormatted;
         };
 
-        inputElement.addEventListener('input', () => {
+        inputElement.addEventListener('input', async () => {
             updateOutput();
-            recalculateResult();
+            await recalculateResult();
         });
 
         requestAnimationFrame(() => {
@@ -268,13 +327,13 @@ export function main() {
     }
 
     for (const inputElement of Array.from(document.querySelectorAll(`select`))) {
-        inputElement.addEventListener('input', () => {
-            recalculateResult();
+        inputElement.addEventListener('input', async () => {
+            await recalculateResult();
         });
     }
 
-    requestAnimationFrame(() => {
-        recalculateResult();
+    requestAnimationFrame(async () => {
+        await recalculateResult();
     });
 
     // ======================

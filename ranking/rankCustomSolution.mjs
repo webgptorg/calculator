@@ -17,6 +17,8 @@ export function rankCustomSolution(prefecences) {
 
     const solutionRank = new SolutionRank('Vlastní řešení', '');
 
+    solutionRank.color = '#cccccc';
+
     // TODO: Maybe put to some reusable util
     let completityLevel = 'lowpage'; // <- 'lowpage', 'highpage', 'dynamic', 'complex'
 
@@ -172,14 +174,12 @@ export function rankCustomSolution(prefecences) {
     solutionRank.rankPrefecence(
         { levelOfControl },
         {
-            ideal: 70 /* % */ / 100,
+            ideal: 90 /* % */ / 100,
             possible: 100 /* % */ / 100,
         },
     );
 
-    
-
-    solutionRank.balance({"fitAverage":-3.321645683276949,"fitMin":-14.031446540880502,"fitMax":2.7229396825396823});
+    solutionRank.balance({ fitAverage: -3.321645683276949, fitMin: -14.031446540880502, fitMax: 2.7229396825396823 });
 
     return solutionRank.calculate();
 }

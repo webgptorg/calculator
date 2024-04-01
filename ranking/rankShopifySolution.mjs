@@ -20,6 +20,8 @@ export function rankShopifySolution(prefecences) {
         'Shopify je přední e-commerce platforma, která umožňuje jednoduše vytvořit profesionální online obchod bez potřeby pokročilých technických znalostí.',
     );
 
+    solutionRank.color = '#96bf48';
+
     solutionRank.goodFor({ webType }, ['eshop']);
     solutionRank.badFor({ webType }, ['presentation', 'blog', 'application']);
 
@@ -88,9 +90,7 @@ export function rankShopifySolution(prefecences) {
     solutionRank.smallPro('Vynikající zákaznická podpora.');
     solutionRank.smallCon('Měsíční poplatky mohou být vysoké s rostoucím počtem aplikací.');
 
-    
-
-    solutionRank.balance({"fitAverage":-55.64731149762211,"fitMin":-127.1551875937969,"fitMax":105.13782871747999});
+    solutionRank.balance({ fitAverage: -55.64731149762211, fitMin: -127.1551875937969, fitMax: 105.13782871747999 });
 
     return solutionRank.calculate();
 }

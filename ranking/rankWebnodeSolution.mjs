@@ -94,5 +94,9 @@ export function rankWebnodeSolution(prefecences) {
     solutionRank.bigPro('Rychlost spuštění bez významných technických znalostí.');
     solutionRank.bigCon('Obtížnost integrace složitějších funkcí a modifikací.');
 
+    
+
+    solutionRank.balance({"fitAverage":42.08513615324635,"fitMin":-130.6,"fitMax":105.94579003831416});
+
     return solutionRank.calculate();
 }

@@ -100,5 +100,9 @@ export function rankWebcomSolution(prefecences) {
         );
     }
 
+    
+
+    solutionRank.balance({"fitAverage":13.758718074145166,"fitMin":-136,"fitMax":107.58999999999999});
+
     return solutionRank.calculate();
 }

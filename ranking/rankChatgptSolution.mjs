@@ -35,6 +35,7 @@ export function rankChatgptSolution(preferences) {
 
     solutionRank.title = 'ChatGPT';
     solutionRank.description = 'Vytvořte svůj pomocí ChatGPT';
+    solutionRank.color = '#555555';
 
     solutionRank.note(
         'Tvořit web pomocí ChatGPT je podobné jako tvořit web zcela sami. AI vám s mnoha úkoli pomůže, ale i tak si vše musíte nastavit, zařídit a napromptovat sami.',
@@ -53,9 +54,7 @@ export function rankChatgptSolution(preferences) {
         solutionRank.note('Do mnoha funkcí lze integrovat (Chat)GPT hlouběji.');
     }
 
-    
-
-    solutionRank.balance({"fitAverage":-3.8412753524030676,"fitMin":-13.39874213836478,"fitMax":2.106791111111111});
+    solutionRank.balance({ fitAverage: -3.8412753524030676, fitMin: -13.39874213836478, fitMax: 2.106791111111111 });
 
     return solutionRank.calculate();
 }
