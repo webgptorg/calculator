@@ -153,8 +153,11 @@ export class SolutionRank {
             //                ↑           ↑
             //             [ideal]    [possible]
 
-            fit =
-                (1 - Math.pow((value - ideal) / (possible - ideal), 2)) * 5 /*(1 / (Math.abs(possible - ideal) * 2))*/;
+            fit = 1 - Math.abs((value - ideal) / (possible - ideal));
+
+            // Example:
+            //  1) possible: 10, ideal: 5, value: 7
+            //     1 - Math.abs((7 - 5) / (10 - 5)) = 0.6
         }
 
         // Note: Limiting fit to not give too much weight to one preference
@@ -165,17 +168,19 @@ export class SolutionRank {
             fit = -5;
         }
 
+        let k = 0.62;
         let fitWord;
-        if (fit > 2) {
+        if (fit >= Math.pow(k, 1)) {
             fitWord = 'Naprosto ideální';
-        } else if (fit > 1) {
+        } else if (fit >= Math.pow(k, 2)) {
             fitWord = 'Ideální';
-        } else if (fit > 0.5) {
+        } else if (fit >= Math.pow(k, 3)) {
             fitWord = 'Dobrý';
-        } else if (fit > 0) {
+        } else {
             fitWord = 'Ucházející';
         }
-        // TODO: Maybe same pattern for cons
+
+        // <- TODO: Maybe same pattern for cons
 
         if (fit === 0) {
             return;

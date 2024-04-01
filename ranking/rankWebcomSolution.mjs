@@ -100,7 +100,5 @@ export function rankWebcomSolution(prefecences) {
         );
     }
 
-    solutionRank.balance({ fitAverage: 18.91707293934175, fitMin: -140, fitMax: 134.9283888888889 });
-
     return solutionRank.calculate();
 }

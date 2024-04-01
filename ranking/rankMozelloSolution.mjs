@@ -103,7 +103,9 @@ export function rankMozelloSolution(preferences) {
         solutionRank.smallPro('Vhodné pro klienty, kteří preferují jednoduchost před komplexností.');
     }
 
-    solutionRank.balance({ fitAverage: 41.21823923133128, fitMin: -141, fitMax: 134.5846758139155 });
+    
+
+    solutionRank.balance({"fitAverage":38.93535837538407,"fitMin":-136.6,"fitMax":106.84928210180621});
 
     return solutionRank.calculate();
 }

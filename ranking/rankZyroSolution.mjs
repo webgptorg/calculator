@@ -80,7 +80,5 @@ export function rankZyroSolution(prefecences) {
 
     solutionRank.con('Omezený počet možností přizpůsobení v porovnání s komplexnějšími systémy.');
 
-    solutionRank.balance({ fitAverage: 41.28959256553091, fitMin: -135, fitMax: 132.66698767604703 });
-
     return solutionRank.calculate();
 }

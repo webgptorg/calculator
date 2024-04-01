@@ -88,7 +88,5 @@ export function rankStrikinglySolution(prefecences) {
         },
     );
 
-    solutionRank.balance({ fitAverage: -32.01043845268018, fitMin: -135, fitMax: 132.46466666666666 });
-
     return solutionRank.calculate();
 }
