@@ -72,7 +72,9 @@ export function main() {
             .filter((solution) => solution.percentile > 0)
             .sort((a, b) => b.percentile - a.percentile);
 
-        const solutionsForGraph = [...solutionsForMeUnfiltered].sort((a, b) => a.title < b.title);
+        const solutionsForGraph = [...solutionsForMeUnfiltered]
+            .filter((solution) => solution.percentile > 0)
+            .sort((a, b) => a.title < b.title);
 
         const solutionsListElement = document.getElementById('solutions-list');
         const solutionsGraphElement = document.getElementById('solutions-graph');
