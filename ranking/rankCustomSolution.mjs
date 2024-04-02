@@ -149,7 +149,7 @@ export function rankCustomSolution(prefecences) {
         solutionRank.rankPrefecence(
             { budgetUpfront },
             {
-                ideal: 2000000 /* CZK */,
+                ideal: 3000000 /* CZK */,
                 possible: 300000 /* CZK */,
             },
         );
