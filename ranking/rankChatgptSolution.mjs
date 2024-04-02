@@ -33,7 +33,7 @@ export function rankChatgptSolution(preferences) {
         levelOfControl,
     }).reopen();
 
-    solutionRank.title = 'Vlastní řešení sa pomocí ChatGPT';
+    solutionRank.title = 'Vlastní řešení za pomocí ChatGPT';
     solutionRank.description = 'Vytvořte svůj pomocí ChatGPT nebo jiné generativní umělé inteligence';
     solutionRank.color = '#555555';
 
