@@ -31,7 +31,7 @@ async function balanceSolutions() {
     console.info(`🏭⚖  Balancing solutions`);
 
     const solutions = await import('../../ranking/index.mjs');
-    const RANGES = await import('../../src/ranges.mjs');
+    const { RANGES } = await import('../../src/ranges.mjs');
 
     // TODO: Maybe put whole this into separate function
 

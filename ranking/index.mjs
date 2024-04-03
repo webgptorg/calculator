@@ -16,7 +16,6 @@ import { rankSite123Solution } from './rankSite123Solution.mjs';
 import { rankSitebuilderSolution } from './rankSitebuilderSolution.mjs';
 import { rankSitewSolution } from './rankSitewSolution.mjs';
 import { rankSolidpixelsSolution } from './rankSolidpixelsSolution.mjs';
-/*
 import { rankSquarespaceSolution } from './rankSquarespaceSolution.mjs';
 import { rankStrikinglySolution } from './rankStrikinglySolution.mjs';
 import { rankTestSolution } from './rankTestSolution.mjs';
@@ -29,23 +28,8 @@ import { rankWixSolution } from './rankWixSolution.mjs';
 import { rankWordpresscomSolution } from './rankWordpresscomSolution.mjs';
 import { rankWordpressSolution } from './rankWordpressSolution.mjs';
 import { rankZyroSolution } from './rankZyroSolution.mjs';
-*/
 
 export {
-    /*
-    rankSquarespaceSolution,
-    rankStrikinglySolution,
-    rankTestSolution,
-    rankWebcomSolution,
-    rankWebflowSolution,
-    rankWebgptSolution,
-    rankWebnodeSolution,
-    rankWeeblySolution,
-    rankWixSolution,
-    rankWordpresscomSolution,
-    rankWordpressSolution,
-    rankZyroSolution,
-    */
     rankChatgptSolution,
     rankCustomSolution,
     rankDudaSolution,
@@ -64,4 +48,16 @@ export {
     rankSitebuilderSolution,
     rankSitewSolution,
     rankSolidpixelsSolution,
+    rankSquarespaceSolution,
+    rankStrikinglySolution,
+    rankTestSolution,
+    rankWebcomSolution,
+    rankWebflowSolution,
+    rankWebgptSolution,
+    rankWebnodeSolution,
+    rankWeeblySolution,
+    rankWixSolution,
+    rankWordpresscomSolution,
+    rankWordpressSolution,
+    rankZyroSolution,
 };
