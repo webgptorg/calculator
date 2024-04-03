@@ -1,10 +1,11 @@
 #!/usr/bin/env node
 
 import mermaid from 'https://cdn.jsdelivr.net/npm/mermaid@10/dist/mermaid.esm.min.mjs';
-import { normalizeTo_camelCase } from 'https://cdn.jsdelivr.net/npm/n12@1.8.28/+esm';
+import { normalizeTo_camelCase, normalizeToKebabCase } from 'https://cdn.jsdelivr.net/npm/n12@1.8.28/+esm';
 import showdown from 'https://cdn.jsdelivr.net/npm/showdown@2.1.0/+esm';
 import { spaceTrim } from 'https://cdn.jsdelivr.net/npm/spacetrim@0.11.4/+esm';
 import * as solutions from '../ranking/index.used.mjs';
+import { RANGES } from './ranges.mjs';
 
 //mermaid.initialize({ startOnLoad: false });
 
@@ -19,9 +20,25 @@ const converter = new showdown.Converter();
 export function main() {
     // ======================
 
+    for (const [key, { min, max, step, defaultValue }] of Object.entries(RANGES)) {
+        const elementId = normalizeToKebabCase(key);
+        const inputElement = document.getElementById(elementId);
+        if (!inputElement) {
+            console.error(`Element with id="${elementId}" not found`);
+            continue;
+        }
+
+        inputElement.setAttribute('min', min);
+        inputElement.setAttribute('max', max);
+        inputElement.setAttribute('step', step);
+        inputElement.setAttribute('value', defaultValue);
+    }
+
+    // ======================
+
     const recalculateResult = async () => {
         const inputParameters = {};
-        for (const id of [
+        for (const elementId of [
             'web-type',
             'pages-count',
             'products-count',
@@ -32,15 +49,15 @@ export function main() {
             'days-to-deadline',
             'level-of-control',
         ]) {
-            const inputElement = document.getElementById(id);
+            const inputElement = document.getElementById(elementId);
             if (!inputElement) {
-                console.error(`Element with id="${id}" not found`);
+                console.error(`Element with id="${elementId}" not found`);
                 continue;
             }
 
             let value;
 
-            if (id === 'web-type') {
+            if (elementId === 'web-type') {
                 value = inputElement.value;
             } else if (inputElement.dataset.value) {
                 value = parseFloat(inputElement.dataset.value);
@@ -48,7 +65,7 @@ export function main() {
                 value = parseFloat(inputElement.value);
             }
 
-            inputParameters[normalizeTo_camelCase(id)] = value;
+            inputParameters[normalizeTo_camelCase(elementId)] = value;
         }
 
         const solutionsForMeUnfiltered = Object.values(solutions)

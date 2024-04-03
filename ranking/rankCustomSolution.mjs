@@ -1,4 +1,5 @@
 import { SolutionRank } from '../src/SolutionRank.mjs';
+import { RANGES } from '../src/ranges.mjs';
 
 /**
  * Rank the suitability of the Custom solution based on user preferences.
@@ -149,7 +150,7 @@ export function rankCustomSolution(prefecences) {
         solutionRank.rankPrefecence(
             { budgetUpfront },
             {
-                ideal: 3000000 /* CZK */,
+                ideal: RANGES.budgetUpfront.max,
                 possible: 300000 /* CZK */,
             },
         );
@@ -179,9 +180,7 @@ export function rankCustomSolution(prefecences) {
         },
     );
 
-    
-
-    solutionRank.balance({"fitAverage":-24.12954105105858,"fitMin":-1137.7406395233365,"fitMax":2.7229396825396823});
+    solutionRank.balance({ fitAverage: -24.12954105105858, fitMin: -1137.7406395233365, fitMax: 2.7229396825396823 });
 
     return solutionRank.calculate();
 }

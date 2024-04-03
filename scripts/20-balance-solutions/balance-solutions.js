@@ -31,6 +31,7 @@ async function balanceSolutions() {
     console.info(`🏭⚖  Balancing solutions`);
 
     const solutions = await import('../../ranking/index.mjs');
+    const RANGES = await import('../../src/ranges.mjs');
 
     // TODO: Maybe put whole this into separate function
 
@@ -53,31 +54,39 @@ async function balanceSolutions() {
         const t0 = performance.now();
 
         for (const webType of ['presentation', 'eshop', 'blog', 'application']) {
-            for (let productsCount = 0; productsCount <= 100000; productsCount = increase(productsCount)) {
-                for (let pagesCount = 0; pagesCount <= 10000; pagesCount = increase(pagesCount)) {
+            for (
+                let productsCount = RANGES.productsCount.min;
+                productsCount <= RANGES.productsCount.max;
+                productsCount = increase(productsCount)
+            ) {
+                for (
+                    let pagesCount = RANGES.pagesCount.min;
+                    pagesCount <= RANGES.pagesCount.max;
+                    pagesCount = increase(pagesCount)
+                ) {
                     for (
-                        let customFunctionsCount = 0;
-                        customFunctionsCount <= 100;
+                        let customFunctionsCount = RANGES.customFunctionsCount.min;
+                        customFunctionsCount <= RANGES.customFunctionsCount.max;
                         customFunctionsCount = increase(customFunctionsCount)
                     ) {
                         for (
-                            let budgetUpfront = 0;
-                            budgetUpfront <= 10000000;
+                            let budgetUpfront = RANGES.budgetUpfront.min;
+                            budgetUpfront <= RANGES.budgetUpfront.max;
                             budgetUpfront = increase(budgetUpfront)
                         ) {
                             for (
-                                let budgetPerMonth = 0;
-                                budgetPerMonth <= 100000;
+                                let budgetPerMonth = RANGES.budgetPerMonth.min;
+                                budgetPerMonth <= RANGES.budgetPerMonth.max;
                                 budgetPerMonth = increase(budgetPerMonth)
                             ) {
                                 for (
-                                    let daysToDeadline = 0;
-                                    daysToDeadline <= 500;
+                                    let daysToDeadline = RANGES.daysToDeadline.min;
+                                    daysToDeadline <= RANGES.daysToDeadline.max;
                                     daysToDeadline = increase(daysToDeadline)
                                 ) {
                                     for (
-                                        let levelOfControl = 0;
-                                        levelOfControl <= 1;
+                                        let levelOfControl = RANGES.levelOfControl.min;
+                                        levelOfControl <= RANGES.levelOfControl.max;
                                         levelOfControl = increase(levelOfControl)
                                     ) {
                                         const parameters = {
