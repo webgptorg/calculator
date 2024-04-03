@@ -71,6 +71,10 @@ export function rankCustomSolution(prefecences) {
     */
 
     if (completityLevel === 'lowpage') {
+        solutionRank.note(
+            `Váš web nevypadá na příliš složitý, pokud se vydáte cestou jednoduchého statického webu, můžete ušetřit spoustu peněz, času a starostí.`,
+        );
+
         solutionRank.rankPrefecence(
             { budgetUpfront },
             {
@@ -95,6 +99,10 @@ export function rankCustomSolution(prefecences) {
             },
         );
     } else if (completityLevel === 'highpage') {
+        solutionRank.note(
+            `Váš web vypadá složitě, zvažte využití nějakého CMS (např. Wordpressu) nebo frameworku, abyste ušetřili čas a peníze.`,
+        );
+
         solutionRank.rankPrefecence(
             { budgetUpfront },
             {
@@ -121,6 +129,10 @@ export function rankCustomSolution(prefecences) {
     }
 
     if (completityLevel === 'dynamic') {
+        solutionRank.note(
+            `Váš web vypadá složitě, zvažte využití nějakého frameworku nebo CMS, abyste ušetřili čas a peníze.`,
+        );
+
         solutionRank.rankPrefecence(
             { budgetUpfront },
             {
@@ -147,6 +159,10 @@ export function rankCustomSolution(prefecences) {
     }
 
     if (completityLevel === 'complex') {
+        solutionRank.note(
+            `Váš web vypadá velmi složitě, pečlivě promyslete zadání i dodavatele, abyste se vyhnuli vývoji zbytečných funkcí. Zároveň doporučujeme důkladnou analýzu před samotným vývojem.`,
+        );
+
         solutionRank.rankPrefecence(
             { budgetUpfront },
             {
@@ -182,9 +198,7 @@ export function rankCustomSolution(prefecences) {
 
     solutionRank.balance({ fitAverage: -24.12954105105858, fitMin: -1137.7406395233365, fitMax: 2.7229396825396823 });
 
-    
-
-    solutionRank.balance({"fitAverage":-16.447903125489397,"fitMin":-821.1019424031776,"fitMax":2.7229396825396823});
+    solutionRank.balance({ fitAverage: -16.447903125489397, fitMin: -821.1019424031776, fitMax: 2.7229396825396823 });
 
     return solutionRank.calculate();
 }
