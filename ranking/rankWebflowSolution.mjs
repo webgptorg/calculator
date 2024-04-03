@@ -96,5 +96,9 @@ export function rankWebflowSolution(preferences) {
 
     solutionRank.balance({"fitAverage":-23.035858885685546,"fitMin":-834.2923536231885,"fitMax":106.18384347826088});
 
+    
+
+    solutionRank.balance({"fitAverage":-13.266247573039784,"fitMin":-657.9684579710146,"fitMax":106.18384347826088});
+
     return solutionRank.calculate();
 }

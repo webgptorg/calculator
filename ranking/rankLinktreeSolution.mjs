@@ -91,5 +91,9 @@ export function rankLinktreeSolution(preferences) {
 
     solutionRank.balance({"fitAverage":null,"fitMin":null,"fitMax":103.52000000000001});
 
+    
+
+    solutionRank.balance({"fitAverage":null,"fitMin":null,"fitMax":103.52000000000001});
+
     return solutionRank.calculate();
 }

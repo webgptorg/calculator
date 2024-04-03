@@ -36,7 +36,7 @@ async function balanceSolutions() {
     // TODO: Maybe put whole this into separate function
 
     function increase(value) {
-        if (value === 0) {
+        if (value <= 0) {
             return 1;
         } else {
             return value * 2; // <- TODO: [💫] Tweak this exponent

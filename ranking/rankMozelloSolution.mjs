@@ -107,5 +107,9 @@ export function rankMozelloSolution(preferences) {
 
     solutionRank.balance({"fitAverage":-157.3039316518758,"fitMin":-2387.203846305418,"fitMax":106.84928210180621});
 
+    
+
+    solutionRank.balance({"fitAverage":-66.12962298375788,"fitMin":-1155.3954049261083,"fitMax":106.84928210180621});
+
     return solutionRank.calculate();
 }

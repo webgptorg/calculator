@@ -95,5 +95,9 @@ export function rankLinkedinSolution(prefecences) {
 
     solutionRank.balance({"fitAverage":null,"fitMin":null,"fitMax":104});
 
+    
+
+    solutionRank.balance({"fitAverage":null,"fitMin":null,"fitMax":104});
+
     return solutionRank.calculate();
 }

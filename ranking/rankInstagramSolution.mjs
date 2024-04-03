@@ -96,5 +96,9 @@ export function rankInstagramSolution(preferences) {
 
     solutionRank.balance({"fitAverage":null,"fitMin":null,"fitMax":103.75});
 
+    
+
+    solutionRank.balance({"fitAverage":null,"fitMin":null,"fitMax":103.75});
+
     return solutionRank.calculate();
 }

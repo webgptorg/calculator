@@ -92,5 +92,9 @@ export function rankFacebookSolution(prefecences) {
 
     solutionRank.balance({"fitAverage":null,"fitMin":null,"fitMax":105.85714285714286});
 
+    
+
+    solutionRank.balance({"fitAverage":null,"fitMin":null,"fitMax":105.85714285714286});
+
     return solutionRank.calculate();
 }
