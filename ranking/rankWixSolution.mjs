@@ -91,13 +91,5 @@ export function rankWixSolution(prefecences) {
         },
     );
 
-    
-
-    solutionRank.balance({"fitAverage":-139.68195546274342,"fitMin":-1773.8974132723113,"fitMax":105.69867856598016});
-
-    
-
-    solutionRank.balance({"fitAverage":-98.47042109138552,"fitMin":-1178.143117620137,"fitMax":105.69867856598016});
-
     return solutionRank.calculate();
 }

@@ -88,13 +88,5 @@ export function rankStrikinglySolution(prefecences) {
         },
     );
 
-    
-
-    solutionRank.balance({"fitAverage":-759.0979340723326,"fitMin":-6531.164133333335,"fitMax":105.97999999999999});
-
-    
-
-    solutionRank.balance({"fitAverage":-749.5065232809613,"fitMin":-6030.018533333334,"fitMax":105.97999999999999});
-
     return solutionRank.calculate();
 }

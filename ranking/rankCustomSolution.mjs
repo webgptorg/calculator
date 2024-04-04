@@ -196,9 +196,5 @@ export function rankCustomSolution(prefecences) {
         },
     );
 
-    solutionRank.balance({ fitAverage: -24.12954105105858, fitMin: -1137.7406395233365, fitMax: 2.7229396825396823 });
-
-    solutionRank.balance({ fitAverage: -16.447903125489397, fitMin: -821.1019424031776, fitMax: 2.7229396825396823 });
-
     return solutionRank.calculate();
 }
