@@ -149,7 +149,7 @@ export function rankCustomSolution(prefecences) {
             },
         );
 
-        solutionRank.rankPrefecence(
+        solutionRank.rankImportantPrefecence(
             { daysToDeadline },
             {
                 ideal: 120 /* days */,
@@ -163,7 +163,7 @@ export function rankCustomSolution(prefecences) {
             `Váš web vypadá velmi složitě, pečlivě promyslete zadání i dodavatele, abyste se vyhnuli vývoji zbytečných funkcí. Zároveň doporučujeme důkladnou analýzu před samotným vývojem.`,
         );
 
-        solutionRank.rankPrefecence(
+        solutionRank.rankImportantPrefecence(
             { budgetUpfront },
             {
                 ideal: RANGES.budgetUpfront.max,
@@ -179,7 +179,7 @@ export function rankCustomSolution(prefecences) {
             },
         );
 
-        solutionRank.rankPrefecence(
+        solutionRank.rankImportantPrefecence(
             { daysToDeadline },
             {
                 ideal: 300 /* days */,
@@ -188,7 +188,7 @@ export function rankCustomSolution(prefecences) {
         );
     }
 
-    solutionRank.rankPrefecence(
+    solutionRank.rankImportantPrefecence(
         { levelOfControl },
         {
             ideal: 90 /* % */ / 100,

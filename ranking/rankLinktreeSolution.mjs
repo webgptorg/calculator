@@ -28,7 +28,7 @@ export function rankLinktreeSolution(preferences) {
     solutionRank.goodFor({ webType }, ['presentation', 'blog']);
     solutionRank.badFor({ webType }, ['application', 'eshop']);
 
-    solutionRank.rankPrefecence(
+    solutionRank.rankImportantPrefecence(
         { pagesCount },
         {
             ideal: 1,
@@ -76,7 +76,7 @@ export function rankLinktreeSolution(preferences) {
         },
     );
 
-    solutionRank.rankPrefecence(
+    solutionRank.rankImportantPrefecence(
         { levelOfControl },
         {
             ideal: 5 /* % */ / 100,

@@ -30,7 +30,7 @@ if (process.cwd() !== join(__dirname, '../..')) {
 async function balanceSolutions() {
     console.info(`🏭⚖  Balancing solutions`);
 
-    const solutions = await import('../../ranking/index.mjs');
+    const solutions = await import('../../ranking/index-used.mjs');
     const { RANGES } = await import('../../src/ranges.mjs');
 
     // TODO: Maybe put whole this into separate function

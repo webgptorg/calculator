@@ -72,7 +72,7 @@ export function rankWebgptSolution(prefecences) {
         },
     );
 
-    solutionRank.rankPrefecence(
+    solutionRank.rankImportantPrefecence(
         { daysToDeadline },
         {
             ideal: 7 /* day */,
@@ -96,13 +96,8 @@ export function rankWebgptSolution(prefecences) {
         );
     }
 
-    
-
-    solutionRank.balance({"fitAverage":-1180.9593653167296,"fitMin":-11078.073272727273,"fitMax":108.70266666666666});
-
-    
-
-    solutionRank.balance({"fitAverage":-1057.4459853994229,"fitMin":-9108.921272727273,"fitMax":108.70266666666666});
+    solutionRank.balance({ fitAverage: -1180.9593653167296, fitMin: -11078.073272727273, fitMax: 108.70266666666666 });
+    solutionRank.balance({ fitAverage: -1057.4459853994229, fitMin: -9108.921272727273, fitMax: 108.70266666666666 });
 
     return solutionRank.calculate();
 }

@@ -109,7 +109,7 @@ export class SolutionRank {
         // Note: Do nothing
     }
 
-    rankPrefecence(partialPrefecences, prefecences) {
+    _rankPrefecence(importanceFactor, partialPrefecences, prefecences) {
         const [key, value] = this._extractPartialPrefecencesKeyValuePair(partialPrefecences);
         const { ideal, possible } = prefecences;
 
@@ -181,6 +181,8 @@ export class SolutionRank {
         } else {
             fitWord = 'Ucházející';
         }
+
+        fit *= importanceFactor;
 
         // <- TODO: Maybe same pattern for cons
 
@@ -259,6 +261,14 @@ export class SolutionRank {
         } else {
             throw new Error(`Unknown preference: ${key}`);
         }
+    }
+
+    rankPrefecence(partialPrefecences, prefecences) {
+        return this._rankPrefecence(1, partialPrefecences, prefecences);
+    }
+
+    rankImportantPrefecence() {
+        return this._rankPrefecence(3, partialPrefecences, prefecences);
     }
 
     balance(stats) {

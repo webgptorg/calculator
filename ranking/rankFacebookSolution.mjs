@@ -48,7 +48,7 @@ export function rankFacebookSolution(prefecences) {
         solutionRank.note('Facebook umožňuje přidávat produkty a vytvářet "mini-eshop" přímo na vaší stránce.');
     }
 
-    solutionRank.rankPrefecence(
+    solutionRank.rankImportantPrefecence(
         { customFunctionsCount },
         {
             ideal: 0,
@@ -80,7 +80,7 @@ export function rankFacebookSolution(prefecences) {
         },
     );
 
-    solutionRank.rankPrefecence(
+    solutionRank.rankImportantPrefecence(
         { levelOfControl },
         {
             ideal: 0 /* % */ / 100,
@@ -88,13 +88,9 @@ export function rankFacebookSolution(prefecences) {
         },
     );
 
-    
+    solutionRank.balance({ fitAverage: null, fitMin: null, fitMax: 105.85714285714286 });
 
-    solutionRank.balance({"fitAverage":null,"fitMin":null,"fitMax":105.85714285714286});
-
-    
-
-    solutionRank.balance({"fitAverage":null,"fitMin":null,"fitMax":105.85714285714286});
+    solutionRank.balance({ fitAverage: null, fitMin: null, fitMax: 105.85714285714286 });
 
     return solutionRank.calculate();
 }

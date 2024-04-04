@@ -4,7 +4,7 @@ import mermaid from 'https://cdn.jsdelivr.net/npm/mermaid@10/dist/mermaid.esm.mi
 import { normalizeTo_camelCase, normalizeToKebabCase } from 'https://cdn.jsdelivr.net/npm/n12@1.8.28/+esm';
 import showdown from 'https://cdn.jsdelivr.net/npm/showdown@2.1.0/+esm';
 import { spaceTrim } from 'https://cdn.jsdelivr.net/npm/spacetrim@0.11.4/+esm';
-import * as solutions from '../ranking/index.used.mjs';
+import * as solutions from '../ranking/index-used.mjs';
 import { RANGES } from './ranges.mjs';
 
 //mermaid.initialize({ startOnLoad: false });
