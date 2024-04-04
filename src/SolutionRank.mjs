@@ -285,8 +285,8 @@ export class SolutionRank {
         const { fitAverage, fitMin, fitMax } = this.stats;
 
         // TODO: !!! Definitelly decide between these two strategies:
-        const percentile = (this.fit - fitAverage) / (fitMax - fitMin);
-        // const percentile = (this.fit - fitMin) / (fitMax - fitMin);
+        // const percentile = (this.fit - fitAverage) / (fitMax - fitMin);
+         const percentile = (this.fit - fitMin) / (fitMax - fitMin);
 
         /*
         if (this.title === 'Wordpress.com Hosted') {
