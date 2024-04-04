@@ -108,5 +108,9 @@ export function rankWordpressSolution(prefecences) {
 
     solutionRank.balance({"fitAverage":20.600253523565023,"fitMin":-175.13222111848756,"fitMax":106.38252930087698});
 
+    
+
+    solutionRank.balance({"fitAverage":21.127526250859294,"fitMin":-175.13222111848756,"fitMax":107.18252930087698});
+
     return solutionRank.calculate();
 }

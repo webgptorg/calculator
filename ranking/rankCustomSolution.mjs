@@ -200,5 +200,9 @@ export function rankCustomSolution(prefecences) {
 
     solutionRank.balance({"fitAverage":-24.524283392216347,"fitMin":-837.1019424031776,"fitMax":5.04459746031746});
 
+    
+
+    solutionRank.balance({"fitAverage":-22.069737939055162,"fitMin":-837.1019424031776,"fitMax":8.044597460317457});
+
     return solutionRank.calculate();
 }

@@ -58,5 +58,9 @@ export function rankChatgptSolution(preferences) {
 
     solutionRank.balance({"fitAverage":-22.312950079629367,"fitMin":-668.0516300562728,"fitMax":3.7977017777777786});
 
+    
+
+    solutionRank.balance({"fitAverage":-19.85840462371631,"fitMin":-668.0516300562728,"fitMax":6.7977017777777755});
+
     return solutionRank.calculate();
 }

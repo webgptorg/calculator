@@ -94,5 +94,9 @@ export function rankShopifySolution(prefecences) {
 
     solutionRank.balance({"fitAverage":-87.85803015479003,"fitMin":-497.69183585310066,"fitMax":105.13782871747999});
 
+    
+
+    solutionRank.balance({"fitAverage":-86.90348470020542,"fitMin":-497.69183585310066,"fitMax":106.63782871747999});
+
     return solutionRank.calculate();
 }

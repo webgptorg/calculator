@@ -87,7 +87,7 @@ async function balanceSolutions() {
                                     for (
                                         let levelOfControl = RANGES.levelOfControl.min;
                                         levelOfControl <= RANGES.levelOfControl.max;
-                                        levelOfControl = increase(levelOfControl)
+                                        levelOfControl += 0.1
                                     ) {
                                         const parameters = {
                                             webType,

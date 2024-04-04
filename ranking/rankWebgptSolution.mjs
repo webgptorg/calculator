@@ -100,5 +100,9 @@ export function rankWebgptSolution(prefecences) {
 
     solutionRank.balance({"fitAverage":-1111.168207622215,"fitMin":-9445.921272727273,"fitMax":110.36933333333333});
 
+    
+
+    solutionRank.balance({"fitAverage":-1110.6833591015568,"fitMin":-9445.921272727273,"fitMax":111.036});
+
     return solutionRank.calculate();
 }
