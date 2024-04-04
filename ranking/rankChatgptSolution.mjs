@@ -54,5 +54,9 @@ export function rankChatgptSolution(preferences) {
         solutionRank.note('Do mnoha funkcí lze integrovat (Chat)GPT hlouběji.');
     }
 
+    
+
+    solutionRank.balance({"fitAverage":-22.312950079629367,"fitMin":-668.0516300562728,"fitMax":3.7977017777777786});
+
     return solutionRank.calculate();
 }

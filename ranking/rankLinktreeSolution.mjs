@@ -87,5 +87,9 @@ export function rankLinktreeSolution(preferences) {
     solutionRank.bigPro('Rychlé nastavení a spuštění.');
     solutionRank.bigCon('Velmi omezený prostor pro růst a rozšiřování. Nepodporuje eshop ani aplikace.');
 
+    
+
+    solutionRank.balance({"fitAverage":null,"fitMin":null,"fitMax":106.85333333333334});
+
     return solutionRank.calculate();
 }
