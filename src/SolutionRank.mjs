@@ -109,9 +109,9 @@ export class SolutionRank {
         // Note: Do nothing
     }
 
-    _rankPrefecence(importanceFactor, partialPrefecences, prefecences) {
-        const [key, value] = this._extractPartialPrefecencesKeyValuePair(partialPrefecences);
-        const { ideal, possible } = prefecences;
+    _rankPrefecence(importanceFactor, onePreferenceInRecord, prerferedRanges) {
+        const [key, value] = this._extractPartialPrefecencesKeyValuePair(onePreferenceInRecord);
+        const { ideal, possible } = prerferedRanges;
 
         if (key === 'webType') {
             throw new Error(`For ${this.title} can not rank webType, use goodFor or badFor instead`);
@@ -263,12 +263,12 @@ export class SolutionRank {
         }
     }
 
-    rankPrefecence(partialPrefecences, prefecences) {
-        return this._rankPrefecence(1, partialPrefecences, prefecences);
+    rankPrefecence(onePreferenceInRecord, prerferedRanges) {
+        return this._rankPrefecence(1, onePreferenceInRecord, prerferedRanges);
     }
 
-    rankImportantPrefecence() {
-        return this._rankPrefecence(3, partialPrefecences, prefecences);
+    rankImportantPrefecence(onePreferenceInRecord, prerferedRanges) {
+        return this._rankPrefecence(3, onePreferenceInRecord, prerferedRanges);
     }
 
     balance(stats) {
